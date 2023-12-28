@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "qrW0j02DP2THYU2P0l4fNf8Hdpoq2GDkLvX14taBlQk7BUS94B+dO1/XmWGMQ4Mg2+R/E4p2nqy0qAH5N4ITQg==",
+  "success": true,
+  "projectFilePath": "D:\\microservice\\Microservice\\src\\Services\\Inventory.API\\Inventory.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lengu\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\lengu\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\lengu\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\lengu\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\lengu\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\lengu\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

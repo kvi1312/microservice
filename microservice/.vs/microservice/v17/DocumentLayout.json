@@ -1,0 +1,81 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\microservice\\microservice\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|D:\\microservice\\Microservice\\src\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|solutionrelative:src\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|D:\\microservice\\Microservice\\src\\docker-compose.override.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|solutionrelative:src\\docker-compose.override.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|C:\\Users\\lengu\\Desktop\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|C:\\Users\\lengu\\Desktop\\global.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "D:\\microservice\\microservice\\src\\docker-compose.yml",
+              "RelativeDocumentMoniker": "src\\docker-compose.yml",
+              "ToolTip": "D:\\microservice\\microservice\\src\\docker-compose.yml",
+              "RelativeToolTip": "src\\docker-compose.yml",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAmwCYAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2023-12-28T16:26:16.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "docker-compose.override.yml",
+              "DocumentMoniker": "D:\\microservice\\microservice\\src\\docker-compose.override.yml",
+              "RelativeDocumentMoniker": "src\\docker-compose.override.yml",
+              "ToolTip": "D:\\microservice\\microservice\\src\\docker-compose.override.yml",
+              "RelativeToolTip": "src\\docker-compose.override.yml",
+              "ViewState": "AQIAAAsAAAAAAAAAAAA1wHIAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2023-12-28T16:26:07.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\lengu\\Desktop\\README.md",
+              "ToolTip": "C:\\Users\\lengu\\Desktop\\README.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2023-12-28T15:24:11.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "global.json",
+              "DocumentMoniker": "C:\\Users\\lengu\\Desktop\\global.json",
+              "ToolTip": "C:\\Users\\lengu\\Desktop\\global.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2023-12-28T15:24:08.003Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
