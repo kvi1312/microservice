@@ -11,7 +11,7 @@
         "projectName": "Shared",
         "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj",
         "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Shared\\obj\\",
+        "outputPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",

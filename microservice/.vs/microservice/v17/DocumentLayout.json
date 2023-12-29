@@ -3,18 +3,28 @@
   "WorkspaceRootPath": "D:\\microservice\\microservice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|D:\\microservice\\Microservice\\src\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|solutionrelative:src\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{AB325F8E-7933-4BCA-BEDB-8F88264774AF}|src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj|d:\\microservice\\microservice\\src\\buildingblocks\\common.logging\\serilogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB325F8E-7933-4BCA-BEDB-8F88264774AF}|src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj|solutionrelative:src\\buildingblocks\\common.logging\\serilogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|D:\\microservice\\Microservice\\src\\docker-compose.override.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|solutionrelative:src\\docker-compose.override.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{C7B7F9F4-D666-4589-BA44-459560766859}|src\\Services\\Ordering.API\\Ordering.API.csproj|d:\\microservice\\microservice\\src\\services\\ordering.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7B7F9F4-D666-4589-BA44-459560766859}|src\\Services\\Ordering.API\\Ordering.API.csproj|solutionrelative:src\\services\\ordering.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|C:\\Users\\lengu\\Desktop\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+      "AbsoluteMoniker": "D:0:0:{A2854331-C098-446D-86C7-8167A92C76CA}|src\\Services\\Inventory.API\\Inventory.API.csproj|d:\\microservice\\microservice\\src\\services\\inventory.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2854331-C098-446D-86C7-8167A92C76CA}|src\\Services\\Inventory.API\\Inventory.API.csproj|solutionrelative:src\\services\\inventory.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F95D0273-99D5-4953-80F5-BCB032CF4239}|Solution Items{F95D0273-99D5-4953-80F5-BCB032CF4239}|C:\\Users\\lengu\\Desktop\\global.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{650C1218-0D11-42B2-964D-22AA7FBA1B40}|src\\Services\\Customer.API\\Customer.API.csproj|d:\\microservice\\microservice\\src\\services\\customer.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{650C1218-0D11-42B2-964D-22AA7FBA1B40}|src\\Services\\Customer.API\\Customer.API.csproj|solutionrelative:src\\services\\customer.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{307581EF-8600-4CFE-AA10-31353F3F40FA}|src\\Services\\Basket.API\\Basket.API.csproj|d:\\microservice\\microservice\\src\\services\\basket.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{307581EF-8600-4CFE-AA10-31353F3F40FA}|src\\Services\\Basket.API\\Basket.API.csproj|solutionrelative:src\\services\\basket.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|d:\\microservice\\microservice\\src\\services\\product.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|solutionrelative:src\\services\\product.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,54 +34,85 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "docker-compose.yml",
-              "DocumentMoniker": "D:\\microservice\\microservice\\src\\docker-compose.yml",
-              "RelativeDocumentMoniker": "src\\docker-compose.yml",
-              "ToolTip": "D:\\microservice\\microservice\\src\\docker-compose.yml",
-              "RelativeToolTip": "src\\docker-compose.yml",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAmwCYAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2023-12-28T16:26:16.642Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "docker-compose.override.yml",
-              "DocumentMoniker": "D:\\microservice\\microservice\\src\\docker-compose.override.yml",
-              "RelativeDocumentMoniker": "src\\docker-compose.override.yml",
-              "ToolTip": "D:\\microservice\\microservice\\src\\docker-compose.override.yml",
-              "RelativeToolTip": "src\\docker-compose.override.yml",
-              "ViewState": "AQIAAAsAAAAAAAAAAAA1wHIAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2023-12-28T16:26:07.095Z",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Ordering.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Services\\Ordering.API\\Program.cs",
+              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Ordering.API\\Program.cs",
+              "RelativeToolTip": "src\\Services\\Ordering.API\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-29T14:31:58.623Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "README.md",
-              "DocumentMoniker": "C:\\Users\\lengu\\Desktop\\README.md",
-              "ToolTip": "C:\\Users\\lengu\\Desktop\\README.md",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2023-12-28T15:24:11.643Z",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Inventory.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Services\\Inventory.API\\Program.cs",
+              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Inventory.API\\Program.cs",
+              "RelativeToolTip": "src\\Services\\Inventory.API\\Program.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAuwCoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-29T14:31:28.539Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "global.json",
-              "DocumentMoniker": "C:\\Users\\lengu\\Desktop\\global.json",
-              "ToolTip": "C:\\Users\\lengu\\Desktop\\global.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2023-12-28T15:24:08.003Z"
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Customer.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Services\\Customer.API\\Program.cs",
+              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Customer.API\\Program.cs",
+              "RelativeToolTip": "src\\Services\\Customer.API\\Program.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAIwCkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-29T14:30:52.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Basket.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Services\\Basket.API\\Program.cs",
+              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Basket.API\\Program.cs",
+              "RelativeToolTip": "src\\Services\\Basket.API\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-29T14:27:29.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SeriLogger.cs",
+              "DocumentMoniker": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\SeriLogger.cs",
+              "RelativeDocumentMoniker": "src\\BuildingBlocks\\Common.Logging\\SeriLogger.cs",
+              "ToolTip": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\SeriLogger.cs",
+              "RelativeToolTip": "src\\BuildingBlocks\\Common.Logging\\SeriLogger.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAgwAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-29T14:11:51.479Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Services\\Product.API\\Program.cs",
+              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Program.cs",
+              "RelativeToolTip": "src\\Services\\Product.API\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-29T14:04:35.326Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -11,7 +11,7 @@
         "projectName": "EventBus.Messages",
         "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\EventBus.Messages\\EventBus.Messages.csproj",
         "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\EventBus.Messages\\obj\\",
+        "outputPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\EventBus.Messages\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",

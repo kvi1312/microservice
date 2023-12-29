@@ -11,7 +11,7 @@
         "projectName": "WebHealthStatus",
         "projectPath": "D:\\microservice\\Microservice\\src\\WebApps\\WebHealthStatus\\WebHealthStatus.csproj",
         "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\microservice\\src\\WebApps\\WebHealthStatus\\obj\\",
+        "outputPath": "D:\\microservice\\Microservice\\src\\WebApps\\WebHealthStatus\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",

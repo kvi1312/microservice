@@ -11,7 +11,7 @@
         "projectName": "OcelotApiGw",
         "projectPath": "D:\\microservice\\Microservice\\src\\ApiGateways\\OcelotApiGw\\OcelotApiGw.csproj",
         "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\microservice\\src\\ApiGateways\\OcelotApiGw\\obj\\",
+        "outputPath": "D:\\microservice\\Microservice\\src\\ApiGateways\\OcelotApiGw\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -11,7 +11,7 @@
         "projectName": "Contracts",
         "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj",
         "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\obj\\",
+        "outputPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",
