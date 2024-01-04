@@ -1,42 +1,33 @@
 ﻿using Common.Logging;
+using Product.API.Extensions;
+using Product.API.Persistence;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog(SeriLogger.Configure); // config logger để reference tới common logging với Configure là Action được xác định trong file common logging
+
 Log.Information("Starting product API up");
 
 try
 {
-
-    builder.Host.UseSerilog((hostBuilder, loggerConfiguration) =>
-    loggerConfiguration.WriteTo.Console(outputTemplate:
-        "[{Timestamp:HH:mm:ss} {Level}] {SourceContext} {NewLine}{Message:lj}{NewLine}{Exception}{NewLine}") // template 
-        .Enrich.FromLogContext()
-        .ReadFrom.Configuration(hostBuilder.Configuration));
-    // Add services to the container.
-    builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
-
+    builder.Host.UseSerilog(SeriLogger.Configure); // config logger for reference to common logging with Configure is Action is function was identified in file common logging
+    builder.Host.AddAppConfigurations(); // using UseInfrastructure function from ConfigureHostExtensions
+    builder.Services.AddInfrastructure(builder.Configuration); // using UseInfrastructure function from ServiceExtensions
     var app = builder.Build();
-
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
+    app.UseInfrastructure(); // using UseInfrastructure function from ApplicationExtensions
+    
+    app.MigrateDataBase<ProductContext>((context, _) =>
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
-
-    app.UseHttpsRedirection();
-
-    app.UseAuthorization();
-
-    app.MapControllers();
-
+        ProductContextSeed.SeedProductAsync(context, Log.Logger).Wait();
+    });
     app.Run();
 }
-catch(Exception ex) {
+catch (Exception ex)
+{
+    string type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
     Log.Fatal(ex, "Unhandle Exception");
 }
 finally

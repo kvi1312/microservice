@@ -1,0 +1,13 @@
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\bin\Debug\net6.0\Common.Logging.deps.json
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\bin\Debug\net6.0\Common.Logging.dll
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\bin\Debug\net6.0\Common.Logging.pdb
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\Common.Logging.csproj.AssemblyReference.cache
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\Common.Logging.GeneratedMSBuildEditorConfig.editorconfig
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\Common.Logging.AssemblyInfoInputs.cache
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\Common.Logging.AssemblyInfo.cs
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\Common.Logging.csproj.CoreCompileInputs.cache
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\Common.Logging.sourcelink.json
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\Common.Logging.dll
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\refint\Common.Logging.dll
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\Common.Logging.pdb
+D:\microservice\Microservice\src\BuildingBlocks\Common.Logging\obj\Debug\net6.0\ref\Common.Logging.dll

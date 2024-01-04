@@ -12,3 +12,10 @@
    =>>>>>>>>> https://200lab.io/blog/elastic-search-la-gi/
 
 - ELK Stack (elastic search + logstash + kibana) : hệ sinh thái để ghi log về lỗi, hiệu xuất, và giúp giám sát cơ sở hạ tầng, hỗ trợ search engine
+
+# TẠO INFRASTRACTURE CHO PROJECT
+
+- abstract class : không cho phép tạo new instance
+- DateTimeOffset tốt hơn DateTime trong việc convert từ utc sang local time zone
+- đổi port product api aplication sang 5002
+- tạo thư
