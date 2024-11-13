@@ -3,28 +3,7 @@
   "WorkspaceRootPath": "D:\\microservice\\microservice\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|d:\\microservice\\microservice\\src\\services\\product.api\\extensions\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|solutionrelative:src\\services\\product.api\\extensions\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|d:\\microservice\\microservice\\src\\services\\product.api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|solutionrelative:src\\services\\product.api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|d:\\microservice\\microservice\\src\\services\\product.api\\extensions\\applicationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|solutionrelative:src\\services\\product.api\\extensions\\applicationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|d:\\microservice\\microservice\\src\\services\\product.api\\extensions\\configurehostextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|solutionrelative:src\\services\\product.api\\extensions\\configurehostextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|d:\\microservice\\microservice\\src\\services\\product.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|solutionrelative:src\\services\\product.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|d:\\microservice\\microservice\\src\\services\\product.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{2FDF265D-B3B1-408A-A762-99022E99BFEF}|src\\Services\\Product.API\\Product.API.csproj|solutionrelative:src\\services\\product.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\microservice\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,81 +13,52 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 8,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "src\\Services\\Product.API\\Controllers\\ProductController.cs",
-              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "src\\Services\\Product.API\\Controllers\\ProductController.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAIBBwBEAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-04T11:15:32.071Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ServiceExtensions.cs",
-              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Extensions\\ServiceExtensions.cs",
-              "RelativeDocumentMoniker": "src\\Services\\Product.API\\Extensions\\ServiceExtensions.cs",
-              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Extensions\\ServiceExtensions.cs",
-              "RelativeToolTip": "src\\Services\\Product.API\\Extensions\\ServiceExtensions.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAA5wAcAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-04T08:53:06.195Z",
+              "Title": ".gitignore",
+              "DocumentMoniker": "D:\\microservice\\.gitignore",
+              "RelativeDocumentMoniker": "..\\.gitignore",
+              "ToolTip": "D:\\microservice\\.gitignore",
+              "RelativeToolTip": "..\\.gitignore",
+              "ViewState": "AgIAAEEBAAAAAAAAAAAxwJUBAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-13T16:11:19.796Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ConfigureHostExtensions.cs",
-              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Extensions\\ConfigureHostExtensions.cs",
-              "RelativeDocumentMoniker": "src\\Services\\Product.API\\Extensions\\ConfigureHostExtensions.cs",
-              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Extensions\\ConfigureHostExtensions.cs",
-              "RelativeToolTip": "src\\Services\\Product.API\\Extensions\\ConfigureHostExtensions.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAwwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-04T08:50:48.928Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ApplicationExtensions.cs",
-              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Extensions\\ApplicationExtensions.cs",
-              "RelativeDocumentMoniker": "src\\Services\\Product.API\\Extensions\\ApplicationExtensions.cs",
-              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Extensions\\ApplicationExtensions.cs",
-              "RelativeToolTip": "src\\Services\\Product.API\\Extensions\\ApplicationExtensions.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAIBBwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-04T08:50:43.1Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Program.cs",
-              "RelativeDocumentMoniker": "src\\Services\\Product.API\\Program.cs",
-              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Program.cs",
-              "RelativeToolTip": "src\\Services\\Product.API\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-01-04T06:51:39.031Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "src\\Services\\Product.API\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Properties\\launchSettings.json",
-              "RelativeToolTip": "src\\Services\\Product.API\\Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-01-04T06:50:19.907Z"
             }
           ]
         }

@@ -1,4 +1,4 @@
-﻿- lệnh chạy docker : docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans
+﻿- lệnh chạy docker : docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans (phải cd vô thư mục src mới chạy được)
 - lệnh drop docker : docker-compose down
 - account portainer http://local:9000 : admin - Nguyenkhai2611!
 - account kibana http://localhost:5601 : elastic - admin

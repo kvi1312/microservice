@@ -1,6 +1,9 @@
-﻿namespace Shared.DTOS;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class CreateProductDto
+namespace Shared.DTOS;
+
+public class CreateProductDto : CreateOrUpdateProductDto
 {
-    
+    [Required]
+    public string No { get; set; }
 }

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\microservice\\Microservice\\src\\Services\\Basket.API\\Basket.API.csproj": {}
+    "D:\\microservice\\microservice\\src\\Services\\Basket.API\\Basket.API.csproj": {}
   },
   "projects": {
-    "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj": {
+    "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj",
+        "projectUniqueName": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj",
         "projectName": "Common.Logging",
-        "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj",
-        "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\obj\\",
+        "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj",
+        "packagesPath": "C:\\Users\\legen5\\.nuget\\packages\\",
+        "outputPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\legen5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -35,6 +38,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -70,21 +78,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\microservice\\Microservice\\src\\Services\\Basket.API\\Basket.API.csproj": {
+    "D:\\microservice\\microservice\\src\\Services\\Basket.API\\Basket.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\microservice\\Microservice\\src\\Services\\Basket.API\\Basket.API.csproj",
+        "projectUniqueName": "D:\\microservice\\microservice\\src\\Services\\Basket.API\\Basket.API.csproj",
         "projectName": "Basket.API",
-        "projectPath": "D:\\microservice\\Microservice\\src\\Services\\Basket.API\\Basket.API.csproj",
-        "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\Microservice\\src\\Services\\Basket.API\\obj\\",
+        "projectPath": "D:\\microservice\\microservice\\src\\Services\\Basket.API\\Basket.API.csproj",
+        "packagesPath": "C:\\Users\\legen5\\.nuget\\packages\\",
+        "outputPath": "D:\\microservice\\microservice\\src\\Services\\Basket.API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\legen5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -92,15 +104,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj": {
-                "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj"
+              "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj": {
+                "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj"
               }
             }
           }
@@ -109,6 +120,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -139,7 +155,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
         }
       }
     }

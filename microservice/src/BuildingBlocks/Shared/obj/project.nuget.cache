@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1EkEUuukIFW2/6QuuInY5I1L0ajo6PZt2xzKTjJd+M8PZl7WcID6QJlGxuX74MjcFUKyv26EPPJHgJbuc4Gy0g==",
+  "dgSpecHash": "/cHfhIL0mz0=",
   "success": true,
-  "projectFilePath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj",
+  "projectFilePath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,6 +1,6 @@
 ﻿namespace Shared.DTOS;
 
-public class UpdateProductDto
+public class UpdateProductDto :CreateOrUpdateProductDto
 {
-    
+
 }

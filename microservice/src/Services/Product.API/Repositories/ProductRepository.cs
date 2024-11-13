@@ -13,15 +13,12 @@ namespace Product.API.Repostiories
         {
         }
 
-        public Task CreateProduct(CatalogProduct product)
-        {
-            throw new NotImplementedException();
-        }
+        public Task CreateProduct(CatalogProduct product) => CreateAsync(product);
 
         public async Task DeleteProduct(long id)
         {
             var product = await GetProduct(id);
-            if (product != null) DeleteAsync(product);
+            if (product is not null) DeleteAsync(product);
         }
 
         public async Task<IEnumerable<CatalogProduct>> GetProducts() => await FindAll().ToListAsync();

@@ -8,7 +8,7 @@ public class ProductContextSeed
     {
         if (!productContext.Products.Any())
         {
-            productContext.AddRangeAsync(getCatalogProducts());
+            await productContext.AddRangeAsync(getCatalogProducts());
             await productContext.SaveChangesAsync();
             logger.Information("Seeded data for product db associated with context {DbContextName}",
                 nameof(productContext));

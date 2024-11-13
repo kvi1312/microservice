@@ -19,6 +19,7 @@ public static class ServiceExtensions
         services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
         services.ConfigureProductDbContext(configuration);
         services.AddInfrastructureServices();
+        services.AddAutoMapper(config => config.AddProfile(new MappingProfile()));
         return services;
     }
 

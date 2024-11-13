@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\microservice\\Microservice\\src\\Services\\Product.API\\Product.API.csproj": {}
+    "D:\\microservice\\microservice\\src\\Services\\Product.API\\Product.API.csproj": {}
   },
   "projects": {
-    "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj": {
+    "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj",
+        "projectUniqueName": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj",
         "projectName": "Common.Logging",
-        "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj",
-        "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\obj\\",
+        "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj",
+        "packagesPath": "C:\\Users\\legen5\\.nuget\\packages\\",
+        "outputPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\legen5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -35,6 +38,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -70,21 +78,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj": {
+    "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj",
-        "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\obj\\",
+        "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\legen5\\.nuget\\packages\\",
+        "outputPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\legen5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -92,7 +104,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -105,6 +116,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -132,21 +148,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\microservice\\microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Infrastructure\\obj\\",
+        "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\legen5\\.nuget\\packages\\",
+        "outputPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\legen5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -154,15 +174,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj": {
-                "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj"
+              "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj": {
+                "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -171,11 +190,22 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -192,21 +222,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj": {
+    "D:\\microservice\\microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj",
+        "projectUniqueName": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj",
         "projectName": "Shared",
-        "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj",
-        "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\obj\\",
+        "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj",
+        "packagesPath": "C:\\Users\\legen5\\.nuget\\packages\\",
+        "outputPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Shared\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\legen5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -214,7 +248,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -227,6 +260,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -248,21 +286,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\microservice\\Microservice\\src\\Services\\Product.API\\Product.API.csproj": {
+    "D:\\microservice\\microservice\\src\\Services\\Product.API\\Product.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\microservice\\Microservice\\src\\Services\\Product.API\\Product.API.csproj",
+        "projectUniqueName": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Product.API.csproj",
         "projectName": "Product.API",
-        "projectPath": "D:\\microservice\\Microservice\\src\\Services\\Product.API\\Product.API.csproj",
-        "packagesPath": "C:\\Users\\lengu\\.nuget\\packages\\",
-        "outputPath": "D:\\microservice\\Microservice\\src\\Services\\Product.API\\obj\\",
+        "projectPath": "D:\\microservice\\microservice\\src\\Services\\Product.API\\Product.API.csproj",
+        "packagesPath": "C:\\Users\\legen5\\.nuget\\packages\\",
+        "outputPath": "D:\\microservice\\microservice\\src\\Services\\Product.API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lengu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\legen5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -270,24 +312,23 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj": {
-                "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj"
+              "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj": {
+                "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Common.Logging\\Common.Logging.csproj"
               },
-              "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj": {
-                "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj"
+              "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj": {
+                "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Contracts\\Contracts.csproj"
               },
-              "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj"
+              "D:\\microservice\\microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Infrastructure\\Infrastructure.csproj"
               },
-              "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj": {
-                "projectPath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj"
+              "D:\\microservice\\microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj": {
+                "projectPath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\Shared\\Shared.csproj"
               }
             }
           }
@@ -296,12 +337,25 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -346,7 +400,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
         }
       }
     }

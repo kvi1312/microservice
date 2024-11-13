@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QCQuAEpCLGV97HZooL/wGN2DxRgEO9Xi1NflsqL5GeQ1hWBlLwXoHKwpzB3+obQ1pZM6SnsLyNe8krbSbqMSdg==",
+  "dgSpecHash": "e1lTv/lWczA=",
   "success": true,
-  "projectFilePath": "D:\\microservice\\Microservice\\src\\BuildingBlocks\\EventBus.Messages\\EventBus.Messages.csproj",
+  "projectFilePath": "D:\\microservice\\microservice\\src\\BuildingBlocks\\EventBus.Messages\\EventBus.Messages.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
