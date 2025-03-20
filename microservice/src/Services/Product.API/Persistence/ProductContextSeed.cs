@@ -8,14 +8,14 @@ public class ProductContextSeed
     {
         if (!productContext.Products.Any())
         {
-            await productContext.AddRangeAsync(getCatalogProducts());
+            await productContext.AddRangeAsync(GetCatalogProducts());
             await productContext.SaveChangesAsync();
             logger.Information("Seeded data for product db associated with context {DbContextName}",
                 nameof(productContext));
         }
     }
 
-    private static IEnumerable<CatalogProduct> getCatalogProducts()
+    private static IEnumerable<CatalogProduct> GetCatalogProducts()
     {
         return new List<CatalogProduct>
         {
