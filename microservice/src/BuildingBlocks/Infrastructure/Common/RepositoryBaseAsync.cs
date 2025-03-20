@@ -44,12 +44,12 @@ public class RepositoryBaseAsync<T, K, TContext> : IRepositoryBaseAsync<T, K, TC
 
     public async Task<T?> GetByIdAsync(K id)
     {
-        return await FindByCondition(x => x.Id.Equals(id)).FirstOrDefaultAsync();
+        return await FindByCondition(x => x.Id != null && x.Id.Equals(id)).FirstOrDefaultAsync();
     }
 
     public async Task<T?> GetByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties)
     {
-        return await FindByCondition(x => x.Id.Equals(id), trackChanges: false, includeProperties).FirstOrDefaultAsync();
+        return await FindByCondition(x => x.Id != null && x.Id.Equals(id), trackChanges: false, includeProperties).FirstOrDefaultAsync();
     }
 
     public async Task<K> CreateAsync(T entity)
@@ -67,6 +67,7 @@ public class RepositoryBaseAsync<T, K, TContext> : IRepositoryBaseAsync<T, K, TC
     public Task UpdateAsync(T entity)
     {
         if (_dbContext.Entry(entity).State == EntityState.Unchanged) return Task.CompletedTask;
+        
         var exist = _dbContext.Set<T>().Find(entity.Id);
         _dbContext.Entry(exist).CurrentValues.SetValues(entity);
         return Task.CompletedTask;
@@ -90,7 +91,7 @@ public class RepositoryBaseAsync<T, K, TContext> : IRepositoryBaseAsync<T, K, TC
 
     public async Task<IDbContextTransaction> BeginTransaction()
     {
-        return _dbContext.Database.BeginTransaction();
+        return await _dbContext.Database.BeginTransactionAsync();
     }
 
     public async Task EndTransactionAsync()
