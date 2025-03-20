@@ -9,12 +9,12 @@ Log.Information("Starting product API up");
 
 try
 {
-    builder.Host.UseSerilog(SeriLogger.Configure); // config logger for reference to common logging with Configure is Action is function was identified in file common logging
-    builder.Host.AddAppConfigurations(); // using UseInfrastructure function from ConfigureHostExtensions
-    builder.Services.AddInfrastructure(builder.Configuration); // using UseInfrastructure function from ServiceExtensions
+    builder.Host.UseSerilog(SeriLogger.Configure);
+    builder.Host.AddAppConfigurations();
+    builder.Services.AddInfrastructure(builder.Configuration);
     var app = builder.Build();
-    app.UseInfrastructure(); // using UseInfrastructure function from ApplicationExtensions
-    
+    app.UseInfrastructure();
+
     app.MigrateDataBase<ProductContext>((context, _) =>
     {
         ProductContextSeed.SeedProductAsync(context, Log.Logger).Wait();
@@ -23,17 +23,16 @@ try
 }
 catch (Exception ex)
 {
-    string type = ex.GetType().Name;
+    var type = ex.GetType().Name;
     if (type.Equals("StopTheHostException", StringComparison.Ordinal))
     {
         throw;
     }
-    Log.Fatal(ex, "Unhandle Exception");
+
+    Log.Fatal(ex, "Unhandled Exception");
 }
 finally
 {
     Log.Information("Shut down product API complete");
     Log.CloseAndFlush();
 }
-
-

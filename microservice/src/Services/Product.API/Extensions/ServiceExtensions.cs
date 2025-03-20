@@ -31,12 +31,12 @@ public static class ServiceExtensions
 
         services.AddDbContext<ProductContext>(
             m => m.UseMySql(builder.ConnectionString,
-            ServerVersion.AutoDetect(builder.ConnectionString),
-            e =>
-            {
-                e.MigrationsAssembly("Product.API");
-                e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
-            }));
+                ServerVersion.AutoDetect(builder.ConnectionString),
+                e =>
+                {
+                    e.MigrationsAssembly("Product.API");
+                    e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
+                }));
         return services;
     }
 
