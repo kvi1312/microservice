@@ -12,9 +12,9 @@ public static class ApplicationExtensions
 
         app.UseRouting();
         app.UseAuthentication();
-        app.UseEndpoints(endpoins =>
+        app.UseEndpoints(endpoints =>
         {
-            endpoins.MapDefaultControllerRoute();
+            endpoints.MapDefaultControllerRoute();
         });
     }
 }

@@ -38,7 +38,8 @@ public class ProductContext : DbContext
                     }
                     break;
                 case EntityState.Modified:
-                    Entry(item.Entity).Property("Id").IsModified = false; // stop modify id of entify
+                    // stop modify id of entity
+                    Entry(item.Entity).Property("Id").IsModified = false;
                     if (item.Entity is IDateTracking modifyEntity)
                     {
                         modifyEntity.CreatedDate = DateTime.Now;
