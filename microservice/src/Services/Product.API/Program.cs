@@ -1,4 +1,5 @@
 ﻿using Common.Logging;
+using Product.API.EndPoints;
 using Product.API.Extensions;
 using Product.API.Persistence;
 using Serilog;
@@ -14,7 +15,7 @@ try
     builder.Services.AddInfrastructure(builder.Configuration);
     var app = builder.Build();
     app.UseInfrastructure();
-
+    app.AddProductEndpoint();
     app.MigrateDataBase<ProductContext>((context, _) =>
     {
         ProductContextSeed.SeedProductAsync(context, Log.Logger).Wait();

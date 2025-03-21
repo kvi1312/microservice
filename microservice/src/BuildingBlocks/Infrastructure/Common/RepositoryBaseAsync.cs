@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infrastructure.Common;
 
-public class RepositoryBaseAsync<T, K, TContext> : IRepositoryBaseAsync<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
+public class RepositoryBaseAsync<T, TK, TContext> : IRepositoryBaseAsync<T, TK, TContext> where T : EntityBase<TK> where TContext : DbContext
 {
     private readonly TContext _dbContext;
     private readonly IUnitOfWork<TContext> _unitOfWork;
@@ -26,7 +26,7 @@ public class RepositoryBaseAsync<T, K, TContext> : IRepositoryBaseAsync<T, K, TC
     public IQueryable<T> FindAll(bool trackChange = false, params Expression<Func<T, object>>[] includeProperties)
     {
         var items = FindAll(trackChange);
-        items = includeProperties.Aggregate(items, (current, includeProperties) => current.Include(includeProperties));
+        items = includeProperties.Aggregate(items, (current, properties) => current.Include(properties));
         return items;
     }
 
@@ -38,27 +38,27 @@ public class RepositoryBaseAsync<T, K, TContext> : IRepositoryBaseAsync<T, K, TC
     public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expressions, bool trackChanges = false, params Expression<Func<T, object>>[] includeProperty)
     {
         var items = FindByCondition(expressions, trackChanges);
-        items = includeProperty.Aggregate(items, (current, includeProperty) => current.Include(includeProperty));
+        items = includeProperty.Aggregate(items, (current, property) => current.Include(property));
         return items;
     }
 
-    public async Task<T?> GetByIdAsync(K id)
+    public async Task<T?> GetByIdAsync(TK id)
     {
         return await FindByCondition(x => x.Id != null && x.Id.Equals(id)).FirstOrDefaultAsync();
     }
 
-    public async Task<T?> GetByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties)
+    public async Task<T?> GetByIdAsync(TK id, params Expression<Func<T, object>>[] includeProperties)
     {
         return await FindByCondition(x => x.Id != null && x.Id.Equals(id), trackChanges: false, includeProperties).FirstOrDefaultAsync();
     }
 
-    public async Task<K> CreateAsync(T entity)
+    public async Task<TK> CreateAsync(T entity)
     {
         await _dbContext.Set<T>().AddAsync(entity);
         return entity.Id;
     }
 
-    public async Task<IList<K>> CreateListAsync(IEnumerable<T> entities)
+    public async Task<IList<TK>> CreateListAsync(IEnumerable<T> entities)
     {
         await _dbContext.Set<T>().AddRangeAsync(entities);
         return entities.Select(x => x.Id).ToList();

@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Contracts.Common.Interfaces;
 
-public interface IRepositoryQueryBase<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
+// TK ref for primary key of T
+public interface IRepositoryQueryBase<T, TK, TContext> where T : EntityBase<TK> where TContext : DbContext
 {
     IQueryable<T> FindAll(bool trackChange = false);
 
@@ -15,16 +16,16 @@ public interface IRepositoryQueryBase<T, K, TContext> where T : EntityBase<K> wh
 
     IQueryable<T> FindByCondition(Expression<Func<T, bool>> expressions, bool trackChanges = false, params Expression<Func<T, object>>[] includeProperty);
 
-    Task<T?> GetByIdAsync(K id);
+    Task<T?> GetByIdAsync(TK id);
 
-    Task<T?> GetByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties);
+    Task<T?> GetByIdAsync(TK id, params Expression<Func<T, object>>[] includeProperties);
 }
 
-public interface IRepositoryBaseAsync<T, K, TContext> : IRepositoryQueryBase<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
+public interface IRepositoryBaseAsync<T, TK, TContext> : IRepositoryQueryBase<T, TK, TContext> where T : EntityBase<TK> where TContext : DbContext
 {
-    Task<K> CreateAsync(T entity);
+    Task<TK> CreateAsync(T entity);
 
-    Task<IList<K>> CreateListAsync(IEnumerable<T> entities);
+    Task<IList<TK>> CreateListAsync(IEnumerable<T> entities);
 
     Task UpdateAsync(T entity);
 
