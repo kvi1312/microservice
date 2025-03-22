@@ -10,6 +10,7 @@ public class ProductEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
+        // TODO : Write Extension having MapGroup feature like .NET 8.0
         app.MapGet("api/products", GetProducts);
         app.MapPost("api/products", AddProduct);
         app.MapGet("api/products/{id:long}", GetProductById);
