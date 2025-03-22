@@ -1,5 +1,5 @@
-﻿using Common.Logging;
-using Product.API.EndPoints;
+﻿using Carter;
+using Common.Logging;
 using Product.API.Extensions;
 using Product.API.Persistence;
 using Serilog;
@@ -10,12 +10,13 @@ Log.Information("Starting product API up");
 
 try
 {
+    builder.Services.AddCarter();
     builder.Host.UseSerilog(SeriLogger.Configure);
     builder.Host.AddAppConfigurations();
     builder.Services.AddInfrastructure(builder.Configuration);
     var app = builder.Build();
+    app.MapCarter();
     app.UseInfrastructure();
-    app.AddProductEndpoint();
     app.MigrateDataBase<ProductContext>((context, _) =>
     {
         ProductContextSeed.SeedProductAsync(context, Log.Logger).Wait();
