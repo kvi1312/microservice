@@ -10,12 +10,12 @@ Log.Information("Starting product API up");
 
 try
 {
-    builder.Services.AddCarter();
+    // builder.Services.AddCarter();
     builder.Host.UseSerilog(SeriLogger.Configure);
     builder.Host.AddAppConfigurations();
     builder.Services.AddInfrastructure(builder.Configuration);
     var app = builder.Build();
-    app.MapCarter();
+    // app.MapCarter();
     app.UseInfrastructure();
     app.MigrateDataBase<ProductContext>((context, _) =>
     {
