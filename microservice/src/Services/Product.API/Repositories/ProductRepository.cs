@@ -18,7 +18,7 @@ namespace Product.API.Repostiories
         public async Task DeleteProduct(long id)
         {
             var product = await GetProduct(id);
-            if (product is not null) DeleteAsync(product);
+            if (product is not null) await DeleteAsync(product);
         }
 
         public async Task<IEnumerable<CatalogProduct>> GetProducts() => await FindAll().ToListAsync();

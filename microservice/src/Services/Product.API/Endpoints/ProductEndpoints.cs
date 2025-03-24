@@ -20,7 +20,8 @@ public class ProductEndpoints : ICarterModule
     }
 
     #region Delegate - Can reuse for unit test
-    public static async Task<IResult> GetProducts(
+
+    private static async Task<IResult> GetProducts(
     IProductRepository productRepository,
     IMapper mapper)
     {
@@ -28,14 +29,16 @@ public class ProductEndpoints : ICarterModule
         var result = mapper.Map<IEnumerable<ProductDto>>(product);
         return Results.Ok(result);
     }
-    public static async Task<IResult> GetProductById(IProductRepository productRepository, IMapper mapper, long id)
+
+    private static async Task<IResult> GetProductById(IProductRepository productRepository, IMapper mapper, long id)
     {
         var product = await productRepository.GetProduct(id);
         if (product is null) return Results.NotFound();
         var result = mapper.Map<ProductDto>(product);
         return Results.Ok(result);
     }
-    public static async Task<IResult> AddProduct(IProductRepository productRepository, IMapper mapper, [FromBody] CreateProductDto productDto)
+
+    private static async Task<IResult> AddProduct(IProductRepository productRepository, IMapper mapper, [FromBody] CreateProductDto productDto)
     {
         var productEntity = await productRepository.GetProductByNo(productDto.No);
         if (productEntity is not null) return Results.BadRequest($"Product No : {productDto.No} is existed");
@@ -46,7 +49,8 @@ public class ProductEndpoints : ICarterModule
         var result = mapper.Map<ProductDto>(product);
         return Results.Ok(result);
     }
-    public static async Task<IResult> UpdateProduct(IProductRepository productRepository, IMapper mapper, long id, [FromBody] UpdateProductDto productDto)
+
+    private static async Task<IResult> UpdateProduct(IProductRepository productRepository, IMapper mapper, long id, [FromBody] UpdateProductDto productDto)
     {
         var product = await productRepository.GetProduct(id);
         if (product is null) return Results.NotFound();
@@ -57,7 +61,8 @@ public class ProductEndpoints : ICarterModule
         var result = mapper.Map<ProductDto>(product);
         return Results.Ok(result);
     }
-    public static async Task<IResult> RemoveProduct(IProductRepository productRepository, IMapper mapper, [Required] long id)
+
+    private static async Task<IResult> RemoveProduct(IProductRepository productRepository, IMapper mapper, [Required] long id)
     {
         var product = await productRepository.GetProduct(id);
         if (product is null) return Results.NotFound();
@@ -65,7 +70,8 @@ public class ProductEndpoints : ICarterModule
         await productRepository.SaveChangesAsync();
         return Results.Ok();
     }
-    public static async Task<IResult> GetProductByNo(IProductRepository productRepository, IMapper mapper, [Required] string productNo)
+
+    private static async Task<IResult> GetProductByNo(IProductRepository productRepository, IMapper mapper, [Required] string productNo)
     {
         var product = await productRepository.GetProductByNo(productNo);
         if (product is null) return Results.NotFound();
