@@ -1,14 +1,12 @@
-﻿using System.Linq;
-using System.Linq.Expressions;
-using Contracts.Common.Interfaces;
+﻿using Contracts.Common.Interfaces;
 using Contracts.Domains;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Common;
 
-public class RepositoryBaseAsync<T, TK, TContext> : IRepositoryBaseAsync<T, TK, TContext> where T : EntityBase<TK> where TContext : DbContext
+public class RepositoryBaseAsync<T, TKey, TContext> : IRepositoryBaseAsync<T, TKey, TContext> where T : EntityBase<TKey> where TContext : DbContext
 {
     private readonly TContext _dbContext;
     private readonly IUnitOfWork<TContext> _unitOfWork;
@@ -42,23 +40,23 @@ public class RepositoryBaseAsync<T, TK, TContext> : IRepositoryBaseAsync<T, TK, 
         return items;
     }
 
-    public async Task<T?> GetByIdAsync(TK id)
+    public async Task<T?> GetByIdAsync(TKey id)
     {
         return await FindByCondition(x => x.Id != null && x.Id.Equals(id)).FirstOrDefaultAsync();
     }
 
-    public async Task<T?> GetByIdAsync(TK id, params Expression<Func<T, object>>[] includeProperties)
+    public async Task<T?> GetByIdAsync(TKey id, params Expression<Func<T, object>>[] includeProperties)
     {
         return await FindByCondition(x => x.Id != null && x.Id.Equals(id), trackChanges: false, includeProperties).FirstOrDefaultAsync();
     }
 
-    public async Task<TK> CreateAsync(T entity)
+    public async Task<TKey> CreateAsync(T entity)
     {
         await _dbContext.Set<T>().AddAsync(entity);
         return entity.Id;
     }
 
-    public async Task<IList<TK>> CreateListAsync(IEnumerable<T> entities)
+    public async Task<IList<TKey>> CreateListAsync(IEnumerable<T> entities)
     {
         await _dbContext.Set<T>().AddRangeAsync(entities);
         return entities.Select(x => x.Id).ToList();
