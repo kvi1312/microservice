@@ -45,6 +45,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.API", "src\Services\Basket.API\Basket.API.csproj", "{307581EF-8600-4CFE-AA10-31353F3F40FA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.API", "src\Services\Customer.API\Customer.API.csproj", "{650C1218-0D11-42B2-964D-22AA7FBA1B40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A098935-4892-421E-9E28-EE8A18E44D15} = {9A098935-4892-421E-9E28-EE8A18E44D15}
+		{ABF82D5F-495F-4D29-A373-A2D3B52E82C4} = {ABF82D5F-495F-4D29-A373-A2D3B52E82C4}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.API", "src\Services\Inventory.API\Inventory.API.csproj", "{A2854331-C098-446D-86C7-8167A92C76CA}"
 EndProject
