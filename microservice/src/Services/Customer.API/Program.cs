@@ -1,18 +1,24 @@
 using Common.Logging;
+using Customer.API.Persistence;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(SeriLogger.Configure);
+
 Log.Information("Starting Customer API up");
-// Add services to the container.
+
 try
 {
-    // Add services to the container.
     builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
+    builder.Services.AddDbContext<CustomerContext>(options =>
+    {
+        options.UseNpgsql(connectionString);
+    });
+    builder.Services.AddHostedService<CustomerSeeder>();
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -27,16 +33,21 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
-
     app.Run();
 
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "Unhandle exception");
+    var type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
+
+    Log.Fatal(ex, "Unhandled Exception");
 }
 finally
 {
-    Log.Information("Shut down Customer API complete");
+    Log.Information("Shut down product API complete");
     Log.CloseAndFlush();
 }
