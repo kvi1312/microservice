@@ -1,9 +1,11 @@
-﻿using Customer.API.Persistence;
+﻿using Contracts.Common.Interfaces;
+using Customer.API.Persistence;
 using Customer.API.Repositories;
 using Customer.API.Repositories.Interface;
+using Customer.API.Services;
+using Customer.API.Services.Interfaces;
+using Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Npgsql;
 
 namespace Customer.API.Extensions
 {
@@ -19,7 +21,7 @@ namespace Customer.API.Extensions
             return services;
         }
 
-        public static IServiceCollection ConfigureCustomerDbContext(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection ConfigureCustomerDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnectionString");
             services.AddDbContext<CustomerContext>(options =>
@@ -29,10 +31,13 @@ namespace Customer.API.Extensions
             return services;
         }
 
-        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+        private static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            return services;
+            return services
+            .AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>)) // must ensure correct total declaration of generic type quantity => 3 here
+            .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
+            .AddScoped<ICustomerService, CustomerService>()
+            .AddScoped<ICustomerRepository, CustomerRepository>();
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Customer.API.Repositories.Interface
         Task CreateCustomer(Entities.Customer customer);
         Task UpdateCustomer(Entities.Customer customer);
         Task DeleteCustomer(long id);
+        Task<Entities.Customer?> GetCustomerByUserName(string userName);
     }
 }

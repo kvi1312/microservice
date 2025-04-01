@@ -1,5 +1,8 @@
+using Carter;
 using Common.Logging;
+using Customer.API.Extensions;
 using Customer.API.Persistence;
+using Customer.API.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -13,6 +16,8 @@ try
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.AddCarter();
+    builder.Services.AddInfrastructure(builder.Configuration);
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
     builder.Services.AddDbContext<CustomerContext>(options =>
     {
@@ -20,7 +25,7 @@ try
     });
     builder.Services.AddHostedService<CustomerSeeder>();
     var app = builder.Build();
-
+    app.MapCarter();
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
