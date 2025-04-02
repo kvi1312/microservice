@@ -2,7 +2,6 @@ using Carter;
 using Common.Logging;
 using Customer.API.Extensions;
 using Customer.API.Persistence;
-using Customer.API.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
