@@ -45,7 +45,7 @@ public static class ServiceExtensions
     {
         return services
             .AddScoped(typeof(IRepositoryBaseAsync<,,>),
-                typeof(RepositoryBaseAsync<,,>)) // must ensure correct total declaration of generic type quantity => 3 here
+                typeof(RepositoryBase<,,>)) // must ensure correct total declaration of generic type quantity => 3 here
             .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
             .AddScoped<IProductRepository, ProductRepository>()
             .AddScoped<IProductService, ProductService>();

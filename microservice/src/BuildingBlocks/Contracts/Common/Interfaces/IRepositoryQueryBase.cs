@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 namespace Contracts.Common.Interfaces
 {
     // TKey ref for primary key of T
+    // IRepositoryQueryBase - Handle for getting Data; IRepositoryBaseAsync - CRUD data
     public interface IRepositoryQueryBase<T, TKey, TContext> where T : EntityBase<TKey> where TContext : DbContext
     {
         IQueryable<T> FindAll(bool trackChange = false);
@@ -18,5 +19,6 @@ namespace Contracts.Common.Interfaces
         Task<T?> GetByIdAsync(TKey id);
 
         Task<T?> GetByIdAsync(TKey id, params Expression<Func<T, object>>[] includeProperties);
+        
     }
 }
