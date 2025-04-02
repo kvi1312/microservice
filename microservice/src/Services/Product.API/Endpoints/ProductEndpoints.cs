@@ -1,10 +1,9 @@
-﻿using AutoMapper;
+﻿using System.ComponentModel.DataAnnotations;
 using Carter;
 using Microsoft.AspNetCore.Mvc;
-using Product.API.Entities;
-using Product.API.Repositories.Interface;
+using Product.API.Services;
 using Shared.DTOS;
-using System.ComponentModel.DataAnnotations;
+
 namespace Product.API.EndPoints;
 public class ProductEndpoints : ICarterModule
 {
@@ -21,61 +20,34 @@ public class ProductEndpoints : ICarterModule
     #region Delegate - Can reuse for unit test
 
     private static async Task<IResult> GetProducts(
-    IProductRepository productRepository,
-    IMapper mapper)
+    IProductService productService)
     {
-        var product = await productRepository.GetProducts();
-        var result = mapper.Map<IEnumerable<ProductDto>>(product);
-        return Results.Ok(result);
+        return await productService.GetAllProducts();
     }
 
-    private static async Task<IResult> GetProductById(IProductRepository productRepository, IMapper mapper, long id)
+    private static async Task<IResult> GetProductById(IProductService productService, long id)
     {
-        var product = await productRepository.GetProduct(id);
-        if (product is null) return Results.NotFound();
-        var result = mapper.Map<ProductDto>(product);
-        return Results.Ok(result);
+        return await productService.GetProduct(id);
     }
 
-    private static async Task<IResult> AddProduct(IProductRepository productRepository, IMapper mapper, [FromBody] CreateProductDto productDto)
+    private static async Task<IResult> AddProduct(IProductService productService, [FromBody] CreateProductDto productDto)
     {
-        var productEntity = await productRepository.GetProductByNo(productDto.No);
-        if (productEntity is not null) return Results.BadRequest($"Product No : {productDto.No} is existed");
-
-        var product = mapper.Map<CatalogProduct>(productDto);
-        await productRepository.CreateProduct(product);
-        await productRepository.SaveChangesAsync();
-        var result = mapper.Map<ProductDto>(product);
-        return Results.Ok(result);
+      return await productService.AddProduct(productDto);
     }
 
-    private static async Task<IResult> UpdateProduct(IProductRepository productRepository, IMapper mapper, long id, [FromBody] UpdateProductDto productDto)
+    private static async Task<IResult> UpdateProduct(IProductService productService, long id, [FromBody] UpdateProductDto productDto)
     {
-        var product = await productRepository.GetProduct(id);
-        if (product is null) return Results.NotFound();
-
-        var updatedProduct = mapper.Map(productDto, product);
-        await productRepository.UpdateAsync(updatedProduct);
-        await productRepository.SaveChangesAsync();
-        var result = mapper.Map<ProductDto>(product);
-        return Results.Ok(result);
+        return await productService.UpdateProduct(id, productDto);
     }
 
-    private static async Task<IResult> RemoveProduct(IProductRepository productRepository, IMapper mapper, [Required] long id)
+    private static async Task<IResult> RemoveProduct(IProductService productService, [Required] long id)
     {
-        var product = await productRepository.GetProduct(id);
-        if (product is null) return Results.NotFound();
-        await productRepository.DeleteProduct(id);
-        await productRepository.SaveChangesAsync();
-        return Results.Ok();
+        return await productService.RemoveProduct(id);
     }
 
-    private static async Task<IResult> GetProductByNo(IProductRepository productRepository, IMapper mapper, [Required] string productNo)
+    private static async Task<IResult> GetProductByNo(IProductService productService, [Required] string productNo)
     {
-        var product = await productRepository.GetProductByNo(productNo);
-        if (product is null) return Results.NotFound();
-        var result = mapper.Map<ProductDto>(product);
-        return Results.Ok(result);
+      return await productService.GetProductByNo(productNo);
     }
     #endregion
 }

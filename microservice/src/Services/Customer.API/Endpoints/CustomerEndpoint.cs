@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Carter;
+﻿using Carter;
 using Customer.API.Services.Interfaces;
 
 namespace Customer.API.Endpoints;

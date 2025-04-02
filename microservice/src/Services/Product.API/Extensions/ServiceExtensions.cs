@@ -6,6 +6,7 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Product.API.Persistence;
 using Product.API.Repositories.Interface;
 using Product.API.Repostiories;
+using Product.API.Services;
 
 namespace Product.API.Extensions;
 
@@ -43,8 +44,10 @@ public static class ServiceExtensions
     private static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
         return services
-            .AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>)) // must ensure correct total declaration of generic type quantity => 3 here
+            .AddScoped(typeof(IRepositoryBaseAsync<,,>),
+                typeof(RepositoryBaseAsync<,,>)) // must ensure correct total declaration of generic type quantity => 3 here
             .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
-            .AddScoped<IProductRepository, ProductRepository>();
+            .AddScoped<IProductRepository, ProductRepository>()
+            .AddScoped<IProductService, ProductService>();
     }
 }
