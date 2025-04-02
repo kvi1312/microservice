@@ -21,8 +21,8 @@ public class CustomerSeeder : IHostedService
         {
             Log.Information("Applying database migrations...");
             await context.Database.MigrateAsync(cancellationToken);
-            await CreateCustomer(context, "Bruce Wayne", "Wayne", "Bruce", "batman@gmail.com");
-            await CreateCustomer(context, "Clark Kent", "Kent", "Clark", "superman@gmail.com");
+            await CreateCustomer(context, "Bruce", "Wayne", "Bruce", "batman@gmail.com");
+            await CreateCustomer(context, "Clark", "Kent", "Clark", "superman@gmail.com");
             Log.Information("Seeding customers completed.");
         }
         catch (Exception ex)
