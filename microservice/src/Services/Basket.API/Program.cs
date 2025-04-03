@@ -1,3 +1,4 @@
+using Basket.API.Extensions;
 using Common.Logging;
 using Serilog;
 
@@ -11,7 +12,13 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-
+    builder.Services.ConfigureServices();   
+    builder.Services.ConfigureRedis(builder.Configuration);
+    builder.Services.Configure<RouteOptions>(options =>
+    {
+        options.LowercaseUrls = true;
+    });
+    builder.Host.AddAppConfigurations();
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
