@@ -19,33 +19,33 @@ public class ProductEndpoints : ICarterModule
 
     #region Delegate - Can reuse for unit test
 
-    private static async Task<IResult> GetProducts(
+    private async Task<IResult> GetProducts(
     IProductService productService)
     {
         return await productService.GetAllProducts();
     }
 
-    private static async Task<IResult> GetProductById(IProductService productService, long id)
+    private async Task<IResult> GetProductById(IProductService productService, long id)
     {
         return await productService.GetProduct(id);
     }
 
-    private static async Task<IResult> AddProduct(IProductService productService, [FromBody] CreateProductDto productDto)
+    private async Task<IResult> AddProduct(IProductService productService, [FromBody] CreateProductDto productDto)
     {
       return await productService.AddProduct(productDto);
     }
 
-    private static async Task<IResult> UpdateProduct(IProductService productService, long id, [FromBody] UpdateProductDto productDto)
+    private async Task<IResult> UpdateProduct(IProductService productService, long id, [FromBody] UpdateProductDto productDto)
     {
         return await productService.UpdateProduct(id, productDto);
     }
 
-    private static async Task<IResult> RemoveProduct(IProductService productService, [Required] long id)
+    private async Task<IResult> RemoveProduct(IProductService productService, [Required] long id)
     {
         return await productService.RemoveProduct(id);
     }
 
-    private static async Task<IResult> GetProductByNo(IProductService productService, [Required] string productNo)
+    private async Task<IResult> GetProductByNo(IProductService productService, [Required] string productNo)
     {
       return await productService.GetProductByNo(productNo);
     }
