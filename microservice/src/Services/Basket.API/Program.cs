@@ -1,4 +1,5 @@
 using Basket.API.Extensions;
+using Carter;
 using Common.Logging;
 using Serilog;
 
@@ -12,6 +13,7 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.AddCarter();
     builder.Services.ConfigureServices();   
     builder.Services.ConfigureRedis(builder.Configuration);
     builder.Services.Configure<RouteOptions>(options =>
@@ -20,7 +22,7 @@ try
     });
     builder.Host.AddAppConfigurations();
     var app = builder.Build();
-
+    app.MapCarter();
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
@@ -28,7 +30,7 @@ try
         app.UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
 
     app.UseAuthorization();
 

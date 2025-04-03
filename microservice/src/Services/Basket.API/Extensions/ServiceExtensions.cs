@@ -1,5 +1,7 @@
 ﻿using Basket.API.Repositories;
 using Basket.API.Repositories.Interfaces;
+using Basket.API.Services;
+using Basket.API.Services.Interfaces;
 using Contracts.Common.Interfaces;
 using Infrastructure.Common;
 
@@ -11,6 +13,7 @@ namespace Basket.API.Extensions
         {
             service.AddScoped<IBasketRepository, BasketRepository>();
             service.AddTransient<ISerializeService, SerializeService>();
+            service.AddScoped<IBasketService, BasketService>();
             return service;
         }
 
