@@ -21,33 +21,21 @@ public class ProductEndpoints : ICarterModule
 
     private async Task<IResult> GetProducts(
     IProductService productService)
-    {
-        return await productService.GetAllProducts();
-    }
+        => await productService.GetAllProducts();
 
     private async Task<IResult> GetProductById(IProductService productService, long id)
-    {
-        return await productService.GetProduct(id);
-    }
+        => await productService.GetProduct(id);
 
     private async Task<IResult> AddProduct(IProductService productService, [FromBody] CreateProductDto productDto)
-    {
-      return await productService.AddProduct(productDto);
-    }
+        => await productService.AddProduct(productDto);
 
     private async Task<IResult> UpdateProduct(IProductService productService, long id, [FromBody] UpdateProductDto productDto)
-    {
-        return await productService.UpdateProduct(id, productDto);
-    }
+        => await productService.UpdateProduct(id, productDto);
 
     private async Task<IResult> RemoveProduct(IProductService productService, [Required] long id)
-    {
-        return await productService.RemoveProduct(id);
-    }
+        => await productService.RemoveProduct(id);
 
     private async Task<IResult> GetProductByNo(IProductService productService, [Required] string productNo)
-    {
-      return await productService.GetProductByNo(productNo);
-    }
+        => await productService.GetProductByNo(productNo);
     #endregion
 }
