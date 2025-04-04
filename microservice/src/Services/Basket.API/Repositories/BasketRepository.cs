@@ -10,17 +10,20 @@ namespace Basket.API.Repositories
         private readonly IDistributedCache _redisCacheService;
         private readonly ISerializeService _serializeService;
         private readonly ILogger _logger;
-        public BasketRepository(IDistributedCache redisCacheService, ILogger logger)
+        public BasketRepository(IDistributedCache redisCacheService, ILogger logger, ISerializeService serializeService)
         {
             _redisCacheService = redisCacheService;
             _logger = logger;
+            _serializeService = serializeService;
         }
 
         public async Task<bool> DeletedBasketFromUserName(string userName)
         {
             try
             {
+                _logger.Information("[BEGIN] Deleting basket for user {UserName}", userName);
                 await _redisCacheService.GetStringAsync(userName);
+                _logger.Information("[END] Deleting basket for user {UserName}", userName);
                 return true;
             }
             catch (Exception ex)
@@ -32,7 +35,9 @@ namespace Basket.API.Repositories
 
         public async Task<Cart?> GetBasketByUserName(string userName)
         {
+            _logger.Information("[BEGIN] Getting basket for user {UserName}", userName);
             var basket = await _redisCacheService.GetStringAsync(userName);
+            _logger.Information("[END] Getting basket for user {UserName}", userName);
             return string.IsNullOrEmpty(basket) ? null : _serializeService.Deserialize<Cart>(basket);
         }
 
