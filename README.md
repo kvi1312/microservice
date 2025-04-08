@@ -1,11 +1,67 @@
-# 1. Migration
-dot net ef migrations add ""
-dotnet ef database update
+# 🧭 Microservice Architecture Guide
 
-# 2. Command
-- Run docker compose : docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans
-- account portainer http://local:9000 : admin - Nguyenkhai2611!
-- account kibana http://localhost:5601 : elastic - admin
-- rabbitMq http://localhost:15672 : guest - guest
-- dotnet ef migrations add "Init_OrderDb" --project Ordering.Infrastructure --startup-project Ordering.API --output-dir Persistence\Migrations
-- dotnet ef database update --project Ordering.Infrastructure --startup-project Ordering.API 
+---
+
+## 🚀 Technology Stack
+
+### ⚙️ Core
+- **.NET 6.0**
+
+### 📚 Libraries & Frameworks
+- `AutoMapper`
+- `FluentValidation`
+- `MediatR`
+- `Entity Framework Core`
+- `Carter`
+- `Ocelot`
+- `Serilog`
+- `Pomelo MySQL Provider`
+- `RabbitMQ`
+- `Newtonsoft.Json`
+
+### 🗄️ Databases
+- `Redis`
+- `PostgreSQL`
+- `MySQL`
+- `SQL Server`
+- `MongoDB`
+- `Elasticsearch`
+
+### 🏗️ Architecture Patterns
+- **Unit of Work**
+- **Repository Pattern**
+- **CQRS (Command Query Responsibility Segregation)**
+- **Clean Architecture**
+
+---
+
+## 🛠️ Common Commands
+
+### 📦 Database Migrations (EF Core)
+
+#### 🔹 Basic
+```bash
+dotnet ef migrations add "<migration_name>"
+dotnet ef database update
+```
+
+#### 🔹 Project-Specific
+```bash
+dotnet ef migrations add "<migration_name>" --project Ordering.Infrastructure --startup-project Ordering.API --output-dir Persistence/Migrations
+
+dotnet ef database update --project Ordering.Infrastructure --startup-project Ordering.API
+```
+
+### 🐳 Docker Compose
+```bash
+cd src
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans
+```
+
+## 🌐 Service Access
+
+| 🧩 Service |🌍 URL                 |👤 Username |🔐 Password     |
+|------------|-----------------------|------------|----------------|
+| Portainer  | http://localhost:9000 | admin      | Nguyenkhai2611! |
+| Kibana     | http://localhost:5601 | elastic    | admin          |
+| RabbitMQ   | http://localhost:15672 | guest      | guest          |

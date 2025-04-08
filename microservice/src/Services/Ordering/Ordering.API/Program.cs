@@ -2,6 +2,7 @@ using Ordering.Infrastructure;
 using Ordering.Infrastructure.Persistence;
 using Serilog;
 using Common.Logging;
+using Ordering.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(SeriLogger.Configure);
@@ -9,6 +10,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddApplicationServices();
 builder.Services.AddHostedService<OrderContextSeed>();
 Log.Information("Starting Ordering API up");
 // Add services to the container.

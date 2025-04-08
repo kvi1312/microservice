@@ -1,26 +1,6 @@
 version: '3.8'
 
 services:
-  # sqlserverdb:
-  #   container_name: sqlserverdb
-  #   environment:
-  #      SA_PASSWORD: 'c#fKeLGv'
-  #      ACCEPT_EULA: "Y"
-  #   restart: always
-  #   volumes:
-  #   - sqlserver_data:/var/lib/sqlserver/data
-  #   ports:
-  #   - "1435:1433"
-  # mysqldb:
-  #   container_name: mysqldb
-  #   environment:
-  #      MYSQL_ROOT_PASSWORD: 'c#fKeLGv'
-  #   restart: always
-  #   volumes:
-  #   - sqlserver_data:/var/lib/sqlserver/data
-  #   ports:
-  #   - "3306:3306"
-
   orderdb:
     container_name: orderdb
     environment:
