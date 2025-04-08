@@ -1,18 +1,6 @@
 version: '3.8'
 
 services:
-  #database section
-  # sqlserverdb:
-  #   image: mcr.microsoft.com/mssql/server:2019-latest
-  #   container_name: sqlserverdb
-  #   environment:
-  #      SA_PASSWORD: 'c#fKeLGv'
-  #      ACCEPT_EULA: "Y"
-  #   restart: always
-  #   volumes:
-  #   - sqlserver_data:/var/lib/sqlserver/data 
-  #   ports:
-  #   - "1435:1433"
   mysqldb:
     image: mysql:8.0.29
 
@@ -69,7 +57,7 @@ services:
 #network section
 networks:
   default:
-    name: tedu_microservices
+    name: microservices
     driver: bridge
 
 #volumes section
