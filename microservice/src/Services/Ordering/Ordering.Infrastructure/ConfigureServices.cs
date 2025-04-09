@@ -1,5 +1,7 @@
 ﻿using Contracts.Common.Interfaces;
+using Contracts.Services;
 using Infrastructure.Common;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,7 @@ public static class ConfigureServices
             builder => builder.MigrationsAssembly(typeof(OrderContext).Assembly.FullName)));
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+        services.AddScoped(typeof(ISmtpEmailService), typeof(SMTPEmailService));
         return services;
     }
     
