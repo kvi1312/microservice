@@ -18,6 +18,8 @@
 - `Pomelo MySQL Provider`
 - `RabbitMQ`
 - `Newtonsoft.Json`
+- `MailKit`
+- `SMTPEmail`
 
 ### 🗄️ Databases
 - `Redis`
