@@ -7,4 +7,6 @@ public interface IOrderRepository : IRepositoryBaseAsync<Order, long>
 {
     Task<IEnumerable<Order>> GetOrderByUserName(string userName);
     Task<long> CreateOrderAsync(Order order);
+    Task<Order> UpdateOrderAsync(Order order);
+    Task DeleteOrder(Order order);
 }

@@ -37,7 +37,7 @@ public class OrderContext : DbContext
                     }
                     break;
                 case EntityState.Modified:
-                    Entry(item.Entity).Property("id").IsModified = false;
+                    Entry(item.Entity).Property("Id").IsModified = false;
                     if (item.Entity is IDateTracking modifiedEntity)
                     {
                         modifiedEntity.LastModifiedDate = DateTime.UtcNow;

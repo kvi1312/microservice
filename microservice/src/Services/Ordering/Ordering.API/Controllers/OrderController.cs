@@ -49,15 +49,21 @@ public class OrderController : ControllerBase
     }
 
     [HttpPut(Name = RoutesName.UpdateOrder)]
-    public async Task<ActionResult> UpdateOrder()
+    [ProducesResponseType(typeof(ApiResult<OrderDto>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult> UpdateOrder([Required] long id,[FromBody]UpdateOrderCommand command)
     {
-        return Ok();
+        command.SetId(id);
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 
     [HttpDelete(Name = RoutesName.DeleteOrder)]
-    public async Task<ActionResult> DeleteOrder()
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult> DeleteOrder([Required] long id)
     {
-        return Ok();
+        var command = new DeleteOrderCommand(id);
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 
     [HttpGet("test-email")]
