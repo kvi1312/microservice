@@ -20,6 +20,7 @@
 - `Newtonsoft.Json`
 - `MailKit`
 - `SMTPEmail`
+- `Masstransit.RabbitMQ`
 
 ### 🗄️ Databases
 - `Redis`

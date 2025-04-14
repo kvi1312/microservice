@@ -1,3 +1,4 @@
+using Basket.API;
 using Basket.API.Extensions;
 using Carter;
 using Common.Logging;
@@ -21,6 +22,10 @@ try
         options.LowercaseUrls = true;
     });
     builder.Host.AddAppConfigurations();
+    builder.Services.AddAutoMapper(config =>
+    {
+        config.AddProfile(new MappingProfile());
+    });
     var app = builder.Build();
     app.MapCarter();
     // Configure the HTTP request pipeline.
