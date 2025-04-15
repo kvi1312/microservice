@@ -6,7 +6,7 @@ namespace Basket.API
 {
     public class MappingProfile :Profile
     {
-        public void Mapping()
+        public MappingProfile()
         {
             CreateMap<BasketCheckout, BasketCheckoutEvent>();
         }

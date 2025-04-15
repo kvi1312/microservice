@@ -10,18 +10,20 @@ Log.Information("Starting Basket API up");
 // Add services to the container.
 try
 {
+    builder.Services.AddConfigurationSettings(builder.Configuration);
+    builder.Host.AddAppConfigurations();
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddCarter();
-    builder.Services.ConfigureServices();   
+    builder.Services.ConfigureServices();
     builder.Services.ConfigureRedis(builder.Configuration);
     builder.Services.Configure<RouteOptions>(options =>
     {
         options.LowercaseUrls = true;
     });
-    builder.Host.AddAppConfigurations();
+    builder.Services.ConfigureMasstransit();
     builder.Services.AddAutoMapper(config =>
     {
         config.AddProfile(new MappingProfile());
@@ -45,6 +47,18 @@ try
 }
 catch (Exception ex)
 {
+    var type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
+
+
+    Console.WriteLine("EXCEPTION: " + ex.Message);
+    if (ex.InnerException != null)
+    {
+        Console.WriteLine("INNER: " + ex.InnerException.Message);
+    }
     Log.Fatal(ex, "Unhandle exception");
 }
 finally
