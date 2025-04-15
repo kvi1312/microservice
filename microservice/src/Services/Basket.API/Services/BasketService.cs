@@ -1,6 +1,9 @@
-﻿using Basket.API.Entities;
+﻿using AutoMapper;
+using Basket.API.Entities;
 using Basket.API.Repositories.Interfaces;
 using Basket.API.Services.Interfaces;
+using EventBus.Messages.IntegrationEvent.Events;
+using MassTransit;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace Basket.API.Services
@@ -8,10 +11,27 @@ namespace Basket.API.Services
     public class BasketService : IBasketService
     {
         private readonly IBasketRepository _basketRepository;
-
-        public BasketService(IBasketRepository basketRepository)
+        private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IMapper _mapper;
+        public BasketService(IBasketRepository basketRepository, IPublishEndpoint publishEndpoint, IMapper mapper)
         {
             _basketRepository = basketRepository;
+            _publishEndpoint = publishEndpoint;
+            _mapper = mapper;
+        }
+
+        public async Task<IResult> Checkout(BasketCheckout basketCheckout)
+        {
+            var basket = await _basketRepository.GetBasketByUserName(basketCheckout.UserName);
+
+            if (basket == null) return Results.NotFound();
+
+            // publish checkout event to EventBus message
+            var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
+            eventMessage.TotalPrice = basket.TotalPrice;
+            await _publishEndpoint.Publish(eventMessage);
+            await _basketRepository.DeletedBasketFromUserName(basketCheckout.UserName);
+            return Results.Accepted();
         }
 
         public async Task<IResult> DeleteBasketByUserName(string userName)
