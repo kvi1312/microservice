@@ -9,8 +9,6 @@ using Infrastructure.Extensions;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shared.Configurations;
-using System;
-using System.Runtime;
 
 namespace Basket.API.Extensions
 {
