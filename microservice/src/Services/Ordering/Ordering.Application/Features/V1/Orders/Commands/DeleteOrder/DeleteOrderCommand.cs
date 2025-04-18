@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Shared.SeedWork;
 
 namespace Ordering.Application.Features.V1.Orders;

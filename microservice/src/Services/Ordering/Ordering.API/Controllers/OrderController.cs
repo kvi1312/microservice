@@ -25,10 +25,9 @@ public class OrderController : ControllerBase
     private static class RoutesName
     {
         public const string GetOrders = nameof(GetOrders);
-        public const string CreateOrder = nameof(CreateOrder);
+        //public const string CreateOrder = nameof(CreateOrder);
         public const string UpdateOrder = nameof(UpdateOrder);
         public const string DeleteOrder = nameof(DeleteOrder);
-        // create -> Id created, update -> orderdto, delete -> no content,
     }
 
     [HttpGet("{userName}", Name = RoutesName.GetOrders)]
@@ -40,13 +39,13 @@ public class OrderController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost(Name = RoutesName.CreateOrder)]
-    [ProducesResponseType(typeof(ApiResult<long>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ApiResult<long>>> CreateOrder([FromBody] CreateOrderCommand command)
-    {
-        var result = await _mediator.Send(command);
-        return Ok(result);
-    }
+    //[HttpPost(Name = RoutesName.CreateOrder)]
+    //[ProducesResponseType(typeof(ApiResult<long>), (int)HttpStatusCode.OK)]
+    //public async Task<ActionResult<ApiResult<long>>> CreateOrder([FromBody] CreateOrderCommand command)
+    //{
+    //    var result = await _mediator.Send(command);
+    //    return Ok(result);
+    //}
 
     [HttpPut(Name = RoutesName.UpdateOrder)]
     [ProducesResponseType(typeof(ApiResult<OrderDto>), (int)HttpStatusCode.OK)]
