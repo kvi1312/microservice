@@ -13,7 +13,7 @@ public class OrderRepository : RepositoryBase<Order, long, OrderContext>, IOrder
     {
     }
 
-    public async Task<long> CreateOrderAsync(Order order) => await CreateAsync(order);
+    public void CreateOrder(Order order) => Create(order);
 
     public async Task DeleteOrder(Order order)
     {
@@ -27,6 +27,4 @@ public class OrderRepository : RepositoryBase<Order, long, OrderContext>, IOrder
         await UpdateAsync(order);
         return order;
     }
-
-
 }
