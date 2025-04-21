@@ -6,7 +6,7 @@ namespace Ordering.Application.Common.Interfaces;
 public interface IOrderRepository : IRepositoryBaseAsync<Order, long>
 {
     Task<IEnumerable<Order>> GetOrderByUserName(string userName);
-    Task<long> CreateOrderAsync(Order order);
+    void CreateOrder(Order order);
     Task<Order> UpdateOrderAsync(Order order);
     Task DeleteOrder(Order order);
 }
