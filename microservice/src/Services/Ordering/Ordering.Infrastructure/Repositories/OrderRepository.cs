@@ -15,9 +15,9 @@ public class OrderRepository : RepositoryBase<Order, long, OrderContext>, IOrder
 
     public void CreateOrder(Order order) => Create(order);
 
-    public async Task DeleteOrder(Order order)
+    public void DeleteOrder(Order order)
     {
-        await DeleteAsync(order);
+        Delete(order);
     }
 
     public async Task<IEnumerable<Order>> GetOrderByUserName(string userName)

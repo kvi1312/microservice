@@ -35,13 +35,16 @@ public class Order : AuditableEventEntity<long>
     [Column(TypeName = "nvarchar(max)")] public string ShippingAddress { get; set; }
 
     [Column(TypeName = "nvarchar(max)")] public string InvoiceAddress { get; set; }
+    
+    [NotMapped]
+    public string FullName => $"{FirstName} {LastName}";
 
     public OrderStatus OrderStatus { get; set; }
 
     public Order AddedOrder()
     {
         AddDomainEvent(new OrderCreatedEvent(Id, UserName, DocumentNo.ToString(), TotalPrice, EmailAddress,
-            ShippingAddress, InvoiceAddress));
+            ShippingAddress, InvoiceAddress, FullName));
         return this;
     }
 
