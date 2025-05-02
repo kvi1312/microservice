@@ -14,6 +14,7 @@ try
     builder.Host.UseSerilog(SeriLogger.Configure);
     builder.Host.AddAppConfigurations();
     builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
     var app = builder.Build();
     app.MapCarter();
     app.UseInfrastructure();
