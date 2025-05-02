@@ -21,6 +21,7 @@
 - `MailKit`
 - `SMTPEmail`
 - `Masstransit.RabbitMQ`
+- `MongoDb.Driver`
 
 ### 🗄️ Databases
 - `Redis`
