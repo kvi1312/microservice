@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Infrastructure.Common.Models;
+using Infrastructure.Extensions;
 using Inventory.API.Entities;
 using Inventory.API.Extensions;
 using Inventory.API.Repositories.Abstraction;
@@ -24,7 +26,7 @@ namespace Inventory.API.Services
             return result;
         }
 
-        public async Task<IEnumerable<InventoryEntryDto>> GetAllByItemNoPagingAsync(GetInventoryPagingQuery query)
+        public async Task<PageList<InventoryEntryDto>> GetAllByItemNoPagingAsync(GetInventoryPagingQuery query)
         {
             var filterSearchTerm = Builders<InventoryEntry>.Filter.Empty;
             var filterItemNo = Builders<InventoryEntry>.Filter.Eq(x => x.ItemNo, query.ItemNo());
@@ -35,16 +37,17 @@ namespace Inventory.API.Services
             }
 
             var andFilter = filterItemNo & filterSearchTerm;
-            var pageList = await Collection.Find(andFilter).Skip((query.PageIndex - 1) * query.PageSize).Limit(query.PageSize).ToListAsync();
-            var result = _mapper.Map<IEnumerable<InventoryEntryDto>>(pageList);
+            var pageList = await Collection.PaginatedListAsync(andFilter, pageIndex: query.PageIndex, pageSize: query.PageSize);
+            var items = _mapper.Map<IEnumerable<InventoryEntryDto>>(pageList);
+            var result = new PageList<InventoryEntryDto>(items, pageList.GetMetaData().TotalItems, pageIndex: query.PageIndex, pageSize: query.PageSize);
 
             return result;
         }
 
-        public async Task<InventoryEntryDto> GetById(string id)
+        public async Task<InventoryEntryDto> GetByIdAsync(string id)
         {
             FilterDefinition<InventoryEntry> filter = Builders<InventoryEntry>.Filter.Eq(x => x.Id, id);
-            var entity = await FindAll().Find(filter).ToListAsync();
+            var entity = await FindAll().Find(filter).FirstOrDefaultAsync();
             var result = _mapper.Map<InventoryEntryDto>(entity);
             return result;
         }

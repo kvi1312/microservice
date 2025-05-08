@@ -4,6 +4,8 @@ namespace Shared.DTOS.Inventory;
 
 public class InventoryEntryDto
 {
+    public string Id { get; set; }
+
     public DocumentType DocumentType { get; set; }
 
     public string DocumentNo { get; set; }

@@ -1,3 +1,4 @@
+using Carter;
 using Common.Logging;
 using Inventory.API.Extensions;
 using Serilog;
@@ -14,6 +15,7 @@ try
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddCarter();
     builder.Services.AddSwaggerGen();
     builder.Services.AddInfrastructureServices();
     builder.Services.AddConfigurationSettings(builder.Configuration);
@@ -28,7 +30,7 @@ try
     }
 
     // app.UseHttpsRedirection();
-
+    app.MapCarter();
     app.UseAuthorization();
 
     app.MapDefaultControllerRoute();
