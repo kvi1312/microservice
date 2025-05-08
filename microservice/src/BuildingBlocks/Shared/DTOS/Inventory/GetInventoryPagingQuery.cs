@@ -1,4 +1,6 @@
-﻿using Shared.SeedWork;
+﻿using Microsoft.AspNetCore.Http;
+using Shared.SeedWork;
+using System.Reflection;
 
 namespace Shared.DTOS.Inventory;
 

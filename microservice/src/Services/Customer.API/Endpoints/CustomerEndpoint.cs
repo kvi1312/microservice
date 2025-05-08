@@ -12,12 +12,12 @@ public class CustomerEndpoint : ICarterModule
     }
 
     #region Delegate Funcs
-    private static async Task<IResult> GetAllCustomers(ICustomerService customerService)
+    private async Task<IResult> GetAllCustomers(ICustomerService customerService)
     {
         return await customerService.GetAllCustomers();
     }
     
-    private static async Task<IResult> GetCustomerByUserName(ICustomerService customerService, string userName)
+    private async Task<IResult> GetCustomerByUserName(ICustomerService customerService, string userName)
     {
         var customer = await customerService.GetCustomerByUserNameAsync(userName);
         return  customer != null ? Results.Ok(customer) : Results.NotFound();
