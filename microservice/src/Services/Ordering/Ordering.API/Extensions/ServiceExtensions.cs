@@ -1,5 +1,4 @@
-﻿using EventBus.Messages.IntegrationEvent.Events;
-using Infrastructure.Configurations;
+﻿using Infrastructure.Configurations;
 using Infrastructure.Extensions;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection.Extensions;

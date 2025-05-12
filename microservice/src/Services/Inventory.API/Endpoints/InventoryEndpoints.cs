@@ -29,7 +29,7 @@ namespace Inventory.API.Endpoints
                 .Produces((int)HttpStatusCode.OK, typeof(NoContentResult));
         }
 
-        private async Task<IResult> DeleteById([Required] string id, IInventoryService inventoryService)
+        private async Task<IResult> DeleteById([Required] string id, IInventoryRepository inventoryService)
         {
             var entity = await inventoryService.GetByIdAsync(id);
 
@@ -39,13 +39,13 @@ namespace Inventory.API.Endpoints
             return Results.NoContent();
         }
 
-        private async Task<IResult> PurchaseItemOrder([Required] string itemNo, [FromBody] PurchaseProductDto dto, IInventoryService inventoryService)
+        private async Task<IResult> PurchaseItemOrder([Required] string itemNo, [FromBody] PurchaseProductDto dto, IInventoryRepository inventoryService)
         {
             var result = await inventoryService.PurchaseItemAsync(itemNo, dto);
             return Results.Ok(result);
         }
 
-        private async Task<IResult> GetAllByItemNo([Required] string itemNo, IInventoryService inventoryService)
+        private async Task<IResult> GetAllByItemNo([Required] string itemNo, IInventoryRepository inventoryService)
         {
             var result = await inventoryService.GetAllByItemNoAsync(itemNo);
             return Results.Ok(result);
@@ -55,7 +55,7 @@ namespace Inventory.API.Endpoints
             [Required] string itemNo,
             [FromQuery] int pageIndex,
             [FromQuery] int pageSize,
-            IInventoryService inventoryService, [FromQuery] string? searchTerm = null)
+            IInventoryRepository inventoryService, [FromQuery] string? searchTerm = null)
         {
             var query = new GetInventoryPagingQuery
             {
@@ -68,7 +68,7 @@ namespace Inventory.API.Endpoints
             return Results.Ok(result);
         }
 
-        private async Task<IResult> GetInventoryById([Required] string id, IInventoryService inventoryService)
+        private async Task<IResult> GetInventoryById([Required] string id, IInventoryRepository inventoryService)
         {
             var result = await inventoryService.GetByIdAsync(id);
             return Results.Ok(result);
