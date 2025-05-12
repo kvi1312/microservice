@@ -1,5 +1,6 @@
 ﻿using Inventory.API.Persistence;
 using MongoDB.Driver;
+using Shared.Configurations;
 
 namespace Inventory.API.Extensions;
 
@@ -9,7 +10,7 @@ public static class HostExtension
     {
         using var scope = host.Services.CreateScope();
         var serivices = scope.ServiceProvider;
-        var settings = serivices.GetRequiredService<DatabaseSettings>();
+        var settings = serivices.GetRequiredService<MongoDbSettings>();
 
         if (settings == null || string.IsNullOrEmpty(settings.ConnectionString))
             throw new ArgumentNullException("MongoDB connection string is not configured.");

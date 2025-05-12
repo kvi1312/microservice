@@ -5,7 +5,7 @@ namespace Common.Logging;
 
 public static class SeriLogger
 {
-    public static Action<HostBuilderContext, LoggerConfiguration> Configure => //sử dụng static để sử dụng thuộc tính có thể gọi qua tên lớp, và tính dùng chung cho mọi đối tượng của static
+    public static Action<HostBuilderContext, LoggerConfiguration> Configure =>
         (context, configuration) =>
         {
             var applicationName = context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-");
