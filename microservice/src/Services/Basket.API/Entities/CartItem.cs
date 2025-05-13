@@ -17,4 +17,8 @@ public class CartItem
 
     [Required]
     public string ItemName { get; set; }
+
+    public int AvailableQuantity { get; set; }
+
+    public void SetAvailabelQuantity(int quantity) => (AvailableQuantity) = quantity;
 }

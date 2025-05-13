@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Carter" Version="6.1.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.4.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.36" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
@@ -27,6 +28,9 @@
     <Content Include="..\..\..\.dockerignore">
       <Link>.dockerignore</Link>
     </Content>
+    <Protobuf Include="..\Inventory\Inventory.Grpc\Inventory.GRPC\Protos\stock.proto" GrpcService="Client">
+      <Link>Protos\stock.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>
