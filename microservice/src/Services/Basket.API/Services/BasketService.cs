@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Basket.API.Entities;
+using Basket.API.GrpcServices;
 using Basket.API.Repositories.Interfaces;
 using Basket.API.Services.Interfaces;
 using EventBus.Messages.IntegrationEvent.Events;
@@ -13,11 +14,13 @@ namespace Basket.API.Services
         private readonly IBasketRepository _basketRepository;
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly IMapper _mapper;
-        public BasketService(IBasketRepository basketRepository, IPublishEndpoint publishEndpoint, IMapper mapper)
+        private readonly StockItemGrpcService _stockItemGrpcService;
+        public BasketService(IBasketRepository basketRepository, IPublishEndpoint publishEndpoint, IMapper mapper, StockItemGrpcService stockItemGrpcService)
         {
             _basketRepository = basketRepository;
             _publishEndpoint = publishEndpoint;
             _mapper = mapper;
+            _stockItemGrpcService = stockItemGrpcService;
         }
 
         public async Task<IResult> Checkout(BasketCheckout basketCheckout)
@@ -37,7 +40,7 @@ namespace Basket.API.Services
         public async Task<IResult> DeleteBasketByUserName(string userName)
         {
             var result = await _basketRepository.DeletedBasketFromUserName(userName);
-            return Results.Ok(result);  
+            return Results.Ok(result);
         }
 
         public async Task<IResult> GetBasketByUserName(string userName)
@@ -48,6 +51,13 @@ namespace Basket.API.Services
 
         public async Task<IResult> UpdateBasket(Cart cart)
         {
+            // communicate with grpc service
+            foreach (var item in cart.Items)
+            {
+                var stock = await _stockItemGrpcService.GetStock(item.ItemNo);
+                item.SetAvailabelQuantity(stock.Quantity);
+            }
+
             var options = new DistributedCacheEntryOptions
             {
                 AbsoluteExpiration = DateTimeOffset.UtcNow.AddMinutes(60),
