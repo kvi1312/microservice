@@ -5,9 +5,11 @@
 ## 🚀 Technology Stack
 
 ### ⚙️ Core
+
 - **.NET 6.0**
 
 ### 📚 Libraries & Frameworks
+
 - `AutoMapper`
 - `FluentValidation`
 - `MediatR`
@@ -22,8 +24,10 @@
 - `SMTPEmail`
 - `Masstransit.RabbitMQ`
 - `MongoDb.Driver`
+- `Grpc.AspNetCore`
 
 ### 🗄️ Databases
+
 - `Redis`
 - `PostgreSQL`
 - `MySQL`
@@ -32,6 +36,7 @@
 - `Elasticsearch`
 
 ### 🏗️ Architecture Patterns
+
 - **Unit of Work**
 - **Repository Pattern**
 - **CQRS (Command Query Responsibility Segregation)**
@@ -44,12 +49,14 @@
 ### 📦 Database Migrations (EF Core)
 
 #### 🔹 Basic
+
 ```bash
 dotnet ef migrations add "<migration_name>"
 dotnet ef database update
 ```
 
 #### 🔹 Project-Specific
+
 ```bash
 dotnet ef migrations add "<migration_name>" --project Ordering.Infrastructure --startup-project Ordering.API --output-dir Persistence/Migrations
 
@@ -57,6 +64,7 @@ dotnet ef database update --project Ordering.Infrastructure --startup-project Or
 ```
 
 ### 🐳 Docker Compose
+
 ```bash
 cd src
 docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans
@@ -64,8 +72,8 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remo
 
 ## 🌐 Service Access
 
-| 🧩 Service |🌍 URL                 |👤 Username |🔐 Password     |
-|------------|-----------------------|------------|----------------|
-| Portainer  | http://localhost:9000 | admin      | Nguyenkhai2611! |
-| Kibana     | http://localhost:5601 | elastic    | admin          |
-| RabbitMQ   | http://localhost:15672 | guest      | guest          |
+| 🧩 Service | 🌍 URL                 | 👤 Username | 🔐 Password     |
+| ---------- | ---------------------- | ----------- | --------------- |
+| Portainer  | http://localhost:9000  | admin       | Nguyenkhai2611! |
+| Kibana     | http://localhost:5601  | elastic     | admin           |
+| RabbitMQ   | http://localhost:15672 | guest       | guest           |

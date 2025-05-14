@@ -30,6 +30,7 @@ namespace Basket.API.Extensions
             var eventBusSettings = configuration.GetSection(nameof(EventBusSettings))
                 .Get<EventBusSettings>();
             services.AddSingleton(eventBusSettings);
+
             var cacheSettings = configuration.GetSection(nameof(CacheSettings))
                 .Get<CacheSettings>();
             services.AddSingleton(cacheSettings);
@@ -37,6 +38,7 @@ namespace Basket.API.Extensions
             var grpcSettings = configuration.GetSection(nameof(GrpcSettings))
                 .Get<GrpcSettings>();
             services.AddSingleton(grpcSettings);
+
             return services;
         }
 

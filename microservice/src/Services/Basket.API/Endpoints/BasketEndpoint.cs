@@ -15,7 +15,7 @@ namespace Basket.API.Endpoints
         {
             app.MapGet("api/basket/{userName}", GetBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(Cart));
             app.MapDelete("api/basket", DeleteBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(bool));
-            app.MapPost("api/basket/{userName}", UpdateBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(Cart));
+            app.MapPost("api/baskets", UpdateBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(Cart));
             app.MapPost("api/basket/checkout", Checkout).Produces((int)HttpStatusCode.Accepted).Produces((int)HttpStatusCode.NotFound);
         }
 
