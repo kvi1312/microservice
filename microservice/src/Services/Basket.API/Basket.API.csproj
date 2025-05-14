@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -28,8 +28,10 @@
     <Content Include="..\..\..\.dockerignore">
       <Link>.dockerignore</Link>
     </Content>
-    <Protobuf Include="..\Inventory\Inventory.Grpc\Inventory.GRPC\Protos\stock.proto" GrpcService="Client">
+    <Protobuf Include="..\Inventory\Inventory.Grpc\Protos\stock.proto">
       <Link>Protos\stock.proto</Link>
+      <GrpcService>Client</GrpcService>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Protobuf>
   </ItemGroup>
 
