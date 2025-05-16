@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using Basket.API.Entities;
-using Basket.API.GrpcServices;
+﻿using Basket.API.Entities;
 using Basket.API.Services.Interfaces;
 using Carter;
-using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
