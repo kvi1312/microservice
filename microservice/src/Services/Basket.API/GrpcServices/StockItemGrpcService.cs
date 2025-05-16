@@ -1,5 +1,6 @@
 ﻿
-using Inventory.GRPC.Protos;
+
+using Inventory.GRPC.Client;
 
 namespace Basket.API.GrpcServices;
 
