@@ -1,0 +1,107 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5001"
+  },
+  "Routes": [
+    // CUSTOMER.API ROUTING
+    {
+      "DownstreamPathTemplate": "/api/customers",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/customers",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/customers/{userName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/customers/{userName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    // PRODUCT.API ROUTING
+    {
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7041
+        }
+      ],
+      "UpstreamPathTemplate": "/api/products",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/products/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7041
+        }
+      ],
+      "UpstreamPathTemplate": "/api/products/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/products/get-product-by-no/{productNo}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7041
+        }
+      ],
+      "UpstreamPathTemplate": "/api/products/by-no/{productNo}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    // BASKET.API ROUTING
+    {
+      "DownstreamPathTemplate": "/api/basket/{userName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7040
+        }
+      ],
+      "UpstreamPathTemplate": "/api/basket/{userName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/basket",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7040
+        }
+      ],
+      "UpstreamPathTemplate": "/api/basket",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/basket/{userName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7040
+        }
+      ],
+      "UpstreamPathTemplate": "/api/basket/{userName}",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ]
+}
