@@ -7,7 +7,7 @@ using Contracts.Common.Interfaces;
 using EventBus.Messages.IntegrationEvent.Interfaces;
 using Infrastructure.Common;
 using Infrastructure.Extensions;
-using Inventory.GRPC.Protos;
+using Inventory.GRPC.Client;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shared.Configurations;
