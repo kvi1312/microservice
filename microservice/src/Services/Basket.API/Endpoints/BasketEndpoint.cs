@@ -10,10 +10,10 @@ namespace Basket.API.Endpoints
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("api/basket/{userName}", GetBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(Cart));
-            app.MapDelete("api/basket", DeleteBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(bool));
+            app.MapGet("api/baskets/{userName}", GetBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(Cart));
+            app.MapDelete("api/baskets", DeleteBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(bool));
             app.MapPost("api/baskets", UpdateBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(Cart));
-            app.MapPost("api/basket/checkout", Checkout).Produces((int)HttpStatusCode.Accepted).Produces((int)HttpStatusCode.NotFound);
+            app.MapPost("api/baskets/checkout", Checkout).Produces((int)HttpStatusCode.Accepted).Produces((int)HttpStatusCode.NotFound);
         }
 
         private async Task<IResult> Checkout(IBasketService basketService, [FromBody] BasketCheckout basketCheckout)
