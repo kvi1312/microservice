@@ -1,3 +1,5 @@
+using Contracts.Identity;
+using Infrastructure.Identity;
 using Infrastructure.Middlewares;
 using Ocelot.Middleware;
 using OcelotApiGw.Extensions;
@@ -14,7 +16,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureOcelot(builder.Configuration);
 builder.Services.ConfigureCors(builder.Configuration);
-
+builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddJwtAuthentication();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,12 +33,18 @@ try
     app.UseCors("CorsPolicy");
 
     app.UseMiddleware<ErrorWrappingMiddleware>();
-
-    await app.UseOcelot();
-
+    app.UseAuthentication();
+    app.UseRouting();
     app.UseAuthorization();
-
+    app.UseEndpoints(e =>
+    {
+        e.MapGet("/", async context =>
+        {
+            await context.Response.WriteAsync("hello world");
+        });
+    });
     app.MapControllers();
+    await app.UseOcelot();
 
     app.Run();
 }

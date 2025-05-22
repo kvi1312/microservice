@@ -5,7 +5,7 @@
   "Routes": [
     // CUSTOMER.API ROUTING
     {
-      "DownstreamPathTemplate": "/api/customers",
+      "DownstreamPathTemplate": "/api/customer",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -13,7 +13,7 @@
           "Port": 5003
         }
       ],
-      "UpstreamPathTemplate": "/customers",
+      "UpstreamPathTemplate": "/customer",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -42,7 +42,7 @@
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/products/{id}",
+      "DownstreamPathTemplate": "/api/product/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

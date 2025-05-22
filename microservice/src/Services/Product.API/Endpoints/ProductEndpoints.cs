@@ -10,10 +10,10 @@ public class ProductEndpoints : ICarterModule
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("api/product", GetProducts);
-        app.MapPost("api/product", AddProduct);
+        app.MapPost("api/product", AddProduct).RequireAuthorization();
         app.MapGet("api/product/{id:long}", GetProductById);
-        app.MapPut("api/product/{id:long}", UpdateProduct);
-        app.MapDelete("api/product/{id:long}", RemoveProduct);
+        app.MapPut("api/product/{id:long}", UpdateProduct).RequireAuthorization();
+        app.MapDelete("api/product/{id:long}", RemoveProduct).RequireAuthorization();
         app.MapGet("api/product/get-product-by-no/{productNo}", GetProductByNo);
     }
 

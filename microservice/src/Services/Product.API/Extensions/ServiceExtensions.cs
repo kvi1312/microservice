@@ -7,6 +7,7 @@ using Product.API.Persistence;
 using Product.API.Repositories.Interface;
 using Product.API.Repostiories;
 using Product.API.Services;
+using Shared.Configurations;
 
 namespace Product.API.Extensions;
 
@@ -49,5 +50,12 @@ public static class ServiceExtensions
             .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
             .AddScoped<IProductRepository, ProductRepository>()
             .AddScoped<IProductService, ProductService>();
+    }
+
+    public static IServiceCollection AddConfigurationSettings(this IServiceCollection services, IConfiguration configuration)
+    {
+        var jwtSettings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
+        services.AddSingleton(jwtSettings);
+        return services;
     }
 }
