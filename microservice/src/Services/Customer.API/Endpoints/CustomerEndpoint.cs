@@ -7,8 +7,8 @@ public class CustomerEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/customers", GetAllCustomers);
-        app.MapGet("api/customers/{userName}", GetCustomerByUserName);
+        app.MapGet("api/customer", GetAllCustomers);
+        app.MapGet("api/customer/{userName}", GetCustomerByUserName);
     }
 
     #region Delegate Funcs

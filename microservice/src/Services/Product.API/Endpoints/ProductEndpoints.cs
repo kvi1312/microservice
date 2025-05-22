@@ -9,12 +9,12 @@ public class ProductEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/products", GetProducts);
-        app.MapPost("api/products", AddProduct);
-        app.MapGet("api/products/{id:long}", GetProductById);
-        app.MapPut("api/products/{id:long}", UpdateProduct);
-        app.MapDelete("api/products/{id:long}", RemoveProduct);
-        app.MapGet("api/products/get-product-by-no/{productNo}", GetProductByNo);
+        app.MapGet("api/product", GetProducts);
+        app.MapPost("api/product", AddProduct);
+        app.MapGet("api/product/{id:long}", GetProductById);
+        app.MapPut("api/product/{id:long}", UpdateProduct);
+        app.MapDelete("api/product/{id:long}", RemoveProduct);
+        app.MapGet("api/product/get-product-by-no/{productNo}", GetProductByNo);
     }
 
     #region Delegate - Can reuse for unit test
