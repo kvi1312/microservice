@@ -17,7 +17,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/customers/{userName}",
+      "DownstreamPathTemplate": "/api/customer/{userName}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -25,88 +25,88 @@
           "Port": 5003
         }
       ],
-      "UpstreamPathTemplate": "/customers/{userName}",
+      "UpstreamPathTemplate": "/customer/{userName}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     // PRODUCT.API ROUTING
     {
-      "DownstreamPathTemplate": "/api/products",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/product",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/products",
+      "UpstreamPathTemplate": "/product",
       "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/products/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/products/{id}",
+      "UpstreamPathTemplate": "/product/{id}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
-      "DownstreamPathTemplate": "/api/products/get-product-by-no/{productNo}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/product/get-product-by-no/{productNo}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/products/by-no/{productNo}",
+      "UpstreamPathTemplate": "/product/by-no/{productNo}",
       "UpstreamHttpMethod": [ "GET" ]
     },
 
     // BASKET.API ROUTING
     {
-      "DownstreamPathTemplate": "/api/baskets/{userName}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/basket/{userName}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/baskets/{userName}",
+      "UpstreamPathTemplate": "/basket/{userName}",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
     {
-      "DownstreamPathTemplate": "/api/baskets/{userName}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/basket/{userName}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/api/baskets/{userName}",
+      "UpstreamPathTemplate": "/api/basket/{userName}",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/baskets/checkout",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/basket/checkout",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/api/baskets/checkout",
+      "UpstreamPathTemplate": "/api/basket/checkout",
       "UpstreamHttpMethod": [ "POST" ]
     },
 
     // ODERS
     {
-      "DownstreamPathTemplate": "/api/{version}/orders/{any}",
+      "DownstreamPathTemplate": "/api/{version}/order/{any}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -114,11 +114,11 @@
           "Port": 5005
         }
       ],
-      "UpstreamPathTemplate": "/{version}/orders/{any}",
+      "UpstreamPathTemplate": "/{version}/order/{any}",
       "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
-      "DownstreamPathTemplate": "/api/{version}/orders",
+      "DownstreamPathTemplate": "/api/{version}/order",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -126,7 +126,7 @@
           "Port": 5005
         }
       ],
-      "UpstreamPathTemplate": "/{version}/orders",
+      "UpstreamPathTemplate": "/{version}/order",
       "UpstreamHttpMethod": [ "POST" ]
     },
 
