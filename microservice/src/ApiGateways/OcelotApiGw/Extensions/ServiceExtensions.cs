@@ -1,5 +1,9 @@
-﻿using Ocelot.DependencyInjection;
+﻿using Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Ocelot.DependencyInjection;
 using Shared.Configurations;
+using System.Text;
 
 namespace OcelotApiGw.Extensions
 {
@@ -8,12 +12,14 @@ namespace OcelotApiGw.Extensions
         internal static IServiceCollection AddConfigurationSettings(this IServiceCollection services,
         IConfiguration configuration)
         {
+            var jwtSettings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
+            services.AddSingleton(jwtSettings);
             return services;
         }
 
         public static void ConfigureOcelot(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddOcelot(configuration);
+            services.AddOcelot(configuration);          
         }
 
         public static void ConfigureCors(this IServiceCollection services, IConfiguration configuration)
@@ -28,6 +34,40 @@ namespace OcelotApiGw.Extensions
                     .AllowAnyHeader();
                 });
             });
+        }
+
+        internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
+        {
+            var settings = services.GetOptions<JwtSettings>(nameof(JwtSettings));
+            if (settings == null || string.IsNullOrEmpty(settings.Key))
+            {
+                throw new ArgumentNullException($"{nameof(settings)} is not configured");
+            }
+
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.Key));
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                IssuerSigningKey = signingKey,
+                ValidateIssuerSigningKey = true,
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ValidateLifetime = false,
+                RequireExpirationTime = false,
+                ClockSkew = TimeSpan.Zero,
+            };
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.SaveToken = true;
+                x.RequireHttpsMetadata = true;
+                x.TokenValidationParameters = tokenValidationParameters;
+            });
+
+            return services;
         }
     }
 }
