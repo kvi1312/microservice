@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Shared.Configurations;
 using Shared.DTOS.Identity;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace Infrastructure.Identity;
@@ -32,8 +33,13 @@ public class TokenService : ITokenService
 
     private string GenerateEncryptedToken(SigningCredentials signingCredentials)
     {
+        var claims = new[]
+        {
+            new Claim("role", "admin"),
+        };
         var token = new JwtSecurityToken(
-            //expires: DateTime.UtcNow.AddMinutes(30)
+            expires: DateTime.UtcNow.AddMinutes(30),
+            claims: claims,
             signingCredentials: signingCredentials);
         var tokenHandler = new JwtSecurityTokenHandler();
         return tokenHandler.WriteToken(token);
