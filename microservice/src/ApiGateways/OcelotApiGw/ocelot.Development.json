@@ -39,7 +39,19 @@
         }
       ],
       "UpstreamPathTemplate": "/product",
-      "UpstreamHttpMethod": [ "GET", "POST" ]
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [], // client in this array will be affected by the limit
+        "EnableRateLimiting": true,
+        "Limit": 1, // total request that a client can do in a time
+        "Period": "2s", // seconds, minutes, hours, days
+        "PeriodTimespan": 1 // retry after a certain number of second
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3, // require value >= 2. modify how many time error can exist before trigger "circuit breaker"
+        "DurationOfBreak": 1000, // when circuit breaker is triggered, services will stop accept request in this time
+        "TimeoutValue": 5000 // max milisecond can be execute in each request
+      }
     },
     {
       "DownstreamPathTemplate": "/api/product/{id}",
@@ -51,7 +63,22 @@
         }
       ],
       "UpstreamPathTemplate": "/product/{id}",
-      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/product/{id}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/product/get-product-by-no/{productNo}",
