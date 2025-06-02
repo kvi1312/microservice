@@ -115,7 +115,7 @@
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/api/basket/{userName}",
+      "UpstreamPathTemplate": "/basket/{userName}",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
@@ -127,7 +127,7 @@
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/api/basket/checkout",
+      "UpstreamPathTemplate": "/basket/checkout",
       "UpstreamHttpMethod": [ "POST" ]
     },
 
