@@ -32,7 +32,7 @@ try
 
     app.UseCors("CorsPolicy");
 
-    app.UseMiddleware<ErrorWrappingMiddleware>();
+    //app.UseMiddleware<ErrorWrappingMiddleware>();
     app.UseAuthentication();
     app.UseRouting();
     app.UseAuthorization();
