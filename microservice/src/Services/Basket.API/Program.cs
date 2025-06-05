@@ -4,6 +4,10 @@ using Carter;
 using Common.Logging;
 using Serilog;
 
+Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateBootstrapLogger();
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(SeriLogger.Configure);
 Log.Information("Starting Basket API up");
@@ -41,7 +45,6 @@ try
     //app.UseHttpsRedirection();
 
     app.UseAuthorization();
-
     app.MapControllers();
 
     app.Run();

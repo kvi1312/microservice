@@ -5,6 +5,10 @@ using Customer.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
+Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateBootstrapLogger();
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(SeriLogger.Configure);
 
@@ -12,16 +16,13 @@ Log.Information("Starting Customer API up");
 
 try
 {
+    builder.Host.AddAppConfigurations();
+    builder.Services.AddConfigurations(builder.Configuration);
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddCarter();
     builder.Services.AddInfrastructure(builder.Configuration);
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
-    builder.Services.AddDbContext<CustomerContext>(options =>
-    {
-        options.UseNpgsql(connectionString);
-    });
     builder.Services.AddHostedService<CustomerSeeder>();
     var app = builder.Build();
     app.MapCarter();
@@ -31,12 +32,12 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-
-    // app.UseHttpsRedirection();
-
+    app.UseRouting();
     app.UseAuthorization();
-
-    app.MapControllers();
+    app.UseCustomHangfireDashboard(builder.Configuration);
+    app.UseEndpoints((endpoint) => {
+        endpoint.MapDefaultControllerRoute();
+    });
     app.Run();
 
 }
