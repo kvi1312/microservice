@@ -1,4 +1,7 @@
-﻿namespace Basket.API.Extensions
+﻿using Hangfire;
+using Shared.Configurations;
+
+namespace Basket.API.Extensions
 {
     public static class ConfigureHostExtensions
     {

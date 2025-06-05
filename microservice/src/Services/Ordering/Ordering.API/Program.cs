@@ -5,6 +5,10 @@ using Common.Logging;
 using Ordering.API.Extensions;
 using Ordering.Application;
 
+Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateBootstrapLogger();
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(SeriLogger.Configure);
 builder.Services.AddAuthorization();

@@ -18,7 +18,9 @@ services:
 
   inventorydb:
     image: mongo
-    
+
+  hangfiredb:
+    image: mongo
 #infrastructure section
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -102,3 +104,5 @@ volumes:
     name: mongo_data
   pgadmin_data:
     name: pgadmin_data  
+  hangfire_mongo_data:
+    name: hangfire_mongo_data  
