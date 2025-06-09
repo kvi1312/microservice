@@ -14,4 +14,6 @@ public class Cart
     }
 
     public DateTimeOffset LastModified { get; set; } = DateTimeOffset.UtcNow;
+
+    public string EmailAdress { get; set; } = string.Empty;
 }

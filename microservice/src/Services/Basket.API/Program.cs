@@ -11,19 +11,19 @@ Log.Logger = new LoggerConfiguration()
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(SeriLogger.Configure);
 Log.Information("Starting Basket API up");
-// Add services to the container.
+
 try
 {
     builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Host.AddAppConfigurations();
     builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddCarter();
     builder.Services.ConfigureServices();
     builder.Services.ConfigureRedis(builder.Configuration);
     builder.Services.ConfigureGrpcService();
+    builder.Services.ConfigureHttpClientService();
     builder.Services.Configure<RouteOptions>(options =>
     {
         options.LowercaseUrls = true;
