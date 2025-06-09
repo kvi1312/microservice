@@ -12,4 +12,6 @@ public class Cart
     {
         UserName = userName;
     }
+
+    public DateTimeOffset LastModified { get; set; } = DateTimeOffset.UtcNow;
 }
