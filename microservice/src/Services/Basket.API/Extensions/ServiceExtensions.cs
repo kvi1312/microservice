@@ -81,6 +81,7 @@ namespace Basket.API.Extensions
             var settings = services.GetOptions<GrpcSettings>(nameof(GrpcSettings));
             services.AddGrpcClient<StockProtoService.StockProtoServiceClient>(x => x.Address = new Uri(settings.StockUrl));
             services.AddScoped<StockItemGrpcService>();
+            services.AddTransient<IEmailTemplateServices, BasketEmailTemplateService>();
             return services;
         }
     }

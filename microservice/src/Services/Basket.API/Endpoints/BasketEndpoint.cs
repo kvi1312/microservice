@@ -1,4 +1,5 @@
 ﻿using Basket.API.Entities;
+using Basket.API.Services;
 using Basket.API.Services.Interfaces;
 using Carter;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,11 @@ namespace Basket.API.Endpoints
             app.MapDelete("api/basket/{userName}", DeleteBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(bool));
             app.MapPost("api/basket/{userName}", UpdateBasketByUserName).Produces((int)HttpStatusCode.OK, typeof(Cart));
             app.MapPost("api/basket/checkout/{userName}", Checkout).Produces((int)HttpStatusCode.Accepted).Produces((int)HttpStatusCode.NotFound);
+            app.MapPost("api/basket/send-reminder-email", SendReminderEmail);
         }
+
+        private async Task<IResult> SendReminderEmail(IBasketService basketService)
+            => await basketService.SendReminderEmail();
 
         private async Task<IResult> Checkout(IBasketService basketService, [FromBody] BasketCheckout basketCheckout)
             => await basketService.Checkout(basketCheckout);

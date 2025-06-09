@@ -15,12 +15,14 @@ namespace Basket.API.Services
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly IMapper _mapper;
         private readonly StockItemGrpcService _stockItemGrpcService;
-        public BasketService(IBasketRepository basketRepository, IPublishEndpoint publishEndpoint, IMapper mapper, StockItemGrpcService stockItemGrpcService)
+        private readonly IEmailTemplateServices _emailTemplateServices;
+        public BasketService(IBasketRepository basketRepository, IPublishEndpoint publishEndpoint, IMapper mapper, StockItemGrpcService stockItemGrpcService, IEmailTemplateServices emailTemplateServices)
         {
             _basketRepository = basketRepository;
             _publishEndpoint = publishEndpoint;
             _mapper = mapper;
             _stockItemGrpcService = stockItemGrpcService;
+            _emailTemplateServices = emailTemplateServices;
         }
 
         public async Task<IResult> Checkout(BasketCheckout basketCheckout)
@@ -47,6 +49,12 @@ namespace Basket.API.Services
         {
             var result = await _basketRepository.GetBasketByUserName(userName);
             return Results.Ok(result);
+        }
+
+        public async Task<IResult> SendReminderEmail()
+        {
+            var emailTemplate = _emailTemplateServices.GenerateReminderCheckoutOrderEmail("lenguyenkhai2611@gmail.com", "Bruce");
+            return Results.Content(emailTemplate, "text/html");
         }
 
         public async Task<IResult> UpdateBasket(Cart cart)
