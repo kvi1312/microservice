@@ -1,7 +1,10 @@
 ﻿using Basket.API.Entities;
 using Basket.API.Repositories.Interfaces;
+using Basket.API.Services;
+using Basket.API.Services.Interfaces;
 using Contracts.Common.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
+using Shared.DTOS.ScheduledJob;
 using ILogger = Serilog.ILogger;
 namespace Basket.API.Repositories
 {
@@ -10,11 +13,15 @@ namespace Basket.API.Repositories
         private readonly IDistributedCache _redisCacheService;
         private readonly ISerializeService _serializeService;
         private readonly ILogger _logger;
-        public BasketRepository(IDistributedCache redisCacheService, ILogger logger, ISerializeService serializeService)
+        private readonly BackgroundJobHttpServices _backgroundJobHttpServices;
+        private readonly IEmailTemplateServices _emailTemplateServices;
+        public BasketRepository(IDistributedCache redisCacheService, ILogger logger, ISerializeService serializeService, IEmailTemplateServices emailTemplateServices, BackgroundJobHttpServices backgroundJobHttpServices)
         {
             _redisCacheService = redisCacheService;
             _logger = logger;
             _serializeService = serializeService;
+            _emailTemplateServices = emailTemplateServices;
+            _backgroundJobHttpServices = backgroundJobHttpServices;
         }
 
         public async Task<bool> DeletedBasketFromUserName(string userName)
@@ -51,7 +58,23 @@ namespace Basket.API.Repositories
             {
                 await _redisCacheService.SetStringAsync(cart.UserName, _serializeService.Serialize(cart));
             }
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
+
             return await GetBasketByUserName(cart.UserName);
+        }
+
+        private async Task TriggerSendReminderEmailAsync(Cart cart)
+        {
+            var emailTemplate = _emailTemplateServices.GenerateReminderCheckoutOrderEmail(cart.UserName);
+            var model = new ReminderCheckoutOrderDto(cart.EmailAdress, "Reminder Checkout", emailTemplate, DateTimeOffset.UtcNow.AddSeconds(30));
         }
     }
 }

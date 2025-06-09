@@ -51,12 +51,6 @@ namespace Basket.API.Services
             return Results.Ok(result);
         }
 
-        public async Task<IResult> SendReminderEmail()
-        {
-            var emailTemplate = _emailTemplateServices.GenerateReminderCheckoutOrderEmail("lenguyenkhai2611@gmail.com", "Bruce");
-            return Results.Content(emailTemplate, "text/html");
-        }
-
         public async Task<IResult> UpdateBasket(Cart cart)
         {
             // communicate with grpc service

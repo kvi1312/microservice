@@ -8,6 +8,5 @@ namespace Basket.API.Services.Interfaces
         Task<IResult> DeleteBasketByUserName(string userName);
         Task<IResult> UpdateBasket(Cart cart);
         Task<IResult> Checkout(BasketCheckout basketCheckout);
-        Task<IResult> SendReminderEmail();
     }
 }

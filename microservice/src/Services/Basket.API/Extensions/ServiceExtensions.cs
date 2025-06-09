@@ -39,6 +39,9 @@ namespace Basket.API.Extensions
                 .Get<GrpcSettings>();
             services.AddSingleton(grpcSettings);
 
+            var backgroundJobSettings = configuration.GetSection(nameof(BackgroundJobSettings));
+            services.AddSingleton(backgroundJobSettings);
+
             return services;
         }
 
@@ -83,6 +86,11 @@ namespace Basket.API.Extensions
             services.AddScoped<StockItemGrpcService>();
             services.AddTransient<IEmailTemplateServices, BasketEmailTemplateService>();
             return services;
+        }
+
+        public static void ConfigureHttpClientService(this IServiceCollection services)
+        {
+            services.AddHttpClient<BackgroundJobHttpServices>();
         }
     }
 }

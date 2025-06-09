@@ -1,4 +1,5 @@
-using Hangfire;
+using Carter;
+using Common.Logging;
 using Hangfire.API.Extensions;
 using Infrastructure.ScheduledJobs;
 using Serilog;
@@ -8,6 +9,7 @@ Log.Logger = new LoggerConfiguration()
             .CreateBootstrapLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 try
 {
@@ -18,6 +20,7 @@ try
     builder.Services.AddConfigurations(builder.Configuration);
     builder.Services.AddInfrastructureHangfireService();
     builder.Services.ConfigureServices();
+    builder.Services.AddCarter();
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -34,6 +37,7 @@ try
     app.UseEndpoints((endpoint) => {
         endpoint.MapDefaultControllerRoute();
     });
+    app.MapCarter();
     app.Run();
 
 }
