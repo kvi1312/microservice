@@ -3,6 +3,7 @@ using Basket.API.Repositories.Interfaces;
 using Basket.API.Services;
 using Basket.API.Services.Interfaces;
 using Contracts.Common.Interfaces;
+using Infrastructure.Extensions;
 using Microsoft.Extensions.Caching.Distributed;
 using Shared.DTOS.ScheduledJob;
 using ILogger = Serilog.ILogger;
@@ -61,7 +62,7 @@ namespace Basket.API.Repositories
 
             try
             {
-
+                await TriggerSendReminderEmailAsync(cart);
             }
             catch (Exception ex)
             {
@@ -74,7 +75,20 @@ namespace Basket.API.Repositories
         private async Task TriggerSendReminderEmailAsync(Cart cart)
         {
             var emailTemplate = _emailTemplateServices.GenerateReminderCheckoutOrderEmail(cart.UserName);
-            var model = new ReminderCheckoutOrderDto(cart.EmailAdress, "Reminder Checkout", emailTemplate, DateTimeOffset.UtcNow.AddSeconds(30));
+            var model = new ReminderCheckoutOrderDto(cart.EmailAddress, "Reminder Checkout", emailTemplate, DateTimeOffset.UtcNow.AddSeconds(30));
+            const string uri = "/api/scheduled-jobs/send-email-reminder-checkout-order";
+            var response = await _backgroundJobHttpServices.Client.PostAsJsonAsync<ReminderCheckoutOrderDto>(uri, model);
+            if (response.EnsureSuccessStatusCode().IsSuccessStatusCode)
+            {
+                var jobId = await response.ReadContentAs<string>();
+                if (!string.IsNullOrEmpty(jobId))
+                {
+                    // Handle when user update basket and need job id to be tracked and update email into newest version
+                    _logger.Information("Scheduled job created successfully with ID: {JobId}", jobId);
+                    cart.JobId = jobId;
+                    await _redisCacheService.SetStringAsync(cart.UserName, _serializeService.Serialize(cart));
+                }
+            }
         }
     }
 }
