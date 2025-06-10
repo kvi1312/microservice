@@ -39,7 +39,7 @@ namespace Basket.API.Extensions
                 .Get<GrpcSettings>();
             services.AddSingleton(grpcSettings);
 
-            var backgroundJobSettings = configuration.GetSection(nameof(BackgroundJobSettings));
+            var backgroundJobSettings = configuration.GetSection(nameof(BackgroundJobSettings)).Get<BackgroundJobSettings>();
             services.AddSingleton(backgroundJobSettings);
 
             return services;

@@ -71,7 +71,8 @@ public class SMTPEmailService : ISmtpEmailService
             Body = new BodyBuilder
             {
                 HtmlBody = request.Body,
-            }.ToMessageBody()
+            }.ToMessageBody(),
+            
         };
 
         if (request.ToAddresses.Any())
@@ -83,7 +84,8 @@ public class SMTPEmailService : ISmtpEmailService
         }
         else
         {
-            message.To.Add(MailboxAddress.Parse(request.ToAddress));
+            var toAddress = request.ToAddress;
+            message.To.Add(MailboxAddress.Parse(toAddress));
         }
 
         return message;
