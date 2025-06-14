@@ -10,7 +10,7 @@ public class BasketEmailTemplateService : EmailTemplateService, IEmailTemplateSe
     }
     public string GenerateReminderCheckoutOrderEmail(string username)
     {
-        var _checkoutUrl = $"{_backgroundJobSettings.ApiGwUrl}/{_backgroundJobSettings.BasketUrl}/{username}";
+        var _checkoutUrl = $"{_backgroundJobSettings.CheckoutUrl}/{_backgroundJobSettings.BasketUrl}/{username}";
         var emailText = ReadEmailTemplateContent("reminder-checkout-order");
         var emailReplacedText = emailText.Replace("[username]", username)
                                         .Replace("[checkoutUrl]", _checkoutUrl);
