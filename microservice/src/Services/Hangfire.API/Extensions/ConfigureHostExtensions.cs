@@ -24,6 +24,7 @@ public static class ConfigureHostExtensions
         var dashboardSettings = configuration.GetSection("HangfireSettings:Dashboard").Get<DashboardOptions>();
         app.UseHangfireDashboard(hangfireSettings.Route, new DashboardOptions
         {
+            Authorization = new[] { new AuthorizationFilter() },
             DashboardTitle = dashboardSettings.DashboardTitle,
             StatsPollingInterval = dashboardSettings.StatsPollingInterval,
             AppPath = dashboardSettings.AppPath,

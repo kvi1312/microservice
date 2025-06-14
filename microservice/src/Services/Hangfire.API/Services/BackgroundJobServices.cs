@@ -11,12 +11,15 @@ public class BackgroundJobServices : IBackgroundJobServices
     private readonly ISmtpEmailService _smtpEmailService;
     private readonly ILogger _logger;
 
+    public IScheduledServices ScheduledServices => _jobService;
+
     public BackgroundJobServices(ILogger logger, ISmtpEmailService smtpEmailService, IScheduledServices jobService)
     {
         _logger = logger;
         _smtpEmailService = smtpEmailService;
         _jobService = jobService;
     }
+
 
     public string SendEmailContent(string email, string subject, string emailContent, DateTimeOffset enqueueAt)
     {
