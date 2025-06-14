@@ -8,6 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Features\V2\**" />
+      <EmbeddedResource Remove="Features\V2\**" />
+      <None Remove="Features\V2\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="AutoMapper" Version="11.0.0" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
       <PackageReference Include="FluentValidation" Version="11.11.0" />
@@ -25,7 +31,6 @@
 
     <ItemGroup>
       <Folder Include="Features\V1\Orders\EventHandlers\" />
-      <Folder Include="Features\V2\Orders\" />
     </ItemGroup>
 
 </Project>

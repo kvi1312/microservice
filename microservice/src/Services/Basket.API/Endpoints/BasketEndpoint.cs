@@ -3,6 +3,8 @@ using Basket.API.Services;
 using Basket.API.Services.Interfaces;
 using Carter;
 using Microsoft.AspNetCore.Mvc;
+using Shared.DTOS.Basket;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace Basket.API.Endpoints
@@ -17,16 +19,16 @@ namespace Basket.API.Endpoints
             app.MapPost("api/basket/checkout/{userName}", Checkout).Produces((int)HttpStatusCode.Accepted).Produces((int)HttpStatusCode.NotFound);
         }
 
-        private async Task<IResult> Checkout(IBasketService basketService, [FromBody] BasketCheckout basketCheckout)
-            => await basketService.Checkout(basketCheckout);
+        private async Task<IResult> Checkout(IBasketService basketService, [FromBody] BasketCheckout basketCheckout, [Required] string userName)
+            => await basketService.Checkout(basketCheckout, userName);
 
-        private async Task<IResult> UpdateBasketByUserName(IBasketService basketService, [FromBody] Cart cart)
+        private async Task<IResult> UpdateBasketByUserName(IBasketService basketService, [FromBody] CartDto cart)
             => await basketService.UpdateBasket(cart);
 
-        private async Task<IResult> DeleteBasketByUserName(IBasketService basketService, string userName)
+        private async Task<IResult> DeleteBasketByUserName(IBasketService basketService, [Required] string userName)
             => await basketService.DeleteBasketByUserName(userName);
 
-        private async Task<IResult> GetBasketByUserName(IBasketService basketService, string userName)
+        private async Task<IResult> GetBasketByUserName(IBasketService basketService, [Required] string userName)
             => await basketService.GetBasketByUserName(userName);
     }
 }
