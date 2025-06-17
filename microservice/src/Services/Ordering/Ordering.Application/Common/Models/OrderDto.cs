@@ -14,5 +14,6 @@ public class OrderDto : IMapFrom<Order>
     public string EmailAddress { get; set; }
     public string ShippingAddress { get; set; }
     public string InvoiceAddress { get; set; }
+    public Guid DocumentNo { get; set; }
     public OrderStatus OrderStatus { get; set; }
 }

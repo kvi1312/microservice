@@ -46,7 +46,7 @@ public class OrderController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{userName}", Name = RoutesName.GetOrderById)]
+    [HttpGet("{id:long}", Name = RoutesName.GetOrderById)]
     [ProducesResponseType(typeof(IEnumerable<Application.Common.Models.OrderDto>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<Application.Common.Models.OrderDto>>> GetOrderById([Required] long orderId)
     {
