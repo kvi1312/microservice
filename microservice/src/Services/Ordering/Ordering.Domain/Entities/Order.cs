@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Contracts.Common.Events;
-using Contracts.Domains;
-using Ordering.Domain.Enums;
+﻿using Contracts.Common.Events;
 using Ordering.Domain.OrderAggregate.Events;
+using Shared.Enum.Order;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ordering.Domain.Entities;
 
