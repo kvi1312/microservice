@@ -1,11 +1,8 @@
-﻿using AutoMapper;
-using Ordering.Application.Common.Mappings;
-using Ordering.Domain.Entities;
+﻿namespace Shared.DTOS.Order;
 
-namespace Ordering.Application.Features.V1.Orders.Common;
-
-public class CreateOrUpdateCommand : IMapFrom<Order>
+public class CreateOrderDto
 {
+    public string UserNAme { get; set; }
     public decimal TotalPrice { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -13,8 +10,4 @@ public class CreateOrUpdateCommand : IMapFrom<Order>
     public string ShippingAddress { get; set; }
     private string _invoiceAddress = string.Empty;
     public string InvoiceAddress { get => _invoiceAddress; set => _invoiceAddress = value ?? ShippingAddress; }
-    public void Mapping(Profile profile)
-    {
-        profile.CreateMap<CreateOrUpdateCommand, Order>();
-    }
 }

@@ -9,4 +9,5 @@ public interface IOrderRepository : IRepositoryBaseAsync<Order, long>
     void CreateOrder(Order order);
     Task<Order> UpdateOrderAsync(Order order);
     void DeleteOrder(Order order);
+    Task<Order> GetOrderByDocumentNo(string documentNo);
 }

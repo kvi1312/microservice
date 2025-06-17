@@ -20,6 +20,8 @@ public class OrderRepository : RepositoryBase<Order, long, OrderContext>, IOrder
         Delete(order);
     }
 
+    public Task<Order> GetOrderByDocumentNo(string documentNo) => FindByCondition(x => x.DocumentNo.ToString() == documentNo).FirstOrDefaultAsync();
+
     public async Task<IEnumerable<Order>> GetOrderByUserName(string userName)
         => await FindByCondition(x => x.UserName == userName).ToListAsync();
 

@@ -1,8 +1,10 @@
-﻿using Contracts.Services;
+﻿using AutoMapper;
+using Contracts.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Ordering.Application.Common.Models;
 using Ordering.Application.Features.V1.Orders;
+using Ordering.Application.Features.V1.Orders.Commands.DeleteOrderByDocumentNo;
+using Shared.DTOS.Order;
 using Shared.SeedWork;
 using Shared.Services.Email;
 using System.ComponentModel.DataAnnotations;
@@ -16,39 +18,54 @@ public class OrderController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly ISmtpEmailService _smtpEmailService;
-    public OrderController(IMediator mediator, ISmtpEmailService smtpEmailService)
+    private readonly IMapper _mapper;
+    public OrderController(IMediator mediator, ISmtpEmailService smtpEmailService, IMapper mapper)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _smtpEmailService = smtpEmailService;
+        _mapper = mapper;
     }
 
     private static class RoutesName
     {
         public const string GetOrders = nameof(GetOrders);
-        //public const string CreateOrder = nameof(CreateOrder);
+        public const string GetOrderById = nameof(GetOrderById);
+        public const string CreateOrder = nameof(CreateOrder);
         public const string UpdateOrder = nameof(UpdateOrder);
         public const string DeleteOrder = nameof(DeleteOrder);
+        public const string DeleteOrderByDocumentNo = nameof(DeleteOrderByDocumentNo);
+
     }
 
     [HttpGet("{userName}", Name = RoutesName.GetOrders)]
-    [ProducesResponseType(typeof(IEnumerable<OrderDto>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrders([Required] string userName)
+    [ProducesResponseType(typeof(IEnumerable<Application.Common.Models.OrderDto>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<Application.Common.Models.OrderDto>>> GetOrders([Required] string userName)
     {
         var orders = new GetOrdersQuery(userName);
         var result = await _mediator.Send(orders);
         return Ok(result);
     }
 
-    //[HttpPost(Name = RoutesName.CreateOrder)]
-    //[ProducesResponseType(typeof(ApiResult<long>), (int)HttpStatusCode.OK)]
-    //public async Task<ActionResult<ApiResult<long>>> CreateOrder([FromBody] CreateOrderCommand command)
-    //{
-    //    var result = await _mediator.Send(command);
-    //    return Ok(result);
-    //}
+    [HttpGet("{userName}", Name = RoutesName.GetOrderById)]
+    [ProducesResponseType(typeof(IEnumerable<Application.Common.Models.OrderDto>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<Application.Common.Models.OrderDto>>> GetOrderById([Required] long orderId)
+    {
+        var orders = new GetOrderByIdQuery(orderId);
+        var result = await _mediator.Send(orders);
+        return Ok(result);
+    }
+
+    [HttpPost(Name = RoutesName.CreateOrder)]
+    [ProducesResponseType(typeof(ApiResult<long>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<ApiResult<long>>> CreateOrder([FromBody] CreateOrderDto model)
+    {
+        var command = _mapper.Map<CreateOrderCommand>(model);
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
 
     [HttpPut(Name = RoutesName.UpdateOrder)]
-    [ProducesResponseType(typeof(ApiResult<OrderDto>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ApiResult<Application.Common.Models.OrderDto>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult> UpdateOrder([Required] long id,[FromBody]UpdateOrderCommand command)
     {
         command.SetId(id);
@@ -56,13 +73,13 @@ public class OrderController : ControllerBase
         return Ok(result);
     }
 
-    [HttpDelete(Name = RoutesName.DeleteOrder)]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult> DeleteOrder([Required] long id)
+    [HttpDelete("document-no/{documentNo}", Name = RoutesName.DeleteOrderByDocumentNo)]
+    [ProducesResponseType(typeof(ApiResult<bool>), (int)HttpStatusCode.OK)]
+    public async Task<ApiResult<bool>> DeleteOrderByDocumentNo([Required] string documentNo)
     {
-        var command = new DeleteOrderCommand(id);
+        var command = new DeleteOrderByDocumentNoCommand(documentNo);
         var result = await _mediator.Send(command);
-        return Ok(result);
+        return result;
     }
 
     [HttpGet("test-email")]
