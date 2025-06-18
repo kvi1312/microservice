@@ -3,7 +3,6 @@ using Infrastructure.Common;
 using Infrastructure.Common.Models;
 using Infrastructure.Extensions;
 using Inventory.API.Entities;
-using Inventory.API.Extensions;
 using Inventory.API.Services.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -65,6 +64,26 @@ namespace Inventory.API.Services
             await CreateAsync(entity);
             var result = _mapper.Map<InventoryEntryDto>(entity);
             return result;
+        }
+
+        public async Task<InventoryEntryDto> SaveItemAsync(string itemNo, SalesProductDto dto)
+        {
+            var itemToAdd = new InventoryEntry(ObjectId.GenerateNewId().ToString())
+            {
+                ItemNo = itemNo,
+                ExternalDocumentNo = dto.ExternalDocumentNo,
+                Quantity = dto.Quantity,
+                DocumentType = dto.DocumentType,
+            };
+            await CreateAsync(itemToAdd);
+            var result = _mapper.Map<InventoryEntryDto>(itemToAdd);
+            return result;
+        }
+
+        public async Task DeleteByDocumentNoAsync(string documentNo)
+        {
+            FilterDefinition<InventoryEntry> filter = Builders<InventoryEntry>.Filter.Eq(x => x.ItemNo, documentNo);
+            await Collection.DeleteOneAsync(filter);
         }
     }
 }

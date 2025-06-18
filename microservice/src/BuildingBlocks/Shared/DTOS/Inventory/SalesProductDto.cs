@@ -2,7 +2,8 @@
 
 namespace Shared.DTOS.Inventory;
 
-public record SalesProductDto(string externalDocumentNo, int quantity)
+// ExternalDocumentNo = order.documentNo
+public record SalesProductDto(string ExternalDocumentNo, int Quantity)
 {
     public DocumentType DocumentType = DocumentType.Sale;
     public string ItemNo { get; set; } = string.Empty;

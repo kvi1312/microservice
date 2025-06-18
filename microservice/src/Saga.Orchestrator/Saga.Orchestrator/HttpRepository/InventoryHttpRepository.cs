@@ -1,4 +1,5 @@
-﻿using Shared.DTOS.Inventory;
+﻿using Infrastructure.Extensions;
+using Shared.DTOS.Inventory;
 
 namespace Saga.Orchestrator.HttpRepository;
 
@@ -11,13 +12,25 @@ public class InventoryHttpRepository : IInventoryHttpRepository
         _client = client;
     }
 
-    public Task<string> CreateSalesOrder(SalesProductDto model)
+    public async Task<string> CreateSalesOrder(SalesProductDto model)
     {
-        throw new NotImplementedException();
+        var response = await _client.PostAsJsonAsync($"inventory/sales/{model.ItemNo}", model);
+        
+        if (!response.EnsureSuccessStatusCode().IsSuccessStatusCode)
+            throw new Exception($"Create sale order failed: {model.ItemNo}");
+        
+        var result = await response.ReadContentAs<InventoryEntryDto>();
+        return result.DocumentNo;
     }
 
-    public Task<bool> DeleteOrderByDocumentNo(string documentNo)
+    public async Task<bool> DeleteOrderByDocumentNo(string documentNo)
     {
-        throw new NotImplementedException();
+        var response = await _client.DeleteAsync($"inventory/document-no/{documentNo}");
+        
+        if (!response.EnsureSuccessStatusCode().IsSuccessStatusCode)
+            throw new Exception($"Delete order for Document No: {documentNo} not success");
+        
+        var result = await response.ReadContentAs<bool>();
+        return result;
     }
 }
