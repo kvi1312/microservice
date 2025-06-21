@@ -47,10 +47,10 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("{id:long}", Name = RoutesName.GetOrderById)]
-    [ProducesResponseType(typeof(IEnumerable<Application.Common.Models.OrderDto>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<Application.Common.Models.OrderDto>>> GetOrderById([Required] long orderId)
+    [ProducesResponseType(typeof(Application.Common.Models.OrderDto), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Application.Common.Models.OrderDto>> GetOrderById([Required] long id)
     {
-        var orders = new GetOrderByIdQuery(orderId);
+        var orders = new GetOrderByIdQuery(id);
         var result = await _mediator.Send(orders);
         return Ok(result);
     }

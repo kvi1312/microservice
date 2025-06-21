@@ -13,5 +13,7 @@ public interface IInventoryRepository : IMongoDbRepositoryBase<InventoryEntry>
     Task<InventoryEntryDto> PurchaseItemAsync(string itemNo, PurchaseProductDto dto);
     Task<InventoryEntryDto> SaveItemAsync(string itemNo, SalesProductDto dto);
     Task DeleteByDocumentNoAsync(string documentNo);
+    Task<InventoryEntryDto> SalesItemAsync(string itemNo, SalesProductDto dto);
+    Task<string> SalesOrderAsync(SalesOrderDto dto);
 }
 

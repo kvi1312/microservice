@@ -8,7 +8,7 @@ using ILogger = Serilog.ILogger;
 
 namespace Saga.Orchestrator.Services;
 
-public class CheckoutSagaSagaService : ICheckoutSagaService
+public class CheckoutSagaService : ICheckoutSagaService
 {
     private readonly IOrderHttpRepository _orderHttpRepository;
     private readonly IBasketHttpRepository _basketHttpRepository;
@@ -16,7 +16,7 @@ public class CheckoutSagaSagaService : ICheckoutSagaService
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
 
-    public CheckoutSagaSagaService(IOrderHttpRepository orderHttpRepository, IBasketHttpRepository basketHttpRepository,
+    public CheckoutSagaService(IOrderHttpRepository orderHttpRepository, IBasketHttpRepository basketHttpRepository,
         IInventoryHttpRepository inventoryHttpRepository, IMapper mapper, ILogger logger)
     {
         _orderHttpRepository = orderHttpRepository;
@@ -42,8 +42,6 @@ public class CheckoutSagaSagaService : ICheckoutSagaService
         order.TotalPrice = cart.TotalPrice; // prevent user cheating totalprice
         var orderId = await _orderHttpRepository.CreateOrder(order);
         if (orderId < 0) return false;
-
-        // Get order by orderId
         var addedOrder = await _orderHttpRepository.GetOrder(orderId);
         _logger.Information(
             $"[CheckoutOrder] END : Create order success, order ID: {orderId} - Document No : {addedOrder.DocumentNo}");
@@ -84,7 +82,10 @@ public class CheckoutSagaSagaService : ICheckoutSagaService
             $"[RollbackCheckoutOrder] START : RollbackCheckoutOrder for userName : {userName} - OrderId : {orderId} - Inventory document no : {string.Join(",", inventoryDocumentNo)}");
 
         var deletedDocumentNo = new List<string>();
-        // delete order by order id
+        _logger.Information($"START : DELETE order id: {orderId}");
+        await _orderHttpRepository.DeleteOrder(orderId);
+        _logger.Information($"END : DELETE order id: {orderId}");
+
         foreach (var documentNo in inventoryDocumentNo)
         {
             await _inventoryHttpRepository.DeleteOrderByDocumentNo(documentNo);

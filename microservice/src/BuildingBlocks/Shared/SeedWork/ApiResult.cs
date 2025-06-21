@@ -1,14 +1,14 @@
-﻿namespace Shared.SeedWork;
+﻿using System.Text.Json.Serialization;
+
+namespace Shared.SeedWork;
 
 public class ApiResult<T>
 {
     public string Message { get; set; }
     public bool IsSuccess { get; set; }
     public T Data { get; set; }
-    public ApiResult()
-    {
-    }
-    
+
+    [JsonConstructor]
     public ApiResult(bool isSuccess, string message = null)
     {
         Message = message;
