@@ -15,28 +15,46 @@ public class OrderHttpRepository : IOrderHttpRepository
 
     public async Task<long> CreateOrder(CreateOrderDto order)
     {
-        var response = await _client.PostAsJsonAsync("order", order);
-        if (response.EnsureSuccessStatusCode().IsSuccessStatusCode) return -1;
-
+        var response = await _client.PostAsJsonAsync("Order", order);
+        if (!response.EnsureSuccessStatusCode().IsSuccessStatusCode) return -1;
         var orderId = await response.ReadContentAs<ApiSuccessResult<long>>();
         return orderId.Data;
     }
 
-    public async Task<bool> DeleteOrder(long orderId)
+    public async Task<bool> DeleteOrder(long id)
     {
-        var response = await _client.DeleteAsync($"order/{orderId.ToString()}");
+        var response = await _client.DeleteAsync($"Order/{id}");
         return response.IsSuccessStatusCode;
     }
 
     public async Task<bool> DeleteOrderByDocumentNo(string documentNo)
     {
-        var response = await _client.DeleteAsync($"document-no/{documentNo}");
+        var response = await _client.DeleteAsync($"Order/document-no/{documentNo}");
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<OrderDto> GetOrder(long orderId)
+    public async Task<OrderDto> GetOrder(long id)
     {
-        var order = await _client.GetFromJsonAsync<ApiSuccessResult<OrderDto>>($"order/{orderId.ToString()}");
-        return order.Data;
+        try
+        {
+            var response = await _client.GetAsync($"Order/{id}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"Failed to get order {id}. Status: {response.StatusCode}, Error: {errorContent}");
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<ApiSuccessResult<OrderDto>>();
+            return result?.Data ?? throw new InvalidOperationException($"Order {id} returned null data");
+        }
+        catch (HttpRequestException)
+        {
+            throw; // Re-throw HTTP exceptions as-is
+        }
+        catch (Exception ex)
+        {
+            throw new HttpRequestException($"Error getting order {id}: {ex.Message}", ex);
+        }
     }
 }

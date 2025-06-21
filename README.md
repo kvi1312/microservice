@@ -25,6 +25,7 @@
 - `Masstransit.RabbitMQ`
 - `MongoDb.Driver`
 - `Grpc.AspNetCore`
+- `Stateless`
 
 ### 🗄️ Databases
 

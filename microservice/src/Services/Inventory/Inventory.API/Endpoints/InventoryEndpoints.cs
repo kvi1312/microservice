@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.DTOS.Inventory;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Inventory.API.Endpoints
 {
@@ -27,6 +28,27 @@ namespace Inventory.API.Endpoints
 
             app.MapDelete("api/inventory/{id}", DeleteById)
                 .Produces((int)HttpStatusCode.OK, typeof(NoContentResult));
+
+            app.MapPost("api/inventory/sales/{itemNo}", SalesItem)
+                .Produces((int)HttpStatusCode.OK, typeof(NoContentResult));
+
+            app.MapPost("api/inventory/sales/order-no/{orderNo}", SalesOrder)
+                .Produces((int)HttpStatusCode.OK, typeof(NoContentResult));
+        }
+
+        private async Task<IResult> SalesOrder(IInventoryRepository inventoryService, string orderNo, SalesOrderDto dto)
+        {
+            dto.OrderNo = orderNo;
+            var documentNo = await inventoryService.SalesOrderAsync(dto);
+            var result = new CreatedSalesOrderSuccessDto(documentNo);
+            return Results.Created(documentNo, result);
+        }
+
+        private async Task<IResult> SalesItem(IInventoryRepository inventoryService, string itemNo, SalesProductDto dto)
+        {
+            dto.SetItemNo(itemNo);
+            var result = await inventoryService.SalesItemAsync(itemNo, dto);
+            return Results.Ok(result);
         }
 
         private async Task<IResult> DeleteById([Required] string id, IInventoryRepository inventoryService)
@@ -39,7 +61,8 @@ namespace Inventory.API.Endpoints
             return Results.NoContent();
         }
 
-        private async Task<IResult> PurchaseItemOrder([Required] string itemNo, [FromBody] PurchaseProductDto dto, IInventoryRepository inventoryService)
+        private async Task<IResult> PurchaseItemOrder([Required] string itemNo, [FromBody] PurchaseProductDto dto,
+            IInventoryRepository inventoryService)
         {
             var result = await inventoryService.PurchaseItemAsync(itemNo, dto);
             return Results.Ok(result);

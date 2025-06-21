@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Shared.Enum.Order;
+﻿using Shared.Enum.Order;
 
 namespace Shared.DTOS.Order;
 
