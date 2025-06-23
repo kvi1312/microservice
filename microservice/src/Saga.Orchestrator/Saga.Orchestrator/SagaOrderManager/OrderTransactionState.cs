@@ -5,11 +5,16 @@ public enum OrderTransactionState
     NotStarted,
     BasketGot,
     BasketGetFailed,
+    BasketDeleted,
     OrderCreated,
     OrderCreateFailed,
+    OrderDeleted,
+    OrderDeleteFailed,
     OrderGot,
     OrderGetFailed,
     InventoryUpdated,
     InventoryUpdatedFailed,
-    InventoryRollback
+    InventoryRollback,
+    RollbackInventory,
+    InventoryRollbackFailed
 }
