@@ -1,4 +1,5 @@
-﻿using Shared.DTOS.Basket;
+﻿using Infrastructure.Extensions;
+using Shared.DTOS.Basket;
 
 namespace Saga.Orchestrator.HttpRepository;
 
@@ -11,9 +12,15 @@ public class BasketHttpRepository : IBasketHttpRepository
         _client = client;
     }
 
-    public Task<bool> DeleteBasket(string userName)
+    public async Task<bool> DeleteBasket(string userName)
     {
-        throw new NotImplementedException();
+        var response = await _client.DeleteAsync($"basket/{userName}");
+
+        if (!response.EnsureSuccessStatusCode().IsSuccessStatusCode)
+            throw new Exception($"Delete basket for UserName: {userName} failed");
+
+        var result = await response.ReadContentAs<bool>();
+        return result;
     }
 
     public async Task<CartDto> GetBasket(string userName)

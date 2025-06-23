@@ -15,6 +15,7 @@ public class BasketCheckoutDto
     public string EmailAddress { get; set; }
     [Required]
     public string ShippingAddress { get; set; }
+    public decimal TotalPrice { get; set; }
     private string _invoiceAddress;
     public string? InvoiceAddress
     {
