@@ -22,6 +22,7 @@ public class BasketCheckoutConsumer : IConsumer<BasketCheckoutEvent>
     public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
     {
         var command = _mapper.Map<CreateOrderCommand>(context.Message);
+        // using meditor instead of a service layer is better when applying CQRS
         var result = await _mediator.Send(command);
         _logger.Information("BasketCheckoutEvent consumed successfully. Order is created with Id: {newOrderId}", result.Data);
     }

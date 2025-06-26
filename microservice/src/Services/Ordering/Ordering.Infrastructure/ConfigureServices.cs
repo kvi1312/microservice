@@ -23,5 +23,4 @@ public static class ConfigureServices
         services.AddScoped(typeof(ISmtpEmailService), typeof(SMTPEmailService));
         return services;
     }
-    
 }
