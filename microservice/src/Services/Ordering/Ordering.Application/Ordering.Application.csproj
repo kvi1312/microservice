@@ -8,8 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Features\V1\Orders\EventHandlers\**" />
       <Compile Remove="Features\V2\**" />
+      <EmbeddedResource Remove="Features\V1\Orders\EventHandlers\**" />
       <EmbeddedResource Remove="Features\V2\**" />
+      <None Remove="Features\V1\Orders\EventHandlers\**" />
       <None Remove="Features\V2\**" />
     </ItemGroup>
 
@@ -27,10 +30,6 @@
       <ProjectReference Include="..\..\..\BuildingBlocks\Infrastructure\Infrastructure.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\Shared\Shared.csproj" />
       <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Features\V1\Orders\EventHandlers\" />
     </ItemGroup>
 
 </Project>

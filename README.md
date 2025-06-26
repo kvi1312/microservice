@@ -26,6 +26,7 @@
 - `MongoDb.Driver`
 - `Grpc.AspNetCore`
 - `Stateless`
+- `Serilog.sinks.elasticsearch`
 
 ### 🗄️ Databases
 

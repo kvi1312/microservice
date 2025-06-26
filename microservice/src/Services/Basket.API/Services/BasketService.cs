@@ -32,9 +32,9 @@ namespace Basket.API.Services
 
             if (basket == null) return Results.NotFound();
 
-            // publish checkout event to EventBus message
             var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
             eventMessage.TotalPrice = basket.TotalPrice;
+            // publish checkout event to EventBus message
             await _publishEndpoint.Publish(eventMessage);
             await _basketRepository.DeletedBasketFromUserName(basketCheckout.UserName);
             return Results.Accepted();
