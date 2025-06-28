@@ -1,4 +1,5 @@
-﻿using Contracts.Sagas.OrderManager;
+﻿using Common.Logging;
+using Contracts.Sagas.OrderManager;
 using Saga.Orchestrator.HttpRepository;
 using Saga.Orchestrator.SagaOrderManager;
 using Saga.Orchestrator.Services;
@@ -18,6 +19,7 @@ public static class ServiceExtensions
     {
         services.AddTransient<ICheckoutSagaService, CheckoutSagaService>();
         services.AddTransient<ISagaOrderManager<BasketCheckoutDto, OrderResponse>, SagaOrderManager.SagaOrderManager>();
+        services.AddTransient<LoggingDelegatingHandler>();
         return services;
     }
 
@@ -31,15 +33,15 @@ public static class ServiceExtensions
 
     public static void ConfigureHttpClients(this IServiceCollection services)
     {
-       ConfigureOrderHttpClients(services);
-       ConfigureBasketHttpClients(services);
-       ConfigureInventoryHttpClients(services);
+        ConfigureOrderHttpClients(services);
+        ConfigureBasketHttpClients(services);
+        ConfigureInventoryHttpClients(services);
     }
 
     private static void ConfigureOrderHttpClients(this IServiceCollection services)
     {
         services.AddHttpClient<IOrderHttpRepository, OrderHttpRepository>("OrderAPI",
-            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5005/api/v1/"); });
+            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5005/api/v1/"); }).AddHttpMessageHandler<LoggingDelegatingHandler>();
 
         services.AddScoped(provider => provider.GetService<IHttpClientFactory>().CreateClient("OrderAPI"));
     }
@@ -47,7 +49,7 @@ public static class ServiceExtensions
     private static void ConfigureBasketHttpClients(this IServiceCollection services)
     {
         services.AddHttpClient<IBasketHttpRepository, BasketHttpRepository>("BasketAPI",
-            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5004/api/"); });
+            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5004/api/"); }).AddHttpMessageHandler<LoggingDelegatingHandler>();
 
         services.AddScoped(provider => provider.GetService<IHttpClientFactory>().CreateClient("BasketAPI"));
     }
@@ -55,7 +57,7 @@ public static class ServiceExtensions
     private static void ConfigureInventoryHttpClients(this IServiceCollection services)
     {
         services.AddHttpClient<IInventoryHttpRepository, InventoryHttpRepository>("InventoryAPI",
-            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5006/api/"); });
+            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5006/api/"); }).AddHttpMessageHandler<LoggingDelegatingHandler>();
 
         services.AddScoped(provider => provider.GetService<IHttpClientFactory>().CreateClient("InventoryAPI"));
     }

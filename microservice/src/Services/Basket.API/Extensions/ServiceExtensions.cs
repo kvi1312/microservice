@@ -3,6 +3,7 @@ using Basket.API.Repositories;
 using Basket.API.Repositories.Interfaces;
 using Basket.API.Services;
 using Basket.API.Services.Interfaces;
+using Common.Logging;
 using Contracts.Common.Interfaces;
 using EventBus.Messages.IntegrationEvent.Interfaces;
 using Infrastructure.Common;
@@ -21,6 +22,7 @@ namespace Basket.API.Extensions
             service.AddScoped<IBasketRepository, BasketRepository>();
             service.AddTransient<ISerializeService, SerializeService>();
             service.AddScoped<IBasketService, BasketService>();
+            service.AddTransient<LoggingDelegatingHandler>();
             return service;
         }
 
@@ -49,7 +51,7 @@ namespace Basket.API.Extensions
         {
             var settings = services.GetOptions<CacheSettings>(nameof(CacheSettings));
 
-            if(string.IsNullOrEmpty(settings.ConnectionString)) 
+            if (string.IsNullOrEmpty(settings.ConnectionString))
                 throw new ArgumentException("Redis connection string is not configured.");
 
             services.AddStackExchangeRedisCache(options =>
@@ -62,7 +64,7 @@ namespace Basket.API.Extensions
         {
             var settings = services.GetOptions<EventBusSettings>(nameof(EventBusSettings));
 
-            if(settings is null || string.IsNullOrEmpty(settings.HostAddress)) 
+            if (settings is null || string.IsNullOrEmpty(settings.HostAddress))
                 throw new ArgumentNullException("EventBusSettings is not configured");
 
             var mqConnection = new Uri(settings.HostAddress);
@@ -90,7 +92,8 @@ namespace Basket.API.Extensions
 
         public static void ConfigureHttpClientService(this IServiceCollection services)
         {
-            services.AddHttpClient<BackgroundJobHttpServices>();
+            services.AddHttpClient<BackgroundJobHttpServices>()
+                    .AddHttpMessageHandler<LoggingDelegatingHandler>();
         }
     }
 }
