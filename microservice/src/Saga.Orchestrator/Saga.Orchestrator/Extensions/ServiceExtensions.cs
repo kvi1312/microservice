@@ -18,7 +18,7 @@ public static class ServiceExtensions
     public static IServiceCollection ConfigureServices(this IServiceCollection services)
     {
         services.AddTransient<ICheckoutSagaService, CheckoutSagaService>();
-        services.AddTransient<ISagaOrderManager<BasketCheckoutDto, OrderResponse>, SagaOrderManager.SagaOrderManager>();
+        services.AddTransient<ISagaOrderManager<BasketCheckoutDto, OrderResponse>, SagaOrderManager.OrderOrchestrator>();
         services.AddTransient<LoggingDelegatingHandler>();
         return services;
     }
