@@ -4,11 +4,13 @@ using Serilog;
 using Common.Logging;
 using Ordering.API.Extensions;
 using Ordering.Application;
+using Carter;
 
 Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
             .CreateBootstrapLogger();
 
+Log.Information("Starting Ordering API up");
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(SeriLogger.Configure);
 builder.Services.AddAuthorization();
@@ -20,8 +22,7 @@ builder.Services.AddHostedService<OrderContextSeed>();
 builder.Services.AddConfigurationSettings(builder.Configuration);
 builder.Host.AddAppConfigurations();
 builder.Services.ConfigureMasstransit();
-Log.Information("Starting Ordering API up");
-// Add services to the container.
+builder.Services.AddCarter();
 try
 {
     var app = builder.Build();
@@ -37,8 +38,8 @@ try
 
     app.UseAuthorization();
 
-    app.MapControllers();
-
+    //app.MapControllers();
+    app.MapCarter();
     app.Run();
 }
 catch (Exception ex)
