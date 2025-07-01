@@ -1,5 +1,6 @@
 ﻿using Common.Logging;
 using Contracts.Sagas.OrderManager;
+using Infrastructure.Policies;
 using Saga.Orchestrator.HttpRepository;
 using Saga.Orchestrator.SagaOrderManager;
 using Saga.Orchestrator.Services;
@@ -41,7 +42,9 @@ public static class ServiceExtensions
     private static void ConfigureOrderHttpClients(this IServiceCollection services)
     {
         services.AddHttpClient<IOrderHttpRepository, OrderHttpRepository>("OrderAPI",
-            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5005/api/v1/"); }).AddHttpMessageHandler<LoggingDelegatingHandler>();
+            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5005/api/v1/"); })
+                .AddHttpMessageHandler<LoggingDelegatingHandler>()
+                .UseExponentialHttpRetryPolicy();
 
         services.AddScoped(provider => provider.GetService<IHttpClientFactory>().CreateClient("OrderAPI"));
     }
@@ -49,7 +52,9 @@ public static class ServiceExtensions
     private static void ConfigureBasketHttpClients(this IServiceCollection services)
     {
         services.AddHttpClient<IBasketHttpRepository, BasketHttpRepository>("BasketAPI",
-            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5004/api/"); }).AddHttpMessageHandler<LoggingDelegatingHandler>();
+            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5004/api/"); })
+            .AddHttpMessageHandler<LoggingDelegatingHandler>()
+            .UseImmediateHttpRetryPolicy();
 
         services.AddScoped(provider => provider.GetService<IHttpClientFactory>().CreateClient("BasketAPI"));
     }
@@ -57,7 +62,9 @@ public static class ServiceExtensions
     private static void ConfigureInventoryHttpClients(this IServiceCollection services)
     {
         services.AddHttpClient<IInventoryHttpRepository, InventoryHttpRepository>("InventoryAPI",
-            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5006/api/"); }).AddHttpMessageHandler<LoggingDelegatingHandler>();
+            (provider, config) => { config.BaseAddress = new Uri("http://localhost:5006/api/"); })
+            .AddHttpMessageHandler<LoggingDelegatingHandler>()
+            .UseExponentialHttpRetryPolicy();
 
         services.AddScoped(provider => provider.GetService<IHttpClientFactory>().CreateClient("InventoryAPI"));
     }
