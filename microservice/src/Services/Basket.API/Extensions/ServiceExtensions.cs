@@ -8,6 +8,7 @@ using Contracts.Common.Interfaces;
 using EventBus.Messages.IntegrationEvent.Interfaces;
 using Infrastructure.Common;
 using Infrastructure.Extensions;
+using Infrastructure.Policies;
 using Inventory.GRPC.Client;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -93,7 +94,9 @@ namespace Basket.API.Extensions
         public static void ConfigureHttpClientService(this IServiceCollection services)
         {
             services.AddHttpClient<BackgroundJobHttpServices>()
-                    .AddHttpMessageHandler<LoggingDelegatingHandler>();
+                    .AddHttpMessageHandler<LoggingDelegatingHandler>()
+                    .UseImmediateHttpRetryPolicy()
+                    .UseCircuitBreakerPolicy();
         }
     }
 }
