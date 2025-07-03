@@ -1,6 +1,8 @@
 using Carter;
 using Common.Logging;
+using HealthChecks.UI.Client;
 using Inventory.API.Extensions;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -24,6 +26,7 @@ try
     builder.Services.AddInfrastructureServices();
     builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.ConfigureMongoDbClient();
+    builder.Services.ConfigureHealthChecks();
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -35,9 +38,17 @@ try
 
     // app.UseHttpsRedirection();
     app.MapCarter();
+    app.UseRouting();
     app.UseAuthorization();
-
-    app.MapDefaultControllerRoute();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapDefaultControllerRoute();
+        endpoints.MapHealthChecks("/hc", new HealthCheckOptions
+        {
+            Predicate = _ => true,
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
+    });
 
     app.MigrateDatabase()
         .Run();

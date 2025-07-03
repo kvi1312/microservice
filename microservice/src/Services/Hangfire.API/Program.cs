@@ -1,7 +1,9 @@
 using Carter;
 using Common.Logging;
 using Hangfire.API.Extensions;
+using HealthChecks.UI.Client;
 using Infrastructure.ScheduledJobs;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -21,6 +23,7 @@ try
     builder.Services.AddInfrastructureHangfireService();
     builder.Services.ConfigureServices();
     builder.Services.AddCarter();
+    builder.Services.ConfigureHealthChecks();
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -34,8 +37,14 @@ try
     app.UseRouting();
     app.UseAuthorization();
     app.UseCustomHangfireDashboard(builder.Configuration);
-    app.UseEndpoints((endpoint) => {
-        endpoint.MapDefaultControllerRoute();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHealthChecks("/hc", new HealthCheckOptions
+        {
+            Predicate = _ => true,
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
+        endpoints.MapDefaultControllerRoute();
     });
     app.MapCarter();
     app.Run();

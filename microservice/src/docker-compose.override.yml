@@ -118,7 +118,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "ConnectionStrings:DefaultConnectionString=Server=productdb;Port=3306;Database=ProductDB;Uid=root;Pwd=c#fKeLGv;"
+      - "DatabaseSettings:ConnectionString=Server=localhost;Port=3306;Database=productdb;Uid=root;Pwd=c#fKeLGv;"
     depends_on:
       - productdb
     ports:
@@ -130,8 +130,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "DatabaseSettings:ConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;Uid=admin;Pwd=admin1234;"
-      - "HangFireSettings:Storage:ConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;User Id=admin;Password=admin1234"
+      - "DatabaseSettings:ConnectionString=Server=localhost;Port=5433;Database=CustomerDb;Uid=postgres;Pwd=postgres;"
+      - "HangFireSettings:Storage:ConnectionString=Server=customerdb;Port=5433;Database=CustomerDb;User Id=postgres;Password=postgres"
     depends_on:
       - customerdb
     ports:

@@ -7,6 +7,7 @@ using Infrastructure.Extensions;
 using Infrastructure.ScheduledJobs;
 using Infrastructure.Services;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using MongoDB.Driver;
 using Shared.Configurations;
 
 namespace Hangfire.API.Extensions;
@@ -29,5 +30,15 @@ public static class ServiceExtensions
         services.AddScoped<ISmtpEmailService, SMTPEmailService>();
         services.AddTransient<IBackgroundJobServices, BackgroundJobServices>();
         return services;
+    }
+    
+    public static void ConfigureHealthChecks(this IServiceCollection services)
+    {
+        var databaseSettings = services.GetOptions<HangfireSettings>(nameof(HangfireSettings));
+        services.AddHealthChecks()
+            .AddMongoDb(
+                sp => new MongoClient(databaseSettings.Storage.ConnectionString),
+                name: "MongoDb Health",
+                failureStatus: HealthStatus.Degraded);
     }
 }
