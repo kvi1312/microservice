@@ -42,12 +42,13 @@ public static class ServiceExtensions
     }
 
 
-    //public static void ConfigureHealthChecks(this IServiceCollection services)
-    //{
-    //    var databaseSettings = services.GetOptions<MongoDbSettings>(nameof(MongoDbSettings));
-    //    services.AddHealthChecks()
-    //        .AddMongoDb(databaseSettings.ConnectionString,
-    //            name: "Inventory MongoDb Health",
-    //            failureStatus: HealthStatus.Degraded);
-    //}
+    public static void ConfigureHealthChecks(this IServiceCollection services)
+    {
+        var databaseSettings = services.GetOptions<MongoDbSettings>(nameof(MongoDbSettings));
+        services.AddHealthChecks()
+            .AddMongoDb(
+                 sp => new MongoClient(databaseSettings.ConnectionString),
+                name: "Inventory MongoDb Health",
+                failureStatus: HealthStatus.Degraded);
+    }
 }

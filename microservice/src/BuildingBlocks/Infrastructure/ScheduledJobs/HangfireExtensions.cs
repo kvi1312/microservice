@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using Shared.Configurations;
+using System.Security.Authentication;
 
 namespace Infrastructure.ScheduledJobs;
 
@@ -44,10 +45,11 @@ public static class HangfireExtensions
                 break;
             case "mongodb":
                 var mongoUrlBuilder = new MongoUrlBuilder(settings.Storage.ConnectionString);
-                var mongoClientSettings = MongoClientSettings.FromUrl(new MongoUrl(mongoUrlBuilder.ToString()));
+                var mongoClientSettings = MongoClientSettings.FromUrl(
+                   new MongoUrl(settings.Storage.ConnectionString));
                 mongoClientSettings.SslSettings = new SslSettings
                 {
-                    EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12
+                    EnabledSslProtocols = SslProtocols.Tls12
                 };
                 var mongoClient = new MongoClient(mongoClientSettings);
                 var mongoStorageOpts = new MongoStorageOptions

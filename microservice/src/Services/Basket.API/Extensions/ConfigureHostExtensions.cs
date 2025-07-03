@@ -12,7 +12,6 @@ namespace Basket.API.Extensions
                 var enviroment = context.HostingEnvironment;
                 config
                     .AddJsonFile("appsettings.json", optional:false)
-                    .AddJsonFile($"appsettings.{enviroment.EnvironmentName}.json", optional:true ,reloadOnChange: true)
                     .AddEnvironmentVariables();
             });
         }

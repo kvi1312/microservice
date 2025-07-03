@@ -1,11 +1,22 @@
-﻿using Inventory.API.Persistence;
+﻿using Common.Logging;
+using Inventory.API.Persistence;
 using MongoDB.Driver;
+using Serilog;
 using Shared.Configurations;
 
 namespace Inventory.API.Extensions;
 
 public static class HostExtension
 {
+    internal static void AddAppConfigurations(this ConfigureHostBuilder host)
+    {
+        host.ConfigureAppConfiguration((context, config) =>
+        {
+            var env = context.HostingEnvironment;
+            config.AddJsonFile("appsettings.json", false, true)
+                .AddEnvironmentVariables();
+        }).UseSerilog(SeriLogger.Configure);
+    }
     public static IHost MigrateDatabase(this IHost host)
     {
         using var scope = host.Services.CreateScope();
