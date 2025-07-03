@@ -2,6 +2,8 @@ using Carter;
 using Common.Logging;
 using Customer.API.Extensions;
 using Customer.API.Persistence;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -23,6 +25,7 @@ try
     builder.Services.AddCarter();
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddHostedService<CustomerSeeder>();
+    builder.Services.ConfigureHealthChecks();
     var app = builder.Build();
     app.MapCarter();
     // Configure the HTTP request pipeline.
@@ -34,8 +37,14 @@ try
     app.UseRouting();
     app.UseAuthorization();
     app.UseCustomHangfireDashboard(builder.Configuration);
-    app.UseEndpoints((endpoint) => {
-        endpoint.MapDefaultControllerRoute();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+        {
+            Predicate = _ => true,
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
+        endpoints.MapDefaultControllerRoute();
     });
     app.Run();
 

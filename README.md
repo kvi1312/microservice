@@ -27,6 +27,10 @@
 - `Grpc.AspNetCore`
 - `Stateless`
 - `Serilog.sinks.elasticsearch`
+- `AspNetCore.HealthChecks.UI`
+- `AspNetCore.HealthChecks.UI.InMemory.Storage`
+- `AspNetCore.HealthChecks.UI.Client`
+- `AspNetCore.HealthChecks.MySql`
 
 ### 🗄️ Databases
 

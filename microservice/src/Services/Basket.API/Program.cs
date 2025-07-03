@@ -2,6 +2,8 @@ using Basket.API;
 using Basket.API.Extensions;
 using Carter;
 using Common.Logging;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -33,6 +35,8 @@ try
     {
         config.AddProfile(new MappingProfile());
     });
+    builder.Services.ConfigureHealthChecks();
+
     var app = builder.Build();
     app.MapCarter();
     // Configure the HTTP request pipeline.
@@ -45,8 +49,16 @@ try
     //app.UseHttpsRedirection();
 
     app.UseAuthorization();
-    app.MapControllers();
-
+    app.UseRouting();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+        {
+            Predicate = _ => true,
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
+        endpoints.MapDefaultControllerRoute();
+    });
     app.Run();
 }
 catch (Exception ex)

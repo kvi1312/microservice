@@ -5,8 +5,10 @@ using Customer.API.Repositories.Interface;
 using Customer.API.Services;
 using Customer.API.Services.Interfaces;
 using Infrastructure.Common;
+using Infrastructure.Extensions;
 using Infrastructure.ScheduledJobs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Shared.Configurations;
 
 namespace Customer.API.Extensions;
@@ -26,10 +28,13 @@ public static class ServiceExtensions
 
     private static IServiceCollection ConfigureCustomerDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnectionString");
+        var settings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings));
+        if (settings is null || string.IsNullOrEmpty(settings.ConnectionString))
+            throw new ArgumentNullException("Customer DatabaseSettings is not configured");
+
         services.AddDbContext<CustomerContext>(options =>
         {
-            options.UseNpgsql(connectionString);
+            options.UseNpgsql(settings.ConnectionString);
         });
         return services;
     }
@@ -47,6 +52,18 @@ public static class ServiceExtensions
     {
         var hangfireSettings = configuration.GetSection(nameof(HangfireSettings)).Get<HangfireSettings>();
         services.AddSingleton(hangfireSettings);
+
+        var dbSettings = configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>();
+        services.AddSingleton(dbSettings);
         return services;
+    }
+
+    public static void ConfigureHealthChecks(this IServiceCollection services)
+    {
+        var databaseSettings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings));
+        services.AddHealthChecks()
+            .AddNpgSql(databaseSettings.ConnectionString,
+                name: "PostgresQL Health",
+                failureStatus: HealthStatus.Degraded);
     }
 }
