@@ -1,6 +1,8 @@
 ﻿using Contracts.Common.Interfaces;
 using Infrastructure.Common;
+using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using MySqlConnector;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Product.API.Persistence;
@@ -22,23 +24,25 @@ public static class ServiceExtensions
         services.ConfigureProductDbContext(configuration);
         services.AddInfrastructureServices();
         services.AddAutoMapper(config => config.AddProfile(new MappingProfile()));
+        services.ConfigureHealthChecks();
         return services;
     }
 
     private static IServiceCollection ConfigureProductDbContext(this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnectionString");
-        var builder = new MySqlConnectionStringBuilder(connectionString);
+        var settings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings));
+        if (settings is null || string.IsNullOrEmpty(settings.ConnectionString))
+            throw new ArgumentNullException("Product DatabaseSettings is not configured");
 
-        services.AddDbContext<ProductContext>(
-            m => m.UseMySql(builder.ConnectionString,
-                ServerVersion.AutoDetect(builder.ConnectionString),
-                e =>
-                {
-                    e.MigrationsAssembly("Product.API");
-                    e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
-                }));
+        var connectionString = settings.ConnectionString;
+        services.AddDbContext<ProductContext>(m => m.UseMySql(connectionString,
+            ServerVersion.AutoDetect(connectionString),
+            e =>
+            {
+                e.MigrationsAssembly("Product.API");
+                e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
+            }));
         return services;
     }
 
@@ -52,10 +56,20 @@ public static class ServiceExtensions
             .AddScoped<IProductService, ProductService>();
     }
 
-    public static IServiceCollection AddConfigurationSettings(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddConfigurationSettings(this IServiceCollection services,
+        IConfiguration configuration)
     {
         var jwtSettings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
         services.AddSingleton(jwtSettings);
+
+        var dbSettings = configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>();
+        services.AddSingleton(dbSettings);
         return services;
+    }
+
+    private static void ConfigureHealthChecks(this IServiceCollection services)
+    {
+        var settings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings));
+        services.AddHealthChecks().AddMySql(settings.ConnectionString, "MySql Health", HealthStatus.Degraded);
     }
 }

@@ -7,6 +7,7 @@ using Infrastructure.Extensions;
 using Microsoft.Extensions.Caching.Distributed;
 using Shared.DTOS.ScheduledJob;
 using ILogger = Serilog.ILogger;
+
 namespace Basket.API.Repositories
 {
     public class BasketRepository : IBasketRepository
@@ -16,7 +17,9 @@ namespace Basket.API.Repositories
         private readonly ILogger _logger;
         private readonly BackgroundJobHttpServices _backgroundJobHttpServices;
         private readonly IEmailTemplateServices _emailTemplateServices;
-        public BasketRepository(IDistributedCache redisCacheService, ILogger logger, ISerializeService serializeService, IEmailTemplateServices emailTemplateServices, BackgroundJobHttpServices backgroundJobHttpServices)
+
+        public BasketRepository(IDistributedCache redisCacheService, ILogger logger, ISerializeService serializeService,
+            IEmailTemplateServices emailTemplateServices, BackgroundJobHttpServices backgroundJobHttpServices)
         {
             _redisCacheService = redisCacheService;
             _logger = logger;
@@ -27,7 +30,7 @@ namespace Basket.API.Repositories
 
         public async Task<bool> DeletedBasketFromUserName(string userName)
         {
-            await DeleteReminderCheckoutOurder(userName);
+            await DeleteReminderCheckoutOrder(userName);
             try
             {
                 _logger.Information("[BEGIN] Deleting basket for user {UserName}", userName);
@@ -52,7 +55,7 @@ namespace Basket.API.Repositories
 
         public async Task<Cart> UpdateBasket(Cart cart, DistributedCacheEntryOptions options = null)
         {
-            await DeleteReminderCheckoutOurder(cart.UserName);
+            await DeleteReminderCheckoutOrder(cart.UserName);
             if (options is not null)
             {
                 await _redisCacheService.SetStringAsync(cart.UserName, _serializeService.Serialize(cart), options);
@@ -77,30 +80,24 @@ namespace Basket.API.Repositories
         private async Task TriggerSendReminderEmailAsync(Cart cart)
         {
             var emailTemplate = _emailTemplateServices.GenerateReminderCheckoutOrderEmail(cart.UserName);
-            var model = new ReminderCheckoutOrderDto(cart.EmailAddress, "Reminder Checkout", emailTemplate, DateTimeOffset.UtcNow.AddSeconds(30));
-            var uri = $"{_backgroundJobHttpServices.ScheduledJobUrl}/send-email-reminder-checkout-order";
-            var response = await _backgroundJobHttpServices.Client.PostAsJsonAsync<ReminderCheckoutOrderDto>(uri, model);
-            if (response.EnsureSuccessStatusCode().IsSuccessStatusCode)
+            var model = new ReminderCheckoutOrderDto(cart.EmailAddress, "Reminder Checkout", emailTemplate,
+                DateTimeOffset.UtcNow.AddSeconds(30));
+            var jobId = await _backgroundJobHttpServices.SendEmailReminderCheckout(model);
+            if (!string.IsNullOrEmpty(jobId))
             {
-                var jobId = await response.ReadContentAs<string>();
-                if (!string.IsNullOrEmpty(jobId))
-                    {
-                    // Handle when user update basket and need job id to be tracked and update email into newest version
-                    _logger.Information("Scheduled job created successfully with ID: {JobId}", jobId);
-                    cart.JobId = jobId;
-                    await _redisCacheService.SetStringAsync(cart.UserName, _serializeService.Serialize(cart));
-                }
+                _logger.Information("Scheduled job created successfully with ID: {JobId}", jobId);
+                cart.JobId = jobId;
+                await _redisCacheService.SetStringAsync(cart.UserName, _serializeService.Serialize(cart));
             }
         }
 
-        private async Task DeleteReminderCheckoutOurder(string userName)
+        private async Task DeleteReminderCheckoutOrder(string userName)
         {
             var cart = await GetBasketByUserName(userName);
             if (cart == null || string.IsNullOrEmpty(cart.JobId)) return;
             var jobId = cart.JobId;
-            var uri = $"{_backgroundJobHttpServices.ScheduledJobUrl}/delete/jobId/{jobId}";
-            await _backgroundJobHttpServices.Client.DeleteAsync(uri);
-            _logger.Information($"[DeleteReminderCheckoutOurder] Delete jobId : {jobId}");
+            _backgroundJobHttpServices.DeleteReminderCheckoutOrder(jobId);
+            _logger.Information("[DeleteReminderCheckoutOrder] Delete jobId : {JobId}", jobId);
         }
     }
 }

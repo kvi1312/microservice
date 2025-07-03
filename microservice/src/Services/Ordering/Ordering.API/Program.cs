@@ -5,6 +5,8 @@ using Common.Logging;
 using Ordering.API.Extensions;
 using Ordering.Application;
 using Carter;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
@@ -23,6 +25,7 @@ builder.Services.AddConfigurationSettings(builder.Configuration);
 builder.Host.AddAppConfigurations();
 builder.Services.ConfigureMasstransit();
 builder.Services.AddCarter();
+builder.Services.ConfigureHealthChecks(builder.Configuration);
 try
 {
     var app = builder.Build();
@@ -40,6 +43,16 @@ try
 
     //app.MapControllers();
     app.MapCarter();
+    app.UseRouting();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+        {
+            Predicate = _ => true,
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
+        endpoints.MapDefaultControllerRoute();
+    });
     app.Run();
 }
 catch (Exception ex)

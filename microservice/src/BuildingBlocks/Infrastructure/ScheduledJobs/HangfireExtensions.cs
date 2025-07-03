@@ -69,7 +69,7 @@ public static class HangfireExtensions
                     .UseRecommendedSerializerSettings()
                     .UseConsole()
                     .UseMongoStorage(mongoClient, mongoUrlBuilder.DatabaseName, mongoStorageOpts);
-
+                    
                     var jsonSettings = new JsonSerializerSettings
                     {
                         TypeNameHandling = TypeNameHandling.All,
