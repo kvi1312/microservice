@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IdentityServer.Entities;
+using IdentityServer.Persistence;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace IdentityServer.Extensions;
@@ -57,12 +60,12 @@ public static class ServiceExtension
                 options.Events.RaiseSuccessEvents = true;
             })
             .AddDeveloperSigningCredential() // not recommend for PROD
-            // .AddInMemoryIdentityResources(Config.IdentityResources)
-            // .AddInMemoryApiScopes(Config.ApiScopes)
-            // .AddInMemoryClients(Config.Clients)
-            // .AddInMemoryApiResources(Config.ApiResources)
-            // .AddTestUsers(TestUsers.Users)
-            // .AddLicenseSummary()
+                                             // .AddInMemoryIdentityResources(Config.IdentityResources)
+                                             // .AddInMemoryApiScopes(Config.ApiScopes)
+                                             // .AddInMemoryClients(Config.Clients)
+                                             // .AddInMemoryApiResources(Config.ApiResources)
+                                             // .AddTestUsers(TestUsers.Users)
+                                             // .AddLicenseSummary()
             .AddConfigurationStore(opt =>
             {
                 opt.ConfigureDbContext = c =>
@@ -72,7 +75,27 @@ public static class ServiceExtension
             {
                 opt.ConfigureDbContext = c =>
                     c.UseSqlServer(connectionString, builder => builder.MigrationsAssembly("IdentityServer"));
-            });
+            })
+            .AddAspNetIdentity<User>();
+    }
+
+    public static void ConfigureIdentity(this IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("IdentitySqlConnection");
+        services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connectionString))
+            .AddIdentity<User, IdentityRole>(opt =>
+        {
+            opt.Password.RequireDigit = false;
+            opt.Password.RequireLowercase = false;
+            opt.Password.RequireUppercase = false;
+            opt.Password.RequiredLength = 6;
+            opt.User.RequireUniqueEmail = true;
+            opt.Lockout.AllowedForNewUsers = true;
+            opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            opt.Lockout.MaxFailedAccessAttempts = 3;
+        })
+            .AddEntityFrameworkStores<IdentityContext>()
+            .AddDefaultTokenProviders();
     }
 
     public static void ConfigureCors(this IServiceCollection services)

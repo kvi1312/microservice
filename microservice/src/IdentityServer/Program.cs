@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Text;
 using Duende.IdentityServer.Licensing;
 using IdentityServer.Extensions;
+using IdentityServer.Persistence;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -19,10 +20,10 @@ try
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
-
+    app.MigrateDatabase();
     app.Run();
 }
-catch (Exception ex)
+catch (Exception ex) when (ex is not HostAbortedException && ex.Source != "Microsoft.EntityFrameworkCore.Design")
 {
     var type = ex.GetType().Name;
     if (type.Equals("StopTheHostException", StringComparison.Ordinal))
