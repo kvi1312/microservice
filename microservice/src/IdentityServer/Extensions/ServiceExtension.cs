@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace IdentityServer.Extensions;
 
@@ -46,7 +47,7 @@ public static class ServiceExtension
 
     public static void ConfigureIdentityServer(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Identity");
+        var connectionString = configuration.GetConnectionString("IdentitySqlConnection");
         services.AddIdentityServer((options) =>
             {
                 options.EmitStaticAudienceClaim = true;
@@ -55,13 +56,23 @@ public static class ServiceExtension
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
             })
-            .AddDeveloperSigningCredential() // not recommend for prod
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients)
-            .AddInMemoryApiResources(Config.ApiResources)
-            .AddTestUsers(TestUsers.Users)
-            .AddLicenseSummary();
+            .AddDeveloperSigningCredential() // not recommend for PROD
+            // .AddInMemoryIdentityResources(Config.IdentityResources)
+            // .AddInMemoryApiScopes(Config.ApiScopes)
+            // .AddInMemoryClients(Config.Clients)
+            // .AddInMemoryApiResources(Config.ApiResources)
+            // .AddTestUsers(TestUsers.Users)
+            // .AddLicenseSummary()
+            .AddConfigurationStore(opt =>
+            {
+                opt.ConfigureDbContext = c =>
+                    c.UseSqlServer(connectionString, builder => builder.MigrationsAssembly("IdentityServer"));
+            })
+            .AddOperationalStore(opt =>
+            {
+                opt.ConfigureDbContext = c =>
+                    c.UseSqlServer(connectionString, builder => builder.MigrationsAssembly("IdentityServer"));
+            });
     }
 
     public static void ConfigureCors(this IServiceCollection services)

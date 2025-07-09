@@ -31,6 +31,9 @@
 - `AspNetCore.HealthChecks.UI.InMemory.Storage`
 - `AspNetCore.HealthChecks.UI.Client`
 - `AspNetCore.HealthChecks.MySql`
+- `Duende.IdentityServer`
+- `Microsoft.EntityFrameworkCore.SqlServer`
+- `Microsoft.EntityFrameworkCore.Tools`
 
 ### 🗄️ Databases
 

@@ -22,7 +22,6 @@ internal static class HostingExtensions
             app.UseDeveloperExceptionPage();
         }
 
-        // uncomment if you want to add a UI
         app.UseStaticFiles();
         app.UseCors("CorsPolicy");
         app.UseRouting();
