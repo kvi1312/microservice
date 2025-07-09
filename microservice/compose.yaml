@@ -1,0 +1,7 @@
+﻿services:
+  identityserver:
+    image: identityserver
+    build:
+      context: .
+      dockerfile: src/IdentityServer/Dockerfile
+
