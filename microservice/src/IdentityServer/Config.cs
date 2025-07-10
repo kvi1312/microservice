@@ -79,7 +79,8 @@ public static class Config
                 ClientSecrets = new[] { new Secret("7B477353B1421711913A86B48346C".Sha512()) },
                 AllowedGrantTypes = new[]
                 {
-                    GrantType.ClientCredentials
+                    GrantType.ClientCredentials,
+                    GrantType.ResourceOwnerPassword,
                 },
                 RequireConsent = false,
                 AccessTokenLifetime = 60 * 60 * 2,
