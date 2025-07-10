@@ -14,6 +14,6 @@ public class IdentityContext : IdentityDbContext<User>
     {
         //builder.ApplyConfiguration(new RoleConfiguration());
         builder.ApplyConfigurationsFromAssembly(typeof(IdentityContext).Assembly);
-        base.OnModelCreating(builder);
+        builder.ApplyIdentityConfiguration();
     }
 }

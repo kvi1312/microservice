@@ -76,7 +76,8 @@ public static class ServiceExtension
                 opt.ConfigureDbContext = c =>
                     c.UseSqlServer(connectionString, builder => builder.MigrationsAssembly("IdentityServer"));
             })
-            .AddAspNetIdentity<User>();
+            .AddAspNetIdentity<User>()
+            .AddProfileService<IdentityProfileService>();
     }
 
     public static void ConfigureIdentity(this IServiceCollection services, IConfiguration configuration)
