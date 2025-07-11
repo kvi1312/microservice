@@ -1,4 +1,5 @@
-﻿using IdentityServer.Entities;
+﻿using IdentityServer.Common;
+using IdentityServer.Entities;
 using IdentityServer.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -110,5 +111,13 @@ public static class ServiceExtension
                     .AllowAnyMethod();
             });
         });
+    }
+
+    public static IServiceCollection AddConfigurationSettings(this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        var emailSettings = configuration.GetSection(nameof(SMTPEmailSettings)).Get<SMTPEmailSettings>();
+        services.AddSingleton(emailSettings);
+        return services;
     }
 }
