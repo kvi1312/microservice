@@ -1,5 +1,6 @@
 using IdentityServer.Common.Domain;
 using IdentityServer.Repositories;
+using IdentityServer.Services.EmailServices;
 using Serilog;
 
 namespace IdentityServer.Extensions;
@@ -9,6 +10,8 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddRazorPages();
+        builder.Services.AddConfigurationSettings(builder.Configuration);
+        builder.Services.AddScoped<IEmailSender, SMTPEmailService>();
         builder.Services.ConfigureCookiePolicy();
         builder.Services.ConfigureCors();
         builder.Services.ConfigureIdentity(builder.Configuration);
