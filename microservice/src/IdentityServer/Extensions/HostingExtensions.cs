@@ -1,3 +1,5 @@
+using IdentityServer.Common.Domain;
+using IdentityServer.Repositories;
 using Serilog;
 
 namespace IdentityServer.Extensions;
@@ -11,6 +13,9 @@ internal static class HostingExtensions
         builder.Services.ConfigureCors();
         builder.Services.ConfigureIdentity(builder.Configuration);
         builder.Services.ConfigureIdentityServer(builder.Configuration);
+        builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
+        builder.Services.AddTransient(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
+        builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
         return builder.Build();
     }
 
