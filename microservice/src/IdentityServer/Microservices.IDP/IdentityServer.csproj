@@ -23,11 +23,19 @@
     <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
 
     <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="10.0.0" />
+
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.3" />
+
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="..\..\.dockerignore">
       <Link>.dockerignore</Link>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microservices.IDP.Presentation\Microservices.IDP.Presentation\Microservices.IDP.Presentation.csproj" />
   </ItemGroup>
 </Project>
