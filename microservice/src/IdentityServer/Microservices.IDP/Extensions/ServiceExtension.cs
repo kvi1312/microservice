@@ -120,4 +120,22 @@ public static class ServiceExtension
         services.AddSingleton(emailSettings);
         return services;
     }
+
+    public static void ConfigureSwagger(this IServiceCollection service, IConfiguration configuration)
+    {
+        service.AddEndpointsApiExplorer();
+        service.AddSwaggerGen(c =>
+        {
+            c.EnableAnnotations();
+            c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+            {
+                Title = "Identity Server API",
+                Version = "v1",
+                Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                {
+                    Email = "lenguyenkhai2611@gmail.com"
+                }
+            });
+        });
+    }
 }

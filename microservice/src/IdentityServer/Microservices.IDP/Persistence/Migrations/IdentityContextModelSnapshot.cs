@@ -22,6 +22,35 @@ namespace IdentityServer.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("IdentityServer.Entities.Permission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Command")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Function")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId", "Function", "Command")
+                        .IsUnique()
+                        .HasFilter("[Function] IS NOT NULL AND [Command] IS NOT NULL");
+
+                    b.ToTable("Permissions", "Identity");
+                });
+
             modelBuilder.Entity("IdentityServer.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -122,13 +151,13 @@ namespace IdentityServer.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "01e68832-e0f6-414d-a83c-972fc40362c2",
+                            Id = "9e84905c-9583-470a-be9f-99bde5425a20",
                             Name = "administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "274f93e5-7cf0-478e-9c53-a50994bb4ad5",
+                            Id = "258e234f-bb79-4a92-9e9a-4b438deb4fe6",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -230,6 +259,17 @@ namespace IdentityServer.Persistence.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("UserTokens", "Identity");
+                });
+
+            modelBuilder.Entity("IdentityServer.Entities.Permission", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }
