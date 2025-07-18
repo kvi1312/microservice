@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		src\docker-compose.yml = src\docker-compose.yml
 		global.json = global.json
 		..\README.md = ..\README.md
+		NET_Microservices_Architecture_for_Containerized_NET_Applications.pdf = NET_Microservices_Architecture_for_Containerized_NET_Applications.pdf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{15931F8C-35B5-45EC-AAD5-BC24E12CC378}"

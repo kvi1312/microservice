@@ -1,12 +1,11 @@
-﻿using System.Reflection;
-using Contracts.Common.Events;
+﻿using Contracts.Common.Events;
 using Contracts.Common.Interfaces;
 using Contracts.Domains.Interfaces;
 using Infrastructure.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Ordering.Domain.Entities;
+using System.Reflection;
 using ILogger = Serilog.ILogger;
 namespace Ordering.Infrastructure.Persistence;
 
@@ -30,7 +29,7 @@ public class OrderContext : DbContext
             .Where(x => x.GetDomainEvents().Any())
             .ToList();
 
-        _tempBaseEvents = domainEntities.SelectMany(x=> x.GetDomainEvents()).ToList();
+        _tempBaseEvents = domainEntities.SelectMany(x=> x.GetDomainEvents()).ToList(); // temp variables to storage all events for publishing them at a same time
 
         // Prevent looping published event
         domainEntities.ForEach(x => x.ClearDomainEvents());
@@ -70,7 +69,7 @@ public class OrderContext : DbContext
             }
         }
         var result = base.SaveChangesAsync(cancellationToken);
-        _mediator.DispatchDomainEventAsync(_tempBaseEvents);
+        _mediator.DispatchDomainEventAsync(_tempBaseEvents); // publish all event at a same time to make sure Data is Consistency
         return result;
     }
 }
