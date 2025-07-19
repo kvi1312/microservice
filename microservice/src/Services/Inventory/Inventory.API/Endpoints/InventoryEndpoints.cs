@@ -1,12 +1,10 @@
 ﻿using Carter;
 using Infrastructure.Common.Models;
-using Inventory.API.Services;
 using Inventory.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOS.Inventory;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Inventory.API.Endpoints
 {
