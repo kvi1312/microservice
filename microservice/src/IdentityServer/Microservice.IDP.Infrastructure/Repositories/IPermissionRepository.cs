@@ -7,5 +7,7 @@ namespace Microservice.IDP.Infrastructure.Repositories;
 public interface IPermissionRepository : IRepositoryBase<Permission, long>
 {
     Task<IReadOnlyList<PermissionViewModel>> GetPermissionsByRole(string roleId);
-    void UpdatePermissionByRoleId(string roleId, IEnumerable<Permission> permissionCollection, bool trackChanges);
+    Task<PermissionViewModel?> CreatePermission(string roleId, PermissionAddModel model);
+    Task DeletePermission(string roleId, string function, string command);
+    Task UpdatePermissionByRoleId(string roleId, IEnumerable<PermissionAddModel> permissionCollection);
 }

@@ -34,6 +34,7 @@
 - `Duende.IdentityServer`
 - `Microsoft.EntityFrameworkCore.SqlServer`
 - `Microsoft.EntityFrameworkCore.Tools`
+- `Dapper`
 
 ### 🗄️ Databases
 
