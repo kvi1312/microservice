@@ -120,7 +120,7 @@ public class RepositoryBase<T, K> : IRepositoryBase<T, K> where T : EntityBase<K
         return await _dbContext.Connection.QuerySingleAsync<TModel>(sql, param, transaction, commandTimeout, commandType);
     }
 
-    public async Task<int> ExecuteAsync<TModel>(string sql,
+    public async Task<int> ExecuteAsync(string sql,
                                                 object? param,
                                                 System.Data.CommandType? commandType = System.Data.CommandType.StoredProcedure,
                                                 System.Data.IDbTransaction? transaction = null,

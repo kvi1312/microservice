@@ -69,10 +69,10 @@ public interface IRepositoryBase<T, K> where T : EntityBase<K>
                                                IDbTransaction? transaction,
                                                int? commandTimeout) where TModel : EntityBase<K>;
 
-    Task<int> ExecuteAsync<TModel>(string sql,
-                                           object? param,
-                                           CommandType? commandType,
-                                           IDbTransaction? transaction,
-                                           int? commandTimeout);
+    Task<int> ExecuteAsync(string sql,
+                           object? param,
+                           CommandType? commandType,
+                           IDbTransaction? transaction,
+                           int? commandTimeout);
     #endregion
 }
