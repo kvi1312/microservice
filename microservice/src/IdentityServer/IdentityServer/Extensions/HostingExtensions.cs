@@ -1,3 +1,4 @@
+using AutoMapper;
 using IdentityServer.Services.EmailServices;
 using Microservice.IDP.Infrastructure.Domain;
 using Microservice.IDP.Infrastructure.Repositories;
@@ -12,6 +13,7 @@ internal static class HostingExtensions
     {
         builder.Services.AddRazorPages();
         builder.Services.AddConfigurationSettings(builder.Configuration);
+        builder.Services.AddAutoMapper(typeof(MappingProfile));
         builder.Services.AddScoped<IEmailSender, SMTPEmailService>();
         builder.Services.ConfigureCookiePolicy();
         builder.Services.ConfigureCors();
@@ -26,6 +28,10 @@ internal static class HostingExtensions
             config.RespectBrowserAcceptHeader = true;
             config.ReturnHttpNotAcceptable = true;
         }).AddApplicationPart(typeof(AssemblyReference).Assembly);
+
+        builder.Services.ConfigureAuthentication();
+        builder.Services.ConfigureAuthorization();
+
         builder.Services.ConfigureSwagger(builder.Configuration);
         return builder.Build();
     }
@@ -42,9 +48,9 @@ internal static class HostingExtensions
         app.UseStaticFiles();
         app.UseCors("CorsPolicy");
         app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Identity API"));
+        app.UseSwaggerUI(c => {c.OAuthClientId("microservices_swagger");  c.SwaggerEndpoint("/swagger/v1/swagger.json", "Identity API"); c.DisplayRequestDuration(); });
         app.UseRouting();
-        
+        app.UseMiddleware<ErrorWrappingMiddleware>();
         //set cookie before authentication and authorization
         app.UseCookiePolicy();
         app.UseIdentityServer();
@@ -53,7 +59,7 @@ internal static class HostingExtensions
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapDefaultControllerRoute().RequireAuthorization();
+            endpoints.MapDefaultControllerRoute().RequireAuthorization("Bearer");
             endpoints.MapRazorPages().RequireAuthorization();
         });
 

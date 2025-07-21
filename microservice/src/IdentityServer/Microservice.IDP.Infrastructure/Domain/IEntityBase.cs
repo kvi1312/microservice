@@ -1,6 +1,6 @@
 ﻿namespace Microservice.IDP.Infrastructure.Domain;
 
-public interface IEntityBase<TKey>
+public interface IEntityBase<T>
 {
-    TKey Id { get; set; }
+    T Id { get; set; }
 }

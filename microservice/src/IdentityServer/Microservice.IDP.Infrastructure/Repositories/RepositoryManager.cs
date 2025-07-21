@@ -1,4 +1,5 @@
-﻿using IdentityServer.Persistence;
+﻿using AutoMapper;
+using IdentityServer.Persistence;
 using Microservice.IDP.Infrastructure.Domain;
 using Microservice.IDP.Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -14,18 +15,22 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<IPermissionRepository> _permissionRepository;
     public UserManager<User> UserManager { get; }
     public RoleManager<IdentityRole> RoleManager { get; }
+    private readonly IMapper _mapper;
 
     public RepositoryManager(IUnitOfWork unitOfWork,
-        IdentityContext dbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        IdentityContext dbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _dbContext = dbContext;
         UserManager = userManager;
         RoleManager = roleManager;
+
+        //  applying lazyload, actual inuse when PermissionRepository is called
         _permissionRepository =
             new Lazy<IPermissionRepository>(() =>
                 new PermissionRepository(_dbContext,
-                    _unitOfWork)); //  applying lazyload, actual inuse when PermissionRepository is called
+                    _unitOfWork, userManager, _mapper));
+        _mapper = mapper;
     }
 
     public IPermissionRepository PermissionRepository => _permissionRepository.Value;

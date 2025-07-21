@@ -2,7 +2,9 @@
 using IdentityServer.Persistence;
 using Microservice.IDP.Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 namespace IdentityServer.Extensions;
@@ -60,13 +62,7 @@ public static class ServiceExtension
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
             })
-            .AddDeveloperSigningCredential() // not recommend for PROD
-                                             // .AddInMemoryIdentityResources(Config.IdentityResources)
-                                             // .AddInMemoryApiScopes(Config.ApiScopes)
-                                             // .AddInMemoryClients(Config.Clients)
-                                             // .AddInMemoryApiResources(Config.ApiResources)
-                                             // .AddTestUsers(TestUsers.Users)
-                                             // .AddLicenseSummary()
+            .AddDeveloperSigningCredential()
             .AddConfigurationStore(opt =>
             {
                 opt.ConfigureDbContext = c =>
@@ -97,6 +93,7 @@ public static class ServiceExtension
             opt.Lockout.MaxFailedAccessAttempts = 3;
         })
             .AddEntityFrameworkStores<IdentityContext>()
+            .AddUserStore<UserStore>()
             .AddDefaultTokenProviders();
     }
 
@@ -135,6 +132,61 @@ public static class ServiceExtension
                 {
                     Email = "lenguyenkhai2611@gmail.com"
                 }
+            });
+
+            var identityServerBaseUrl = configuration.GetSection("IdentityServer:BaseUrl").Value;
+
+            c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.OAuth2,
+                Flows = new OpenApiOAuthFlows
+                {
+                    Implicit = new OpenApiOAuthFlow
+                    {
+                        AuthorizationUrl = new Uri($"{identityServerBaseUrl}/connect/authorize"), // Duende Identity server required this endpoint
+                        Scopes = new Dictionary<string, string>()
+                        {
+                            {"microservices_api.read", "Microservices API Read Scope" },
+                            {"microservices_api.write", "Microservices API Write Scope" }
+                        }
+                    }
+                }
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id= "Bearer" }
+                    },
+                    new List<string>
+                    {
+                        "microservices_api.read",
+                        "microservices_api.write"
+                    }
+                }
+            });
+        });
+    }
+
+    public static void ConfigureAuthentication(this IServiceCollection services)
+    {
+        services.AddAuthentication()
+            .AddLocalApi("Bearer", (options) =>
+            {
+                options.ExpectedScope = "microservices_api.read";
+            });
+    }
+
+    public static void ConfigureAuthorization(this IServiceCollection services)
+    {
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("Bearer", policy =>
+            {
+                policy.AddAuthenticationSchemes("Bearer");
+                policy.RequireAuthenticatedUser();
             });
         });
     }
