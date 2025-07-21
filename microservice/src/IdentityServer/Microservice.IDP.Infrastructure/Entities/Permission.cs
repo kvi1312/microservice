@@ -7,25 +7,35 @@ namespace Microservice.IDP.Infrastructure.Entities;
 
 public class Permission : EntityBase<long>
 {
-    [Key]
-    [MaxLength(50)]
-    [Column(TypeName = "varchar(50)")]
-    public string Function { get; set; }
-    [Key]
-    [MaxLength(50)]
-    [Column(TypeName = "varchar(50)")]
-    public string Command { get; set; }
-    [ForeignKey("RoleId")]
-    public string RoleId { get; set; }
-    public virtual IdentityRole Role { get; set; }
-    public Permission()
-    {
-        
-    }
     public Permission(string function, string command, string roleId)
     {
         Function = function;
         Command = command;
         RoleId = roleId;
     }
+
+    public Permission(long id, string function, string command, string roleId)
+        : this(function, command, roleId)
+    {
+        Id = id;
+    }
+
+    [Key]
+    [MaxLength(50)]
+    [Column(TypeName = "varchar(50)")]
+    public string Function { get; set; }
+
+    [Required]
+    [MaxLength(50)]
+    [Column(TypeName = "varchar(50)")]
+    public string RoleId { get; set; }
+
+    [ForeignKey("RoleId")]
+
+    public virtual IdentityRole Role { get; set; }
+
+    [Key]
+    [MaxLength(50)]
+    [Column(TypeName = "varchar(50)")]
+    public string Command { get; set; }
 }
