@@ -2,7 +2,6 @@
 
 public static class ConfigureHostExtensions
 {
-    // this function handle to load appsettings file
     public static void AddAppConfigurations(this ConfigureHostBuilder host)
     {
         host.ConfigureAppConfiguration((context, config) =>

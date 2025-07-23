@@ -1,5 +1,4 @@
-﻿using Carter;
-using Common.Logging;
+﻿using Common.Logging;
 using Product.API.Extensions;
 using Product.API.Persistence;
 using Serilog;
@@ -14,14 +13,12 @@ Log.Information("Starting product API up");
 
 try
 {
-    builder.Services.AddCarter();
     builder.Host.UseSerilog(SeriLogger.Configure);
     builder.Host.AddAppConfigurations();
     builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
     var app = builder.Build();
-    app.MapCarter();
     app.UseInfrastructure();
     app.MigrateDataBase<ProductContext>((context, _) =>
     {
