@@ -1,8 +1,13 @@
 ﻿using Contracts.Common.Interfaces;
 using Infrastructure.Common;
 using Infrastructure.Extensions;
+using Infrastructure.Identity;
+using Infrastructure.Identity.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.OpenApi.Models;
 using MySqlConnector;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Product.API.Persistence;
@@ -19,11 +24,13 @@ public static class ServiceExtensions
     {
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.ConfigureSwagger(configuration);
         services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
         services.ConfigureProductDbContext(configuration);
         services.AddInfrastructureServices();
         services.AddAutoMapper(config => config.AddProfile(new MappingProfile()));
+        services.ConfigureAuthenticationHandler();
+        services.ConfigureAuthorization();
         services.ConfigureHealthChecks();
         return services;
     }
@@ -64,6 +71,9 @@ public static class ServiceExtensions
 
         var dbSettings = configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>();
         services.AddSingleton(dbSettings);
+
+        var apiSettings = configuration.GetSection(nameof(ApiConfiguration)).Get<ApiConfiguration>();
+        services.AddSingleton(apiSettings);
         return services;
     }
 
@@ -71,5 +81,62 @@ public static class ServiceExtensions
     {
         var settings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings));
         services.AddHealthChecks().AddMySql(settings.ConnectionString, "MySql Health", HealthStatus.Degraded);
+    }
+
+    public static void ConfigureSwagger(this IServiceCollection service, IConfiguration configuration)
+    {
+        var setting = configuration.GetSection(nameof(ApiConfiguration)).Get<ApiConfiguration>();
+
+        if (setting == null || string.IsNullOrEmpty(setting.IssuerUri) || string.IsNullOrEmpty(setting.ApiName))
+        {
+            throw new ArgumentNullException($"Api configuration is not configured");
+        }
+
+        service.AddEndpointsApiExplorer();
+        service.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+            {
+                Title = "Product API",
+                Version = "v1",
+                Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                {
+                    Email = "lenguyenkhai2611@gmail.com"
+                }
+            });
+
+            c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.OAuth2,
+                Flows = new OpenApiOAuthFlows
+                {
+                    Implicit = new OpenApiOAuthFlow
+                    {
+                        AuthorizationUrl = new Uri($"{setting.IdentityServerBaseUrl}/connect/authorize"),
+                        Scopes = new Dictionary<string, string>()
+                        {
+                            {"microservices_api.read", "Microservices API Read Scope" },
+                            {"microservices_api.write", "Microservices API Write Scope" }
+                        }
+                    }
+                }
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id= "Bearer" },
+                        Name = "Bearer"
+                    },
+                    new List<string>
+                    {
+                        "microservices_api.read",
+                        "microservices_api.write"
+                    }
+                }
+            });
+        });
     }
 }

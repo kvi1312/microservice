@@ -158,7 +158,8 @@ public static class ServiceExtension
                 {
                     new OpenApiSecurityScheme
                     {
-                        Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id= "Bearer" }
+                        Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id= "Bearer" },
+                        Name = "Bearer"
                     },
                     new List<string>
                     {
