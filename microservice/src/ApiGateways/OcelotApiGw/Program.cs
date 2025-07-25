@@ -21,15 +21,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureOcelot(builder.Configuration);
 builder.Services.ConfigureCors(builder.Configuration);
 builder.Services.AddTransient<ITokenService, TokenService>();
-builder.Services.AddJwtAuthentication();
+//builder.Services.AddJwtAuthentication();
+builder.Services.AddSwaggerForOcelot(builder.Configuration);
+builder.Services.ConfigureAuthenticationHandler();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 try
 {
     //app.UseHttpsRedirection();
@@ -37,9 +34,12 @@ try
     app.UseCors("CorsPolicy");
 
     //app.UseMiddleware<ErrorWrappingMiddleware>();
-    app.UseAuthentication();
+
+    // No need these 2 middlewares cuz Ocelot dont have to authenticate or authorize requests directly. Let these action for api endpoint.
+    //app.UseAuthentication();
+    //app.UseAuthorization();
+
     app.UseRouting();
-    app.UseAuthorization();
     app.UseEndpoints(e =>
     {
         e.MapGet("/", async context =>
@@ -48,6 +48,14 @@ try
         });
     });
     app.MapControllers();
+    app.UseSwaggerForOcelotUI(c =>
+    {
+        c.PathToSwaggerGenerator = "/swagger/docs";
+    }, uiConfig =>
+    {
+        uiConfig.OAuthClientId("microservices_swagger");
+        uiConfig.DisplayRequestDuration();
+    });
     await app.UseOcelot();
 
     app.Run();
