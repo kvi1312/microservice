@@ -15,6 +15,9 @@ namespace OcelotApiGw.Extensions
         {
             var jwtSettings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
             services.AddSingleton(jwtSettings);
+
+            var apiSettings = configuration.GetSection(nameof(ApiConfiguration)).Get<ApiConfiguration>();
+            services.AddSingleton(apiSettings);
             return services;
         }
 
