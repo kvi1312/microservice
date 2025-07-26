@@ -1,21 +1,28 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 80
+EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/IdentityServer/IdentityServer.csproj", "src/IdentityServer/"]
-RUN dotnet restore "src/IdentityServer/IdentityServer.csproj"
+
+# Copy project files cho layer caching tốt hơn
+COPY ["IdentityServer/IdentityServer/IdentityServer.csproj", "IdentityServer/IdentityServer/"]
+COPY ["IdentityServer/Microservice.IDP.Infrastructure/Microservice.IDP.Infrastructure.csproj", "IdentityServer/Microservice.IDP.Infrastructure/"]
+COPY ["IdentityServer/Microservices.IDP.Presentation/Microservices.IDP.Presentation/Microservices.IDP.Presentation.csproj", "IdentityServer/Microservices.IDP.Presentation/Microservices.IDP.Presentation/"]
+
+# Restore packages
+RUN dotnet restore "IdentityServer/IdentityServer/IdentityServer.csproj"
+
+# Copy source code
 COPY . .
-WORKDIR "/src/src/IdentityServer"
-RUN dotnet build "./IdentityServer.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+# Build
+WORKDIR "/src/IdentityServer/IdentityServer"
+RUN dotnet build "IdentityServer.csproj" -c Release -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./IdentityServer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "IdentityServer.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

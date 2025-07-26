@@ -2,6 +2,28 @@
   "GlobalConfiguration": {
     "BaseUrl": "http://apigw.ocelot"
   },
+  "SwaggerEndPoints": [
+    {
+      "Key": "gateway",
+      "Config": [
+        {
+          "Name": "Gateway API",
+          "Version": "v1",
+          "Url": "http://host.docker.internal/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "product-service",
+      "Config": [
+        {
+          "Name": "Product API",
+          "Version": "v1",
+          "Url": "http://host.docker.internal/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
   "Routes": [
     // CUSTOMER.API ROUTING
     {
@@ -51,7 +73,12 @@
         "ExceptionsAllowedBeforeBreaking": 3, // require value >= 2. modify how many time error can exist before trigger "circuit breaker"
         "DurationOfBreak": 1000, // when circuit breaker is triggered, services will stop accept request in this time
         "TimeoutValue": 5000 // max milisecond can be execute in each request
-      }
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "product-service"
     },
     {
       "DownstreamPathTemplate": "/api/product/{id}",
@@ -63,7 +90,12 @@
         }
       ],
       "UpstreamPathTemplate": "/product/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "product-service"
     },
     {
       "DownstreamPathTemplate": "/api/product/{id}",
@@ -78,7 +110,12 @@
       "UpstreamHttpMethod": [ "PUT", "DELETE" ],
       "RouteClaimsRequirement": {
         "Role": "Admin"
-      }
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "product-service"
     },
     {
       "DownstreamPathTemplate": "/api/product/get-product-by-no/{productNo}",
@@ -90,7 +127,12 @@
         }
       ],
       "UpstreamPathTemplate": "/product/by-no/{productNo}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "product-service"
     },
 
     // BASKET.API ROUTING
