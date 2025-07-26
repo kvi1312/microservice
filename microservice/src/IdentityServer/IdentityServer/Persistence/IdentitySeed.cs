@@ -16,6 +16,7 @@ public static class IdentitySeed
 
         using var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
 
+        using var identityContext = scope.ServiceProvider.GetRequiredService<IdentityContext>();
         try
         {
             context.Database.Migrate();

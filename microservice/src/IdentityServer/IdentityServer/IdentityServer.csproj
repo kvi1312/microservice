@@ -30,12 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Microservice.IDP.Infrastructure\Microservice.IDP.Infrastructure.csproj" />
     <ProjectReference Include="..\Microservices.IDP.Presentation\Microservices.IDP.Presentation\Microservices.IDP.Presentation.csproj" />
   </ItemGroup>

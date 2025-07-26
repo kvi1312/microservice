@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Serilog.Sinks.Elasticsearch;
 
 namespace IdentityServer.Extensions;
 
@@ -26,26 +27,30 @@ public static class ServiceExtension
     {
         host.UseSerilog((context, configuration) =>
         {
-            var applicationName = context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-");
-            var envName = context.HostingEnvironment?.EnvironmentName ?? "Development";
             var elasticUri = context.Configuration.GetValue<string>("ElasticConfiguration:Uri");
-            var elasticUserName = context.Configuration.GetValue<string>("ElasticConfiguration:UserName");
-            var elasticPassword = context.Configuration.GetValue<string>("ElasticConfiguration:Password");
+            var username = context.Configuration.GetValue<string>("ElasticConfiguration:Username");
+            var password = context.Configuration.GetValue<string>("ElasticConfiguration:Password");
+            var applicationName = context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-");
+
+            if (string.IsNullOrEmpty(elasticUri))
+                throw new Exception("ElasticConfiguration Uri is not configured.");
 
             configuration
-                .WriteTo.Debug()
-                .WriteTo.Console(outputTemplate:
-                    "[{Timestamp:HH:mm:ss} {Level}] {SourceContext} {NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
-                .WriteTo.Elasticsearch(new Serilog.Sinks.Elasticsearch.ElasticsearchSinkOptions(new Uri(elasticUri))
-                {
-                    IndexFormat = $"logs-{applicationName}-{envName}-{DateTime.UtcNow:yyyy-MM}",
-                    AutoRegisterTemplate = true,
-                    NumberOfShards = 2,
-                    ModifyConnectionSettings = x => x.BasicAuthentication(elasticUserName, elasticPassword)
-                })
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
-                .Enrich.WithProperty("Environment", envName)
+                .WriteTo.Debug()
+                .WriteTo.Console().ReadFrom.Configuration(context.Configuration)
+                .WriteTo.Elasticsearch(
+                    new ElasticsearchSinkOptions(new Uri(elasticUri))
+                    {
+                        IndexFormat =
+                            $"{applicationName}-logs-{context.HostingEnvironment.EnvironmentName?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}",
+                        AutoRegisterTemplate = true,
+                        NumberOfShards = 2,
+                        NumberOfReplicas = 1,
+                        ModifyConnectionSettings = x => x.BasicAuthentication(username, password)
+                    })
+                .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
                 .Enrich.WithProperty("Application", applicationName)
                 .ReadFrom.Configuration(context.Configuration);
         });
@@ -54,6 +59,7 @@ public static class ServiceExtension
     public static void ConfigureIdentityServer(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("IdentitySqlConnection");
+        var issuerUri = configuration.GetSection("IdentityServer:IssuerUri").Value;
         services.AddIdentityServer((options) =>
             {
                 options.EmitStaticAudienceClaim = true;
@@ -61,6 +67,7 @@ public static class ServiceExtension
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
+                options.IssuerUri = issuerUri;
             })
             .AddDeveloperSigningCredential()
             .AddConfigurationStore(opt =>

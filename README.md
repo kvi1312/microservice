@@ -73,6 +73,15 @@ dotnet ef migrations add "<migration_name>" --project Ordering.Infrastructure --
 dotnet ef database update --project Ordering.Infrastructure --startup-project Ordering.API
 ```
 
+#### 🔹 IdentityServer Migration (cd into IdentityServer project)
+
+```bash
+ dotnet ef database update -c PersistedGrantDbContext
+ dotnet ef database update -c ConfigurationDbContext
+ dotnet ef migrations add "Init_Identity" -c IdentityContext -s IdentityServer/IdentityServer.csproj -p ./Microservice.IDP.Infrastructure/Microservice.IDP.Infrastructure.csproj -o Persistence/Migrations
+ dotnet ef database update -c IdentityContext -s IdentityServer/IdentityServer.csproj -p ./Microservice.IDP.Infrastructure/Microservice.IDP.Infrastructure.csproj
+```
+
 ### 🐳 Docker Compose
 
 ```bash

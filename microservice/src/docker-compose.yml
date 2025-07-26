@@ -118,3 +118,5 @@ volumes:
     name: pgadmin_data  
   hangfire_mongo_data:
     name: hangfire_mongo_data  
+  identity_sqlserver_data:
+      external: false

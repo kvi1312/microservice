@@ -22,7 +22,7 @@ builder.Services.ConfigureOcelot(builder.Configuration);
 builder.Services.ConfigureCors(builder.Configuration);
 builder.Services.AddTransient<ITokenService, TokenService>();
 //builder.Services.AddJwtAuthentication();
-builder.Services.AddSwaggerForOcelot(builder.Configuration);
+builder.Services.AddSwaggerForOcelot(configuration);
 builder.Services.ConfigureAuthenticationHandler();
 var app = builder.Build();
 

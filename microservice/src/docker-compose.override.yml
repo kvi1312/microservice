@@ -16,7 +16,7 @@ services:
     container_name: productdb
     environment:
        MYSQL_ROOT_PASSWORD: 'c#fKeLGv'
-       ACCEPT_EULA: "Y"
+#       ACCEPT_EULA: "Y"
     restart: always
     volumes:
     - mysql_data:/var/lib/mysql
@@ -118,7 +118,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "DatabaseSettings:ConnectionString=Server=localhost;Port=3306;Database=productdb;Uid=root;Pwd=c#fKeLGv;"
+      - "DatabaseSettings:ConnectionString=Server=productdb;Port=3306;Database=ProductDb;Uid=root;Pwd=c#fKeLGv;"
+      - "ApiConfiguration:ApiBaseUrl=http://product.api"
+      - "ApiConfiguration:IdentityServerBaseUrl=http://localhost:6001"
+      - "ApiConfiguration:IssuerUri=http://identity.api"
     depends_on:
       - productdb
     ports:
@@ -201,6 +204,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Local
       - ASPNETCORE_URLS=http://+:80
       - GlobalConfiguration:BaseUrl=http://apigw.ocelot
+      - "ApiConfiguration:ApiBaseUrl=http://apigw.ocelot"
+      - "ApiConfiguration:IdentityServerBaseUrl=http://localhost:6001"
+      - "ApiConfiguration:IssuerUri=http://identity.api"
     depends_on:
       - customer.api
       - basket.api
@@ -208,7 +214,7 @@ services:
       - ordering.api
       - inventory.api
     ports:
-      - "6001:80"
+      - "6020:80"
     restart: always
     
   hangfire.api:
@@ -221,6 +227,37 @@ services:
       - hangfiredb
     ports:
       - "6008:80"
+    restart: always
+    
+    #identity server
+  identitydb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: identitydb
+    environment:
+      SA_PASSWORD: 'a2601197'
+      ACCEPT_EULA: "Y"
+    volumes:
+      - identity_sqlserver_data:/var/opt/mssql
+    restart: always
+    ports:
+      - "1438:1433"
+
+  identity.api:
+    image: ${DOCKER_REGISTRY-}identity-api:${PLATFORM:-linux}-${TAG:-lastest}
+    build:
+      context: .
+      dockerfile: IdentityServer/IdentityServer/Dockerfile
+    container_name: identity.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "ConnectionStrings:IdentitySqlConnection=Server=identitydb;Database=IdentityServer;User Id=sa;Password=a2601197;Multipleactiveresultsets=true;TrustServerCertificate=true"
+      - "IdentityServer:BaseUrl=http://localhost:6001"
+      - "IdentityServer:IssuerUri=http://localhost:6001"
+    depends_on:
+      - identitydb
+    ports:
+      - "6001:80"
     restart: always
     
   webstatus:

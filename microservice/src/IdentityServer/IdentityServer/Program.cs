@@ -20,10 +20,11 @@ try
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
-    
-    SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
+
     app.MigrateDatabase();
-    
+
+    SeedUserData.EnsureSeedData(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
+
     app.Run();
 }
 catch (Exception ex) when (ex is not HostAbortedException && ex.Source != "Microsoft.EntityFrameworkCore.Design")

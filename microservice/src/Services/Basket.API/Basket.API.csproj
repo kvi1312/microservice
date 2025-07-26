@@ -27,12 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Protobuf Include="Protos\stock.proto">
       <GrpcServices>Client</GrpcServices>
       <Access>Public</Access>
@@ -49,6 +43,12 @@
     <None Update="EmailTemplates\reminder-checkout-order.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
   </ItemGroup>
 
 </Project>
