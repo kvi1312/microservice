@@ -1,6 +1,7 @@
 using Common.Logging;
 using Contracts.Identity;
 using Infrastructure.Identity;
+using Infrastructure.Middlewares;
 using Ocelot.Middleware;
 using OcelotApiGw.Extensions;
 using Serilog;
@@ -21,23 +22,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureOcelot(builder.Configuration);
 builder.Services.ConfigureCors(builder.Configuration);
 builder.Services.AddTransient<ITokenService, TokenService>();
-//builder.Services.AddJwtAuthentication();
 builder.Services.AddSwaggerForOcelot(configuration);
 builder.Services.ConfigureAuthenticationHandler();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 try
 {
-    //app.UseHttpsRedirection();
-
     app.UseCors("CorsPolicy");
-
-    //app.UseMiddleware<ErrorWrappingMiddleware>();
-
-    // No need these 2 middlewares cuz Ocelot dont have to authenticate or authorize requests directly. Let these action for api endpoint.
-    //app.UseAuthentication();
-    //app.UseAuthorization();
+    app.UseMiddleware<ErrorWrappingMiddleware>();
 
     app.UseRouting();
     app.UseEndpoints(e =>

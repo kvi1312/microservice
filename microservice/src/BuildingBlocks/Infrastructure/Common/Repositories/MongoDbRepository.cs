@@ -31,7 +31,7 @@ public class MongoDbRepository<T> : IMongoDbRepositoryBase<T> where T : MongoEnt
     {
         Expression<Func<T, string>> func = f => f.Id;
         var value = (string)entity.GetType()
-                                  .GetProperty(((MemberExpression)func.Body).Member.Name)? //func.Body.ToString().Split(".")[1]
+                                  .GetProperty(((MemberExpression)func.Body).Member.Name)?
                                   .GetValue(entity, null);
         var filter = Builders<T>.Filter.Eq(func, value);
         return Collection.ReplaceOneAsync(filter, entity);
