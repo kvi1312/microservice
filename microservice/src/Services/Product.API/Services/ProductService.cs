@@ -16,21 +16,6 @@ public class ProductService : IProductService
         _mapper = mapper;
     }
 
-    public async Task<IResult> GetAllProducts()
-    {
-        var product = await _productRepository.GetProducts();
-        var result = _mapper.Map<IEnumerable<ProductDto>>(product);
-        return Results.Ok(result);
-    }
-
-    public async Task<IResult> GetProduct(long id)
-    {
-        var product = await _productRepository.GetProduct(id);
-        if (product is null) return Results.NotFound();
-        var result = _mapper.Map<ProductDto>(product);
-        return Results.Ok(result);
-    }
-
     public async Task<IResult> AddProduct(CreateProductDto productDto)
     {
         var productEntity = await _productRepository.GetProductByNo(productDto.No);
@@ -62,13 +47,5 @@ public class ProductService : IProductService
         await _productRepository.DeleteProduct(id);
         await _productRepository.SaveChangesAsync();
         return Results.Ok();
-    }
-
-    public async Task<IResult> GetProductByNo(string productNo)
-    {
-        var product = await _productRepository.GetProductByNo(productNo);
-        if (product is null) return Results.NotFound();
-        var result = _mapper.Map<ProductDto>(product);
-        return Results.Ok(result);
     }
 }

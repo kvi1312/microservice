@@ -45,7 +45,7 @@ public static class Config
                 AllowedGrantTypes = GrantTypes.Implicit,
                 AllowAccessTokensViaBrowser = true,
                 RequireConsent = false,
-                AccessTokenLifetime = 60 * 60 * 2,
+                AccessTokenLifetime = 60 * 60 * 10,
                 RedirectUris = new List<string>()
                 {
                     "http://localhost:5001/swagger/oauth2-redirect.html",

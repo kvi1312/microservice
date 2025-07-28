@@ -2,19 +2,17 @@
 using Infrastructure.Common;
 using Infrastructure.Extensions;
 using Infrastructure.Identity;
-using Infrastructure.Identity.Authorization;
-using Microsoft.AspNetCore.Authorization;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
-using MySqlConnector;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Product.API.Persistence;
 using Product.API.Repositories.Interface;
 using Product.API.Repostiories;
 using Product.API.Services;
 using Shared.Configurations;
+using System.Reflection;
 
 namespace Product.API.Extensions;
 
@@ -32,6 +30,7 @@ public static class ServiceExtensions
         services.ConfigureAuthenticationHandler();
         services.ConfigureAuthorization();
         services.ConfigureHealthChecks();
+        services.AddMediatR(Assembly.GetExecutingAssembly());
         return services;
     }
 
