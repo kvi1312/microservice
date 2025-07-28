@@ -1,6 +1,12 @@
-﻿using Infrastructure.Identity.Authorization;
+﻿using AutoMapper;
+using Infrastructure.Identity.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Product.API.Features.V1.Query.GetAllProduct;
+using Product.API.Features.V1.Query.GetProduct;
+using Product.API.Features.V1.Query.GetProductByNo;
+using Product.API.Repositories.Interface;
 using Product.API.Services;
 using Shared.Common.Constants;
 using Shared.DTOS;
@@ -14,17 +20,23 @@ namespace Product.API.Controllers;
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
-
-    public ProductController(IProductService productService)
+    private readonly IProductRepository _productRepository;
+    private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
+    public ProductController(IProductService productService, IProductRepository productRepository, IMapper mapper, IMediator mediator)
     {
         _productService = productService;
+        _productRepository = productRepository;
+        _mapper = mapper;
+        _mediator = mediator;
     }
 
     [HttpGet]
     [ClaimsRequirementAttributes(FunctionCode.PRODUCT, CommandCode.VIEW)]
     public async Task<IActionResult> GetProducts()
     {
-        var result = await _productService.GetAllProducts();
+        var products = new GetAllProductQuery();
+        var result = await _mediator.Send(products);
         return Ok(result);
     }
 
@@ -32,7 +44,8 @@ public class ProductController : ControllerBase
     [ClaimsRequirementAttributes(FunctionCode.PRODUCT, CommandCode.VIEW)]
     public async Task<IActionResult> GetProductById(long id)
     {
-        var result = await _productService.GetProduct(id);
+        var product = new GetProductQuery(id);
+        var result = await _mediator.Send(product);
         return Ok(result);
     }
 
@@ -64,7 +77,8 @@ public class ProductController : ControllerBase
     [ClaimsRequirementAttributes(FunctionCode.PRODUCT, CommandCode.VIEW)]
     public async Task<IActionResult> GetProductByNo([Required] string productNo)
     {
-        var result = await _productService.GetProductByNo(productNo);
+        var product = new GetProductByNoQuery(productNo);
+        var result = await _mediator.Send(product);
         return Ok(result);
     }
 }
